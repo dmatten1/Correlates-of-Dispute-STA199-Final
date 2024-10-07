@@ -1,8 +1,8 @@
 ---
-title: Meet the team
+title: Meet the Team
 ---
 
-This project was developed by **\[team name\]** For [STA 199: Introduction to Data Science](https://sta199-f24.github.io/) at Duke University.
+This project was developed by JADA For [STA 199: Introduction to Data Science](https://sta199-f24.github.io/) at Duke University.
 The team is comprised of the following team members.
 
 -   Team member 1: One sentence description of Team member 1 (e.g., year, major, etc.).
