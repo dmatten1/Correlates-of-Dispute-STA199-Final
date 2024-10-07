@@ -6,7 +6,7 @@ This project was developed by JADA For [STA 199: Introduction to Data Science](h
 The team is comprised of the following team members.
 
 -   Allison Yang: Sophomore Bio/Stats.
--   Daniel Mattem: Freshman Comp Sci .
+-   Daniel Matten: Freshman Comp Sci .
 -   Jacob Ominsky: Freshman CS/Econ.
 -   Ashley Deleon: Junior CompSci and Poli Sci 
 
