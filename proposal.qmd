@@ -1,5 +1,5 @@
 ---
-title: Add project title here
+title: College Athletics Spending and Performance
 subtitle: Proposal
 ---
 
@@ -13,11 +13,8 @@ library(tidyverse)
 
 ## Introduction and data
 
--   Identify the source of the data.
+This data comes from the Equity in Athletics Data Analysis, which is created by the U.S. Department of Education. Institutions of higher education that participate in federal student aid programs are obligated to submit athletics data by the Equity in Athletics Disclosure Act, and that data appears in the Equity in Athletics Disclosure database as well as this data. The data is collected every year as schools fill out the mandatory survey, and it includes information such as spending on recruiting, head coaching salary, and financial aid for each school.
 
--   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
-
--   Write a brief description of the observations.
 
 ## Research question
 
