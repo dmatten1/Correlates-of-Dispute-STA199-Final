@@ -1,5 +1,5 @@
 ---
-title: Add project title here
+title: States Resources compared to Likelihood of being involved in conflict 
 subtitle: Proposal
 ---
 
@@ -15,15 +15,39 @@ library(tidyverse)
 
 -   Identify the source of the data.
 
+    Correlates of War
+
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
+    The Correlates of War project generally facilitates the collaboration and collecting of data about the history of wars and conflicts among different states.
+    This data set was prepared by scraping information from sources from each country, such as the US Department of Commerce and Bureau of the Census or The Japan Year Book Office.
+
 -   Write a brief description of the observations.
+
+    Observations: Each observation includes a breakdown of annual data of a certain country in a particular year.
+    This observation includes information about military expenditures, the number of military personnel, energy consumption, total population, etc.
 
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
+
+    How do changes in national material capabilities influence the likelihood of a country being involved in conflict?
+
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
+
+    This research topic explores the varying levels of impact each national capability indicator has on a country's likelihood of entering conflict. It also reflects which national capability indicator has a greater correlation with the likelihood of conflict involvement.
+
+    Thus, our hypothesis is:
+
+    -   Countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
+
 -   Identify the types of variables in your research question. Categorical? Quantitative?
+
+    -   military expenditures - quantitative
+
+        military personnel - quantitative
+
+        likelihood of entering conflict - quantitative
 
 ## Glimpse of data
 
