@@ -29,19 +29,23 @@ library(tidyverse)
 
 ## Research question
 
--   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
+-   A well formulated research question.
+    (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
     How do changes in national material capabilities influence the likelihood of a country being involved in conflict?
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
-    This research topic explores the varying levels of impact each national capability indicator has on a country's likelihood of entering conflict. It also reflects which national capability indicator has a greater correlation with the likelihood of conflict involvement.
+    This research topic explores the varying levels of impact each national capability indicator has on a country's likelihood of entering conflict.
+    It also reflects which national capability indicator has a greater correlation with the likelihood of conflict involvement.
 
     Thus, our hypothesis is:
 
     -   Countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
 
--   Identify the types of variables in your research question. Categorical? Quantitative?
+-   Identify the types of variables in your research question.
+    Categorical?
+    Quantitative?
 
     -   military expenditures - quantitative
 
@@ -78,5 +82,5 @@ library(tidyverse)
 ```{r}
 #| label: load-data-2
 
-# add code here
+read.csv()
 ```
