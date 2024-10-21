@@ -1,5 +1,5 @@
 ---
-title: Add project title here
+title: College Athletics Spending and Performance
 subtitle: Proposal
 ---
 
@@ -7,17 +7,15 @@ subtitle: Proposal
 #| label: load-pkgs
 #| message: false
 library(tidyverse)
+library(readxl)
 ```
 
 # Data 1
 
 ## Introduction and data
 
--   Identify the source of the data.
+This data comes from the Equity in Athletics Data Analysis, which is created by the U.S. Department of Education. Institutions of higher education that participate in federal student aid programs are obligated to submit athletics data by the Equity in Athletics Disclosure Act, and that data appears in the Equity in Athletics Disclosure database as well as this data. The data is collected every year as schools fill out the mandatory survey, and it includes information such as spending on recruiting, head coaching salary, and financial aid for each school.
 
--   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
-
--   Write a brief description of the observations.
 
 ## Research question
 
@@ -29,30 +27,6 @@ library(tidyverse)
 
 ```{r}
 #| label: load-data-1
-
-# add code here
-```
-
-# Data 2
-
-## Introduction and data
-
--   Identify the source of the data.
-
--   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
-
--   Write a brief description of the observations.
-
-## Research question
-
--   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
--   A description of the research topic along with a concise statement of your hypotheses on this topic.
--   Identify the types of variables in your research question. Categorical? Quantitative?
-
-## Glimpse of data
-
-```{r}
-#| label: load-data-2
-
-# add code here
+data <- read_xlsx("Sport_Data_2022.xlsx")
+glimpse(data)
 ```
