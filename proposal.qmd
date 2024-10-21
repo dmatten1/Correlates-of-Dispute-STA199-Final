@@ -7,6 +7,7 @@ subtitle: Proposal
 #| label: load-pkgs
 #| message: false
 library(tidyverse)
+library(readxl)
 ```
 
 # Data 1
@@ -26,30 +27,6 @@ This data comes from the Equity in Athletics Data Analysis, which is created by 
 
 ```{r}
 #| label: load-data-1
-
-# add code here
-```
-
-# Data 2
-
-## Introduction and data
-
--   Identify the source of the data.
-
--   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
-
--   Write a brief description of the observations.
-
-## Research question
-
--   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
--   A description of the research topic along with a concise statement of your hypotheses on this topic.
--   Identify the types of variables in your research question. Categorical? Quantitative?
-
-## Glimpse of data
-
-```{r}
-#| label: load-data-2
-
-# add code here
+data <- read_xlsx("Sport_Data_2022.xlsx")
+glimpse(data)
 ```
