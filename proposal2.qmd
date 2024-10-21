@@ -17,6 +17,10 @@ library(tidyverse)
 
     Correlates of War
 
+    -   Dataset 1: National Material Capabilities
+
+    -   Dataset 2: Militarized Interstate Disputes
+
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
     The Correlates of War project generally facilitates the collaboration and collecting of data about the history of wars and conflicts among different states.
