@@ -14,14 +14,14 @@ library(readxl)
 
 ## Introduction and data
 
-This data comes from the Equity in Athletics Data Analysis, which is created by the U.S. Department of Education. Institutions of higher education that participate in federal student aid programs are obligated to submit athletics data by the Equity in Athletics Disclosure Act, and that data appears in the Equity in Athletics Disclosure database as well as this data. The data is collected every year as schools fill out the mandatory survey, and it includes information such as spending on recruiting, head coaching salary, and financial aid for each school.
+This data comes from the Equity in Athletics Data Analysis, which is created by the U.S. Department of Education. Institutions of higher education that participate in federal student aid programs are obligated to submit athletics data by the Equity in Athletics Disclosure Act, and that data appears in the Equity in Athletics Disclosure database as well as this data. The data is collected every year as schools fill out the mandatory survey, and it includes information such as spending on recruiting, head coaching salary, and financial aid for each school. More specifically, this version of the data only examines expenses, revenue, participants, etc. for the 2022 football teams.
 
 
 ## Research question
 
--   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
--   A description of the research topic along with a concise statement of your hypotheses on this topic.
--   Identify the types of variables in your research question. Categorical? Quantitative?
+
+
+
 
 ## Glimpse of data
 
