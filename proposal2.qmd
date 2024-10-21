@@ -20,12 +20,17 @@ library(tidyverse)
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
     The Correlates of War project generally facilitates the collaboration and collecting of data about the history of wars and conflicts among different states.
+    It was started in 1963 at the University of Michigan by J.
+    David Singer.
     This data set was prepared by scraping information from sources from each country, such as the US Department of Commerce and Bureau of the Census or The Japan Year Book Office.
 
 -   Write a brief description of the observations.
 
-    Observations: Each observation includes a breakdown of annual data of a certain country in a particular year.
+    Observations dataset 1: Each observation includes a breakdown of annual data of a certain country in a particular year.
     This observation includes information about military expenditures, the number of military personnel, energy consumption, total population, etc.
+
+    Observations dataset 2: Each observation includes a breakdown of nations and the conflict in which one or more states threaten, display, or use force against one or more other states between 1816 and 2014.
+    Each observation includes the start and end date of incident, duration, etc.
 
 ## Research question
 
@@ -58,7 +63,17 @@ library(tidyverse)
 ```{r}
 #| label: load-data-1
 
-# add code here
+#main dataset abt resources
+
+country_resource <- read_csv("NMC.csv")
+glimpse(country_resource)
+
+#main dataset abt conflict
+
+country_conflict <- read_csv("Conflict.csv")
+glimpse(country_conflict)
+
+
 ```
 
 # Data 2
@@ -82,5 +97,5 @@ library(tidyverse)
 ```{r}
 #| label: load-data-2
 
-read.csv()
+
 ```
