@@ -3,8 +3,6 @@
 Project repo for STA 199 - Fall 2024.
 
 
-
-<<<<<<< HEAD
 #	Variable	Type	Len	Format	Informat	Label
 1. 	unitid	Num	8			unitid
 2. 	OPEID	Char	10	$10.	$10.	OPE ID
@@ -287,7 +285,7 @@ Project repo for STA 199 - Fall 2024.
 279	PARTIC_COED_MEN_WgtLift	Num	8			# Participants Men Coed. Sport: Weight Lifting
 =======
 EADA Variables in Creation Order
->>>>>>> ad1a63e035a8e99570c2354361f0f43288c95a9d
+
 
 
 #	Variable	
