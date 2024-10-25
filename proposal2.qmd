@@ -33,8 +33,11 @@ library(tidyverse)
     Observations dataset 1: Each observation includes a breakdown of annual data of a certain country in a particular year.
     This observation includes information about military expenditures, the number of military personnel, energy consumption, total population, etc.
 
-    Observations dataset 2: Each observation includes a breakdown of nations and the conflict in which one or more states threaten, display, or use force against one or more other states between 1816 and 2014.
-    Each observation includes the start and end date of incident, duration, etc.
+    Observations dataset 2: This dataset contains information on wars between countries.
+    Each observation is for a specific year and country, which breaks down the number of conflicts in which a country threatens/displays/uses force against one or more states.
+    The observation includes the start and end dates that the observation is tracking between, number of combatants, number of casualties and outcomes, etc.
+    The dataset includes observations between 1816 and 2014.
+    Other information included in the observations are the start and end date of incident, duration, etc.
 
 ## Research question
 
