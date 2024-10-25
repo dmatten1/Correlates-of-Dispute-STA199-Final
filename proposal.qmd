@@ -14,31 +14,38 @@ library(readxl)
 
 ## Introduction and data
 
-This data comes from the Equity in Athletics Data Analysis, which is created by the U.S. Department of Education. Institutions of higher education that participate in federal student aid programs are obligated to submit athletics data by the Equity in Athletics Disclosure Act, and that data appears in the Equity in Athletics Disclosure database as well as this data. The data is collected every year as schools fill out the mandatory survey, and it includes information such as spending on recruiting, head coaching salary, and financial aid for each school.
-
+This data comes from the Equity in Athletics Data Analysis, which is created by the U.S.
+Department of Education.
+Institutions of higher education that participate in federal student aid programs are obligated to submit athletics data by the Equity in Athletics Disclosure Act, and that data appears in the Equity in Athletics Disclosure database as well as this data.
+The data is collected every year as schools fill out the mandatory survey, and it includes information such as spending on recruiting, head coaching salary, and financial aid for each school.
 
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
 What is the correlation between athletic expenditures for football programs and their performance metrics?
+<<<<<<< HEAD
 
 Are there regional differences in football expenditures among various colleges and universities? How do these differences relate to team performance?
 
+=======
+Are there regional differences in football expenditures among various colleges and universities?
+How do these differences relate to team performance?
+>>>>>>> 33b7352ec2e909d69b256eece47fd429dbe1f28f
 How do investments in football facilities (stadiums, training facilities) correlate with overall athletic department budgets and expenditures?
 
 What is the relationship between coaching salaries in football and overall athletic expenditures? How do these salaries compare to those in other sports?
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
-Our research topic focuses on analyzing the EADA's annual, which includes spending on recruiting, coaching salaries, and financial aid. We predict that there is a positive relationship between spending and football success in NCAA Division 1 thanks to the impact of additional scholarships and nicer facilities. However, we predict diminishing marginal returns on that spending -- the difference in spending between the top teams is likely insignificant.
+    Our research topic focuses on analyzing the EADA's annual, which includes spending on recruiting, coaching salaries, and financial aid.
+    We predict that there is a positive relationship between spending and football success in NCAA Division 1 thanks to the impact of additional scholarships and nicer facilities.
+    However, we predict diminishing marginal returns on that spending -- the difference in spending between the top teams is likely insignificant.
 
 -   A statement about why this question is important.
 
 Spending in college football is more rampant than ever with the injection of NIL money into the sport, so schools without such a longstanding football tradition (like SEC schools) might rethink their spending habits.
 
--   Identify the types of variables in your research question. Categorical? Quantitative?
-Besides the variables identifying the sport name and institution name (and associated variables such as state), all of the variables are numerical -- spending, number of participants, etc. Some rows are labeled as "logical" because the row is filled with NAs. Some schools do not have specific sports or specific teams, so expenditure data cannot be provided for them.
-
+-   Identify the types of variables in your research question. Categorical? Quantitative? Besides the variables identifying the sport name and institution name (and associated variables such as state), all of the variables are numerical -- spending, number of participants, etc. Some rows are labeled as "logical" because the row is filled with NAs. Some schools do not have specific sports or specific teams, so expenditure data cannot be provided for them.
 
 ## Glimpse of data
 
@@ -72,8 +79,17 @@ glimpse(data)
     Observations dataset 1: Each observation includes a breakdown of annual data of a certain country in a particular year.
     This observation includes information about military expenditures, the number of military personnel, energy consumption, total population, etc.
 
-    Observations dataset 2: Each observation includes a breakdown of nations and the conflict in which one or more states threaten, display, or use force against one or more other states between 1816 and 2014.
-    Each observation includes the start and end date of incident, duration, etc.
+    Observations dataset 2: This dataset contains information on wars between countries.
+    Each observation is for a specific year and country, which breaks down the number of conflicts in which a country threatens/displays/uses force against one or more states.
+    The observation includes the start and end dates that the observation is tracking between, number of combatants, number of casualties and outcomes, etc.
+    The dataset includes observations between 1816 and 2014.
+    Other information included in the observations are the start and end date of incident, duration, etc.
+
+-   Research Topic Description
+
+This research examines the relationship between national material capabilities and the likelihood of a country’s involvement in conflict.
+National material capabilities—measured by indicators like military expenditure, personnel, industrial output, and population size—are commonly seen as a foundation of state power and often influence foreign policy and international relations.
+By analyzing data on national material capabilities and instances of interstate disputes, this study seeks to understand whether changes in these capabilities make a country more or less likely to engage in conflict.
 
 ## Research question
 
@@ -91,7 +107,19 @@ glimpse(data)
 
     -   Countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
 
--   Identify the types of variables in your research question.
+-   Why is our question important?
+    “How do changes in national material capabilities influence the likelihood of a country being involved in conflict?”
+
+Our question is important because it addresses the fundamental relationship between power dynamics and international stability.
+By examining how shifts in resources—such as military expenditure, population, and industrial capacity—affect a country's propensity for conflict, we can gain insight into the triggers of international disputes and the role of power in state behavior.
+This understanding is essential to predict, prevent, or mediate conflicts, as it can inform strategies to address power imbalances and guide resources toward peacebuilding efforts.
+
+-   
+
+    ```         
+    Identify the types of variables in your research question.
+    ```
+
     Categorical?
     Quantitative?
 
@@ -100,6 +128,14 @@ glimpse(data)
         military personnel - quantitative
 
         likelihood of entering conflict - quantitative
+
+-   Ethical Considerations The National Material Capabilities dataset presents ethical considerations by potentially reinforcing a narrow, militarized view of national power, as it focuses on military expenditure, personnel, and industrial production as core indicators.
+    This emphasis risks promoting military strength as the primary means of influence, possibly justifying power imbalances and framing weaker nations as subordinate in global conflicts.
+    Additionally, the dataset overlooks non-material forms of influence, like diplomacy and cultural power, and may unintentionally support historical biases, reinforcing structural inequalities rooted in past colonial and economic disparities.
+
+The Militarized Interstate Dispute dataset, records instances where states have “threatened, displayed, or used force short of war”, raises ethical concerns by framing state interactions primarily through conflict.
+This narrow focus can reinforce the perception that disputes are best addressed through military means, potentially downplaying diplomatic and peaceful conflict resolution methods.
+Additionally, there are the historical biases to consider, as some nations—particularly those with fewer resources or less military power—might appear disproportionately as victims, potentially perpetuating negative stereotypes or justifying unequal power dynamics in international relations.
 
 ## Glimpse of data
 
