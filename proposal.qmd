@@ -25,6 +25,8 @@ What is the correlation between athletic expenditures for football programs and 
 Are there regional differences in football expenditures among various colleges and universities? How do these differences relate to team performance?
 How do investments in football facilities (stadiums, training facilities) correlate with overall athletic department budgets and expenditures?
 What is the relationship between coaching salaries in football and overall athletic expenditures? How do these salaries compare to those in other sports?
+
+
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
