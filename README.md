@@ -8,8 +8,8 @@ EADA Variables in Creation Order -- we plan on trimming this down significantly
 
 
 #	Variable	Type	Len	Format	Informat	Label
-1	unitid	Num	8			unitid
-2	OPEID	Char	10	$10.	$10.	OPE ID
+1. 	unitid	Num	8			unitid
+2. 	OPEID	Char	10	$10.	$10.	OPE ID
 3	institution_name	Char	65	$65.	$65.	institution_name
 4	addr1_txt	Char	58	$58.	$58.	addr1_txt
 5	addr2_txt	Char	35	$35.	$35.	addr2_txt
