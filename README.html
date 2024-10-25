@@ -61,8 +61,110 @@ ul.task-list li input[type="checkbox"] {
 <section id="proposal-2" class="level1">
 <h1>Proposal 2:</h1>
 <p>Data Dictionary for NMC -&gt; country_resource</p>
-<p>Position Variable Description - “stateabb” - 3 letter country Abbreviation 2 “ccode” - COW Country code 3 “year” - Year of observation 4 “irst” - Iron and steel production (thousands of tons) 5 “milex” - Military Expenditures (For 1816-1913: thousands of current year British Pounds. For 1914+: thousands of current year US Dollars.) 6 “milper” - Military Personnel (thousands) 7 “energy” - Energy consumption (thousands of coal-ton equivalents) 8 “tpop” - Total Population (thousands) 9 “upop” - Urban population (population living in cities with population greater than 100,000; in thousands) 10 “cinc” - Composite Index of National Capability (CINC) score 11 “version” - Version number of the data set</p>
-<p>Data Dictionary for MID -&gt; country_conflict 1 DispNum - Dispute number 2 IncidNum - Incident number 3 StAbb - State abbreviation of participant 4 CCode - Country code/ state number of participant 5 StDay - Start day of incident (-9 = missing) 6 StMon - Start month of incident (-9 = missing) 7 StYear - Start year of incident 8 EndDay - End day of incident (-9 = missing) 9 EndMon - End month of incident (-9 = missing) 10 EndYear - End year of incident 11 InSide A - Incident Side A (1 = yes; 0 = no) 12 SideA - Dispute Side A (1 = yes; 0 = no) 13 Fatality - Fatality leve of Incident 0 None 1 1-25 deaths 2 26-100 deaths 3 101-250 deaths 4 251-500 deaths 5 501-999 deaths 6 &gt; 999 deaths -9 missing 14 FatalPre - Precise Fatalities, if Known (-9 = missing) 15 Action - Action in incident (bracketed numbers refer to corresponding hostility level) 0 No militarized action [1] 1 Threat to use force [2] 2 Threat to blockade [2] 3 Threat to occupy territory [2] 4 Threat to declare war [2] 5 Threat to use CBR weapons [2] 6 Threat to join war [2] 7 Show of force [3] 8 Alert [3] 9 Nuclear alert [3] 10 Mobilization [3] 11 Fortify border [3] 12 Border violation [3] 13 Blockade [4] 14 Occupation of territory [4] 15 Seizure [4] 16 Attack [4] 17 Clash [4] 18 Declaration of war [4] 19 Use of CBR weapons [4] 20 Begin interstate war [5] 21 Join interstate war [5] -9 Missing [-9] 16 HostLev - Hostility level of incident 1 No militarized action 2 Threat to use force 3 Display use of force 4 Use of force 5 War 17 RevType1 - Revision Type #1 0 Not applicable 1 Territory 2 Policy 3 Regime/government 4 Other -9 Missing 18 RevType2 - Revision Type #2 0 Not applicable 1 Territory 2 Policy 3 Regime/government 4 Other -9 Missing 19 Version - Version number of data set</p>
+<p>Position Variable Description</p>
+<ol type="1">
+<li><p>“stateabb” - 3 letter country Abbreviation</p></li>
+<li><p>“ccode” - COW Country code</p></li>
+<li><p>“year” - Year of observation</p></li>
+<li><p>“irst” - Iron and steel production (thousands of tons)</p></li>
+<li><p>“milex” - Military Expenditures (For 1816-1913: thousands of current year British Pounds. For 1914+: thousands of current year US Dollars.)</p></li>
+<li><p>“milper” - Military Personnel (thousands)</p></li>
+<li><p>“energy” - Energy consumption (thousands of coal-ton equivalents)</p></li>
+<li><p>“tpop” - Total Population (thousands)</p></li>
+<li><p>“upop” - Urban population (population living in cities with population greater than 100,000; in thousands)</p></li>
+<li><p>“cinc” - Composite Index of National Capability (CINC) score</p></li>
+<li><p>“version” - Version number of the data set</p></li>
+</ol>
+<p>Data Dictionary for MID -&gt; country_conflict</p>
+<ol type="1">
+<li><p>DispNum - Dispute number</p></li>
+<li><p>IncidNum - Incident number</p></li>
+<li><p>StAbb - State abbreviation of participant</p></li>
+<li><p>CCode - Country code/ state number of participant</p></li>
+<li><p>StDay - Start day of incident (-9 = missing)</p></li>
+<li><p>StMon - Start month of incident (-9 = missing)</p></li>
+<li><p>StYear - Start year of incident</p></li>
+<li><p>EndDay - End day of incident (-9 = missing)</p></li>
+<li><p>EndMon - End month of incident (-9 = missing)</p></li>
+<li><p>EndYear - End year of incident</p></li>
+<li><p>InSide A - Incident Side A (1 = yes; 0 = no)</p></li>
+<li><p>SideA - Dispute Side A (1 = yes; 0 = no)</p></li>
+<li><p>Fatality - Fatality leve of Incident</p></li>
+</ol>
+<ul>
+<li>0 None</li>
+<li>1: 1-25 deaths</li>
+<li>2: 26-100 deaths</li>
+<li>3: 101-250 deaths</li>
+<li>4: 251-500 deaths</li>
+<li>5: 501-999 deaths</li>
+<li>6: &gt; 999 deaths</li>
+<li>-9: missing</li>
+</ul>
+<ol start="14" type="1">
+<li>FatalPre - Precise Fatalities, if Known (-9 = missing)</li>
+<li>Action - Action in incident (bracketed numbers refer to corresponding hostility level)</li>
+</ol>
+<ul>
+<li>0: No militarized action [1]</li>
+<li>1: Threat to use force [2]</li>
+<li>2: Threat to blockade [2]</li>
+<li>3: Threat to occupy territory [2]</li>
+<li>4: Threat to declare war [2]</li>
+<li>5: Threat to use CBR weapons [2]</li>
+<li>6: Threat to join war [2]</li>
+<li>7: Show of force [3]</li>
+<li>8: Alert [3]</li>
+<li>9: Nuclear alert [3]</li>
+<li>10: Mobilization [3]</li>
+<li>11: Fortify border [3]</li>
+<li>12: Border violation [3]</li>
+<li>13: Blockade [4]</li>
+<li>14: Occupation of territory [4]</li>
+<li>15: Seizure [4]</li>
+<li>16: Attack [4]</li>
+<li>17: Clash [4]</li>
+<li>18: Declaration of war [4]</li>
+<li>19: Use of CBR weapons [4]</li>
+<li>20: Begin interstate war [5]</li>
+<li>21: Join interstate war [5]</li>
+<li>-9: Missing [-9]</li>
+</ul>
+<ol start="16" type="1">
+<li>HostLev - Hostility level of incident</li>
+</ol>
+<ul>
+<li>1: No militarized action</li>
+<li>2: Threat to use force</li>
+<li>3: Display use of force</li>
+<li>4: Use of force</li>
+<li>5: War</li>
+</ul>
+<ol start="17" type="1">
+<li>RevType1 - Revision Type #1</li>
+</ol>
+<ul>
+<li>0: Not applicable</li>
+<li>1: Territory</li>
+<li>2: Policy</li>
+<li>3: Regime/government</li>
+<li>4: Other</li>
+<li>-9: Missing</li>
+</ul>
+<ol start="18" type="1">
+<li>RevType2 - Revision Type #2</li>
+</ol>
+<ul>
+<li>0: Not applicable</li>
+<li>1: Territory</li>
+<li>2: Policy</li>
+<li>3: Regime/government</li>
+<li>4: Other</li>
+<li>-9: Missing</li>
+</ul>
+<ol start="19" type="1">
+<li>Version - Version number of data set</li>
+</ol>
 </section>
 
 </main>
