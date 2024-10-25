@@ -13,3 +13,5 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 MarkdownWrap: Sentence
+
+ProjectName: project-jada
