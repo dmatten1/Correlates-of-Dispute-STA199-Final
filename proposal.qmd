@@ -72,17 +72,17 @@ glimpse(data)
     Observations dataset 1: Each observation includes a breakdown of annual data of a certain country in a particular year.
     This observation includes information about military expenditures, the number of military personnel, energy consumption, total population, etc.
 
-    -   Observations dataset 2: This dataset contains information on wars between countries.
-        Each observation is for a specific year and country, which breaks down the number of conflicts in which a country threatens/displays/uses force against one or more states.
-        The observation includes the start and end dates that the observation is tracking between, number of combatants, number of casualties and outcomes, etc.
-        The dataset includes observations between 1816 and 2014.
-        Other information included in the observations are the start and end date of incident, duration, etc.
+    Observations dataset 2: This dataset contains information on wars between countries.
+    Each observation is for a specific year and country, which breaks down the number of conflicts in which a country threatens/displays/uses force against one or more states.
+    The observation includes the start and end dates that the observation is tracking between, number of combatants, number of casualties and outcomes, etc.
+    The dataset includes observations between 1816 and 2014.
+    Other information included in the observations are the start and end date of incident, duration, etc.
 
+-   Research Topic Description
 
-- Research Topic Description
-
-This research examines the relationship between national material capabilities and the likelihood of a country’s involvement in conflict. National material capabilities—measured by indicators like military expenditure, personnel, industrial output, and population size—are commonly seen as a foundation of state power and often influence foreign policy and international relations. By analyzing data on national material capabilities and instances of interstate disputes, this study seeks to understand whether changes in these capabilities make a country more or less likely to engage in conflict.
-
+This research examines the relationship between national material capabilities and the likelihood of a country’s involvement in conflict.
+National material capabilities—measured by indicators like military expenditure, personnel, industrial output, and population size—are commonly seen as a foundation of state power and often influence foreign policy and international relations.
+By analyzing data on national material capabilities and instances of interstate disputes, this study seeks to understand whether changes in these capabilities make a country more or less likely to engage in conflict.
 
 ## Research question
 
@@ -100,12 +100,19 @@ This research examines the relationship between national material capabilities a
 
     -   Countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
 
--   Why is our question important? 
-  “How do changes in national material capabilities influence the likelihood of a country being involved in conflict?” 
-  
-  Our question is important because it addresses the fundamental relationship between power dynamics and international stability. By examining how shifts in resources—such as military expenditure, population, and industrial capacity—affect a country's propensity for conflict, we can gain insight into the triggers of international disputes and the role of power in state behavior. This understanding is essential to predict, prevent, or mediate conflicts, as it can inform strategies to address power imbalances and guide resources toward peacebuilding efforts. 
+-   Why is our question important?
+    “How do changes in national material capabilities influence the likelihood of a country being involved in conflict?”
 
--     Identify the types of variables in your research question.
+Our question is important because it addresses the fundamental relationship between power dynamics and international stability.
+By examining how shifts in resources—such as military expenditure, population, and industrial capacity—affect a country's propensity for conflict, we can gain insight into the triggers of international disputes and the role of power in state behavior.
+This understanding is essential to predict, prevent, or mediate conflicts, as it can inform strategies to address power imbalances and guide resources toward peacebuilding efforts.
+
+-   
+
+    ```         
+    Identify the types of variables in your research question.
+    ```
+
     Categorical?
     Quantitative?
 
@@ -115,11 +122,13 @@ This research examines the relationship between national material capabilities a
 
         likelihood of entering conflict - quantitative
 
--   Ethical Considerations 
-  The National Material Capabilities dataset presents ethical considerations by potentially reinforcing a narrow, militarized view of national power, as it focuses on military expenditure, personnel, and industrial production as core indicators. This emphasis risks promoting military strength as the primary means of influence, possibly justifying power imbalances and framing weaker nations as subordinate in global conflicts. Additionally, the dataset overlooks non-material forms of influence, like diplomacy and cultural power, and may unintentionally support historical biases, reinforcing structural inequalities rooted in past colonial and economic disparities. 
+-   Ethical Considerations The National Material Capabilities dataset presents ethical considerations by potentially reinforcing a narrow, militarized view of national power, as it focuses on military expenditure, personnel, and industrial production as core indicators.
+    This emphasis risks promoting military strength as the primary means of influence, possibly justifying power imbalances and framing weaker nations as subordinate in global conflicts.
+    Additionally, the dataset overlooks non-material forms of influence, like diplomacy and cultural power, and may unintentionally support historical biases, reinforcing structural inequalities rooted in past colonial and economic disparities.
 
-  The Militarized Interstate Dispute dataset, records instances where states have “threatened, displayed, or used force short of war”, raises ethical concerns by framing state interactions primarily through conflict. This narrow focus can reinforce the perception that disputes are best addressed through military means, potentially downplaying diplomatic and peaceful conflict resolution methods.  Additionally, there are the historical biases to consider, as some nations—particularly those with fewer resources or less military power—might appear disproportionately as victims, potentially perpetuating negative stereotypes or justifying unequal power dynamics in international relations. 
-
+The Militarized Interstate Dispute dataset, records instances where states have “threatened, displayed, or used force short of war”, raises ethical concerns by framing state interactions primarily through conflict.
+This narrow focus can reinforce the perception that disputes are best addressed through military means, potentially downplaying diplomatic and peaceful conflict resolution methods.
+Additionally, there are the historical biases to consider, as some nations—particularly those with fewer resources or less military power—might appear disproportionately as victims, potentially perpetuating negative stereotypes or justifying unequal power dynamics in international relations.
 
 ## Glimpse of data
 
