@@ -5,13 +5,10 @@ Project repo for STA 199 - Fall 2024.
 # Proposal 1: 
 
 #	Variable	
-Survey Year	
-UNITID	
-OPE ID	
+Survey Year
 Institution Name	
-State 
-CD	
-Classification Name	
+State CD                    -          state code	
+Classification Name         -          such as FBS	
 Sanction Code	
 Sanction Name	
 Male Undergraduates	
