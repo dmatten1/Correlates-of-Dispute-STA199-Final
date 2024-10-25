@@ -1,8 +1,6 @@
 # project
 
 Project repo for STA 199 - Fall 2024.
-<<<<<<< HEAD
- 
  
  Data Dictionary for NMC -> country_resource 
 
