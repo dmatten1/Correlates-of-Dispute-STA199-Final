@@ -1,6 +1,7 @@
 # project
 
 Project repo for STA 199 - Fall 2024.
+<<<<<<< HEAD
  
  Data Dictionary for NMC -> country_resource 
 
@@ -100,9 +101,15 @@ Data Dictionary for MID -> country_conflict
 EADA Variables in Creation Order -- we plan on trimming this down significantly
 
 
+=======
+
+
+
+<<<<<<< HEAD
+>>>>>>> 731e7adb492de24081be4a99124f2df62ad5cf25
 #	Variable	Type	Len	Format	Informat	Label
-1	unitid	Num	8			unitid
-2	OPEID	Char	10	$10.	$10.	OPE ID
+1. 	unitid	Num	8			unitid
+2. 	OPEID	Char	10	$10.	$10.	OPE ID
 3	institution_name	Char	65	$65.	$65.	institution_name
 4	addr1_txt	Char	58	$58.	$58.	addr1_txt
 5	addr2_txt	Char	35	$35.	$35.	addr2_txt
@@ -380,4 +387,25 @@ EADA Variables in Creation Order -- we plan on trimming this down significantly
 277	PARTIC_COED_MEN_Sailing	Num	8			# Participants Men Coed. Sport: Sailing
 278	PARTIC_COED_MEN_TblTennis	Num	8			# Participants Men Coed. Sport: Table Tennis
 279	PARTIC_COED_MEN_WgtLift	Num	8			# Participants Men Coed. Sport: Weight Lifting
->>>>>>> 43cb31e9adcac5f1b36b8dd9cb52f256530fd86c
+=======
+EADA Variables in Creation Order
+>>>>>>> ad1a63e035a8e99570c2354361f0f43288c95a9d
+
+
+#	Variable	
+Survey Year	
+UNITID	
+OPE ID	
+Institution Name	
+State 
+CD	
+Classification Name	
+Sanction Code	
+Sanction Name	
+Male Undergraduates	
+Female Undergraduates	
+Total Undergraduates	
+\# Participants Men's Team	Total
+Operating Expenses per Participant/Men's Team
+Operating Expenses per Team/Men's Team	
+Revenues Men's Team	Total
