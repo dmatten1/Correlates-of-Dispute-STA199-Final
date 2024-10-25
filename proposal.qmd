@@ -1,5 +1,6 @@
 ---
 title: JADA Proposals
+author: Allison Yang, Daniel Matten, Jacob Ominsky, Ashley Deleon
 ---
 
 ```{r}
