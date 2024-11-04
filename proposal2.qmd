@@ -72,12 +72,12 @@ library(tidyverse)
 
 #main dataset abt resources
 
-country_resource <- read_csv("NMC.csv")
+country_resource <- read_csv("data/NMC.csv")
 glimpse(country_resource)
 
 #main dataset abt conflict
 
-country_conflict <- read_csv("Conflict.csv")
+country_conflict <- read_csv("data/Conflict.csv")
 glimpse(country_conflict)
 
 
