@@ -44,7 +44,7 @@ Spending in college football is more rampant than ever with the injection of NIL
 
 ```{r}
 #| label: load-data-1
-data <- read_xlsx("Sport_Data_2022 FOOTBALL.xlsx")
+data <- read_xlsx("data/Sport_Data_2022 FOOTBALL.xlsx")
 glimpse(data)
 ```
 
