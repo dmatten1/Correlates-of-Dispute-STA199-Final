@@ -22,21 +22,28 @@ Because the survey is government-mandated and doesn't include personal informati
 
 ## Research question
 
--   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
+-   A well formulated research question.
+    (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
     Does the distribution of spending within a college football program change between universities (based on region, for example), and how do these changes impact a program's success?
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
-    Our research topic focuses on analyzing the EADA's annual, which includes spending on recruiting, coaching salaries, and financial aid. We predict that there is a positive relationship between spending and football success in NCAA Division 1 thanks to the impact of additional scholarships and nicer facilities. However, we predict diminishing marginal returns on that spending -- the difference in spending between the top teams is likely insignificant.
+    Our research topic focuses on analyzing the EADA's annual, which includes spending on recruiting, coaching salaries, and financial aid.
+    We predict that there is a positive relationship between spending and football success in NCAA Division 1 thanks to the impact of additional scholarships and nicer facilities.
+    However, we predict diminishing marginal returns on that spending -- the difference in spending between the top teams is likely insignificant.
 
 -   A statement about why this question is important.
 
     Spending in college football is more rampant than ever with the injection of NIL money into the sport, so schools without such a longstanding football tradition (like SEC schools) might rethink their spending habits.
 
--   Identify the types of variables in your research question. Categorical? Quantitative?
+-   Identify the types of variables in your research question.
+    Categorical?
+    Quantitative?
 
-    Besides the variables identifying the sport name and institution name (and associated variables such as state), all of the variables are numerical -- spending, number of participants, etc. Some rows are labeled as "logical" because the row is filled with NAs. Some schools do not have specific sports or specific teams, so expenditure data cannot be provided for them.
+    Besides the variables identifying the sport name and institution name (and associated variables such as state), all of the variables are numerical -- spending, number of participants, etc.
+    Some rows are labeled as "logical" because the row is filled with NAs.
+    Some schools do not have specific sports or specific teams, so expenditure data cannot be provided for them.
 
 ## Glimpse of data
 
@@ -90,7 +97,7 @@ By analyzing data on national material capabilities and instances of interstate 
 
     How do changes in national material capabilities influence the frequency of a country's conflicts?
 
-This phrasing keeps the focus on measurable ele
+This phrasing keeps the focus on measurable variables.
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
@@ -147,4 +154,21 @@ country_conflict <- read_csv("data/Conflict.csv")
 glimpse(country_conflict)
 
 
+```
+
+# Data Exploration
+
+Joining datasets
+
+```{r}
+#| label: join-datasets
+
+join_attempt <- country_conflict |>
+  full_join(country_resource, by = join_by(
+      stabb == stateabb, 
+      styear == year
+    )
+  )
+
+glimpse(join_attempt)
 ```
