@@ -168,7 +168,9 @@ country_resource <- country_resource |>
 
 country_conflict <- country_conflict |>
   select(-ccode, -version)
+```
 
+```{r}
 join_attempt <- country_conflict |>
   full_join(country_resource, by = join_by(
       stabb == stateabb, 
@@ -176,5 +178,10 @@ join_attempt <- country_conflict |>
     )
   )
 
-glimpse(join_attempt)
+#glimpse(join_attempt)
+
+number_of_disputes_df <- join_attempt |>
+  group_by(stabb, styear) |>
+  summarize(count = n(), .groups = "drop")
+glimpse(number_of_disputes_df)
 ```
