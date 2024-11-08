@@ -164,10 +164,10 @@ Joining datasets
 #| label: join-datasets
 
 country_resource <- country_resource |>
-  select(!ccode, !version)
+  select(-ccode, -version)
 
 country_conflict <- country_conflict |>
-  select(!ccode, !version)
+  select(-ccode, -version)
 
 join_attempt <- country_conflict |>
   full_join(country_resource, by = join_by(
