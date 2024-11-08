@@ -185,3 +185,22 @@ number_of_disputes_df <- join_attempt |>
   summarize(count = n(), .groups = "drop")
 glimpse(number_of_disputes_df)
 ```
+
+
+
+
+```{r}
+ggplot(join_attempt, aes(x = styear, y = ccode, size = irst, color = irst)) +
+  geom_point(alpha = 0.7) +
+  scale_size(range = c(2, 10)) +
+  scale_color_viridis_c() +
+  labs(
+    title = "Country Conflicts and Spending on Iron & Steel by Year",
+    x = "Year of Conflict",
+    y = "Country",
+    size = "IRST Spending",
+    color = "IRST Spending"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "right")
+``` 
