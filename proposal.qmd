@@ -189,4 +189,7 @@ join_attempt2 <- join_attempt |>
   left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
 glimpse(join_attempt2)
 
+ggplot(join_attempt2, aes(x = milex, y = count)) +
+  geom_point()
+
 ```
