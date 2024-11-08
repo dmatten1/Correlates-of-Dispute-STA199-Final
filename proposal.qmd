@@ -200,3 +200,34 @@ ggplot(join_attempt2, aes(x = milex, y = count)) +
 ```
 
 
+```{r}
+join_attempt2 <- join_attempt |>
+  left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
+glimpse(join_attempt2)
+ggplot(join_attempt2, aes(x = milex, y = count)) +
+  geom_point() 
+
+```
+
+
+#iron 
+
+```{r}
+
+ggplot(join_attempt2, aes(x = styear, y = irst, color = stabb)) +
+  geom_point(size = 2) + 
+  labs(
+    title = "Yearly Iron Spending by Country",
+    x = "Year",
+    y = "Iron Spending (IRST)",
+    color = "Country"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "right",  
+    legend.text = element_text(size = 3) 
+  )
+
+```
+
+
