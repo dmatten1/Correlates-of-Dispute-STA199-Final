@@ -183,5 +183,10 @@ join_attempt <- country_conflict |>
 number_of_disputes_df <- join_attempt |>
   group_by(stabb, styear) |>
   summarize(count = n(), .groups = "drop")
-glimpse(number_of_disputes_df)
+#glimpse(number_of_disputes_df)
+
+join_attempt2 <- join_attempt |>
+  left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
+glimpse(join_attempt2)
+
 ```
