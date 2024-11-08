@@ -17,13 +17,19 @@ library(readxl)
 This data comes from the Equity in Athletics Data Analysis, which is created by the U.S.
 Department of Education.
 Institutions of higher education that participate in federal student aid programs are obligated to submit athletics data by the Equity in Athletics Disclosure Act, and that data appears in the Equity in Athletics Disclosure database as well as this data.
-The data is collected every year as schools fill out the mandatory survey, and it includes information such as spending on recruiting, head coaching salary, and financial aid for each school. Because the survey is government-sanctioned, mandatory, and not personal, we don't expect any ethical concerns regarding privacy.
+The data is collected every year as schools fill out the mandatory survey, and it includes information such as spending on recruiting, head coaching salary, and financial aid for each school.
 
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
-Does the distribution of college football spending differ between schools (in particular regions, for example), and how does that impact success?
+What is the correlation between athletic expenditures for football programs and their performance metrics?
+
+Are there regional differences in football expenditures among various colleges and universities? How do these differences relate to team performance?
+
+How do investments in football facilities (stadiums, training facilities) correlate with overall athletic department budgets and expenditures?
+
+What is the relationship between coaching salaries in football and overall athletic expenditures? How do these salaries compare to those in other sports?
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
     Our research topic focuses on analyzing the EADA's annual, which includes spending on recruiting, coaching salaries, and financial aid. We predict that there is a positive relationship between spending and football success in NCAA Division 1 thanks to the impact of additional scholarships and nicer facilities. However, we predict diminishing marginal returns on that spending -- the difference in spending between the top teams is likely insignificant.
@@ -75,6 +81,7 @@ glimpse(data)
 -   Research Topic Description
 
 This research examines the relationship between national material capabilities and the likelihood of a country’s involvement in conflict.
+
 National material capabilities—measured by indicators like military expenditure, personnel, industrial output, and population size—are commonly seen as a foundation of state power and often influence foreign policy and international relations.
 By analyzing data on national material capabilities and instances of interstate disputes, this study seeks to understand whether changes in these capabilities make a country more or less likely to engage in conflict.
 
@@ -83,12 +90,14 @@ By analyzing data on national material capabilities and instances of interstate 
 -   A well formulated research question.
     (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
-    How do changes in national material capabilities influence the likelihood of a country being involved in conflict?
+    How do changes in national material capabilities influence the frequency of a country's conflicts?
+
+This phrasing keeps the focus on measurable ele
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
-    This research topic explores the varying levels of impact each national capability indicator has on a country's likelihood of entering conflict.
-    It also reflects which national capability indicator has a greater correlation with the likelihood of conflict involvement.
+    This research topic explores the varying levels of impact each national capability indicator has on a country's frequency of entering conflict.
+    It also reflects which national capability indicator has a greater correlation with the frequency of conflict involvement.
 
     Thus, our hypothesis is:
 
