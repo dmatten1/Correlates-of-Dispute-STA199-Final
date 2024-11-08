@@ -17,7 +17,7 @@ library(readxl)
 This data comes from the Equity in Athletics Data Analysis, which is created by the U.S.
 Department of Education.
 Institutions of higher education that participate in federal student aid programs are obligated to submit athletics data by the Equity in Athletics Disclosure Act, and that data appears in the Equity in Athletics Disclosure database as well as this data.
-The data is collected every year as schools fill out the mandatory survey, and it includes information such as spending on recruiting, head coaching salary, and financial aid for each school.
+The data is collected every year as schools fill out the mandatory survey, and it includes information such as spending on recruiting, head coaching salary, and financial aid for each school. Because the survey is government-sanctioned, mandatory, and not personal, we don't expect any ethical concerns regarding privacy.
 
 ## Research question
 
