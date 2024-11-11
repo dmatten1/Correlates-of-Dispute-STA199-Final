@@ -171,7 +171,7 @@ country_conflict <- country_conflict |>
 ```
 
 ```{r}
-join_attempt <- country_conflict |>
+country_join <- country_conflict |>
   full_join(country_resource, by = join_by(
       stabb == stateabb, 
       styear == year
@@ -180,7 +180,7 @@ join_attempt <- country_conflict |>
 
 #glimpse(join_attempt)
 
-number_of_disputes_df <- join_attempt |>
+number_of_disputes_df <- country_join |>
   group_by(stabb, styear) |>
   summarize(count = n(), .groups = "drop")
 glimpse(number_of_disputes_df)
@@ -188,19 +188,16 @@ glimpse(number_of_disputes_df)
 
 ```
 
-
-
 ```{r}
-join_attempt2 <- join_attempt |>
+country_join_edit <- country_join |>
   left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
-glimpse(join_attempt2)
-ggplot(join_attempt2, aes(x = milex, y = count)) +
+glimpse(country_join_edit)
+ggplot(country_join_edit, aes(x = milex, y = count)) +
   geom_point() 
 
 ```
 
-
-#Iron 
+#Iron
 
 ```{r}
 #| label: graph-Iron-and-IncidentCount
@@ -208,14 +205,14 @@ ggplot(join_attempt2, aes(x = milex, y = count)) +
 #| warning: false
 
 #colored bc countries (too many)
-ggplot(join_attempt2, aes(x = irst, y = count, color = stabb)) +
+ggplot(country_join_edit, aes(x = irst, y = count, color = stabb)) +
   geom_point() + 
    labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
        x = "Iron and steel production (thousands of tons)",
        y = "Count") +
   theme_minimal()
 
-ggplot(join_attempt2, aes(x = irst, y = count)) +
+ggplot(country_join_edit, aes(x = irst, y = count)) +
   geom_point() + 
    labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
        x = "Iron and steel production (thousands of tons)",
@@ -224,6 +221,4 @@ ggplot(join_attempt2, aes(x = irst, y = count)) +
 
 ```
 
-
-
-
+Direction from here: The data set contains too many countries which makes it difficult to visualize- in the future, we can either try grouping the countries by continent (or some other variable) or just focus on a certain number of countries.
