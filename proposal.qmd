@@ -200,7 +200,25 @@ ggplot(join_attempt2, aes(x = milex, y = count)) +
 ```
 
 
-#iron 
+#Iron 
+
+```{r}
+ggplot(join_attempt2, aes(x = irst, y = count, color = stabb)) +
+  geom_point() + 
+   labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
+       x = "Iron and steel production (thousands of tons)",
+       y = "Count") +
+  theme_minimal()
+
+
+ggplot(join_attempt2, aes(x = irst, y = count)) +
+  geom_point() + 
+   labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
+       x = "Iron and steel production (thousands of tons)",
+       y = "Count") +
+  theme_minimal()
+
+```
 
 
 
