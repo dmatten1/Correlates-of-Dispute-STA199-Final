@@ -29,8 +29,6 @@ This dataset includes data on military power indicators such as military expendi
 Militarized Interstate Disputes (Dataset 2)
 This dataset records instances where states threaten, display, or use force against one another. The data includes details such as the start and end dates of conflicts, number of combatants, casualties, and the outcomes of these disputes. This dataset spans from 1816 to 2014 and provides insight into the frequency and intensity of conflicts between countries.
 
-
-
 ## Methodology
 
 This section includes a brief description of your analysis process.
