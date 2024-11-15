@@ -15,6 +15,22 @@ Describe the data and definitions of key variables.
 It should also include some exploratory data analysis.
 All of the EDA won’t fit in the paper, so focus on the EDA for the response variable and a few other interesting variables and relationships.
 
+Motivation:
+
+The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts. Understanding how changes in a nation’s military capabilities—such as military expenditures and natural resources like iron—affect its involvement in international disputes is important for assessing political stability. This research aligns with the broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts. In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations. 
+
+Source:
+
+The data used in this analysis comes from the Correlates of War (COW) project, which is widely used by Political Scientists. This project involves two datasets for our research:
+
+National Material Capabilities (Dataset 1)
+This dataset includes data on military power indicators such as military expenditures, military personnel, energy consumption, and total population for various countries. The data is collected annually, providing a comprehensive look at the material capabilities of each nation over time.
+
+Militarized Interstate Disputes (Dataset 2)
+This dataset records instances where states threaten, display, or use force against one another. The data includes details such as the start and end dates of conflicts, number of combatants, casualties, and the outcomes of these disputes. This dataset spans from 1816 to 2014 and provides insight into the frequency and intensity of conflicts between countries.
+
+
+
 ## Methodology
 
 This section includes a brief description of your analysis process.
