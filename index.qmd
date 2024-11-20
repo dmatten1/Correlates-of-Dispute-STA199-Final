@@ -222,14 +222,14 @@ CountryName <- data.frame(
 )
 
 country_join_countrynames <- country_join_edit |>
-  left_join(CountryName, by = c("stabb" = "COWn")) |> 
-  select(-Country.y)
+  left_join(CountryName, by = c("stabb" = "COWn")) 
+
 
 # country column to get the ISO codes and continents
 country_join_continents <- country_join_countrynames |>
   mutate(
     # join for country code conversion
-    Country_code = countrycode(Country.x, "country.name", "iso3c"),
+    Country_code = countrycode(Country, "country.name", "iso3c"),
     # convert the ISO country code to continent
     Continent = countrycode(Country_code, "iso3c", "continent")
   )
