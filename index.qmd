@@ -5,8 +5,9 @@ execute:
   echo: true
 ---
 
-This study examines the relationship between a country's national material capabilities—such as military expenditures, personnel, and iron—and its frequency engaging in conflict. By analyzing data from the Correlates of War project, which tracks national capabilities and militarized interstate disputes, the research aims to identify whether increases in these capabilities correlate with higher frequencies of interstate conflict. The findings seek to enhance our understanding of how shifts in state power influence international stability and conflict dynamics.
-
+This study examines the relationship between a country's national material capabilities—such as military expenditures, personnel, and iron—and its frequency engaging in conflict.
+By analyzing data from the Correlates of War project, which tracks national capabilities and militarized interstate disputes, the research aims to identify whether increases in these capabilities correlate with higher frequencies of interstate conflict.
+The findings seek to enhance our understanding of how shifts in state power influence international stability and conflict dynamics.
 
 ## Introduction and data
 
@@ -17,17 +18,22 @@ All of the EDA won’t fit in the paper, so focus on the EDA for the response va
 
 Motivation:
 
-The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts. Understanding how changes in a nation’s military capabilities—such as military expenditures and natural resources like iron—affect its involvement in international disputes is important for assessing political stability. This research aligns with the broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts. In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations. 
+The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts.
+Understanding how changes in a nation’s military capabilities—such as military expenditures and natural resources like iron—affect its involvement in international disputes is important for assessing political stability.
+This research aligns with the broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts.
+In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations.
 
 Source:
 
-The data used in this analysis comes from the Correlates of War (COW) project, which is widely used by Political Scientists. This project involves two datasets for our research:
+The data used in this analysis comes from the Correlates of War (COW) project, which is widely used by Political Scientists.
+This project involves two datasets for our research:
 
-National Material Capabilities (Dataset 1)
-This dataset includes data on military power indicators such as military expenditures, military personnel, energy consumption, and total population for various countries. The data is collected annually, providing a comprehensive look at the material capabilities of each nation over time.
+National Material Capabilities (Dataset 1) This dataset includes data on military power indicators such as military expenditures, military personnel, energy consumption, and total population for various countries.
+The data is collected annually, providing a comprehensive look at the material capabilities of each nation over time.
 
-Militarized Interstate Disputes (Dataset 2)
-This dataset records instances where states threaten, display, or use force against one another. The data includes details such as the start and end dates of conflicts, number of combatants, casualties, and the outcomes of these disputes. This dataset spans from 1816 to 2014 and provides insight into the frequency and intensity of conflicts between countries.
+Militarized Interstate Disputes (Dataset 2) This dataset records instances where states threaten, display, or use force against one another.
+The data includes details such as the start and end dates of conflicts, number of combatants, casualties, and the outcomes of these disputes.
+This dataset spans from 1816 to 2014 and provides insight into the frequency and intensity of conflicts between countries.
 
 ## Methodology
 
@@ -49,3 +55,71 @@ In this section you’ll include a summary of what you have learned about your r
 In addition, discuss the limitations of your analysis and provide suggestions on ways the analysis could be improved.
 Any potential issues pertaining to the reliability and validity of your data and appropriateness of the statistical analysis should also be discussed here.
 Lastly, this section will include ideas for future work.
+
+## Data Exploration
+
+Joining datasets
+
+```{r}
+#| label: join-datasets
+
+country_resource <- country_resource |>
+  select(-ccode, -version)
+
+country_conflict <- country_conflict |>
+  select(-ccode, -version)
+```
+
+```{r}
+country_join <- country_conflict |>
+  full_join(country_resource, by = join_by(
+      stabb == stateabb, 
+      styear == year
+    )
+  )
+
+#glimpse(join_attempt)
+
+number_of_disputes_df <- country_join |>
+  group_by(stabb, styear) |>
+  summarize(count = n(), .groups = "drop")
+glimpse(number_of_disputes_df)
+
+
+```
+
+```{r}
+country_join_edit <- country_join |>
+  left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
+glimpse(country_join_edit)
+ggplot(country_join_edit, aes(x = milex, y = count)) +
+  geom_point() 
+
+```
+
+# Iron
+
+```{r}
+#| label: graph-Iron-and-IncidentCount
+#| message: false
+#| warning: false
+
+#colored bc countries (too many)
+ggplot(country_join_edit, aes(x = irst, y = count, color = stabb)) +
+  geom_point() + 
+   labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
+       x = "Iron and steel production (thousands of tons)",
+       y = "Count") +
+  theme_minimal()
+
+ggplot(country_join_edit, aes(x = irst, y = count)) +
+  geom_point() + 
+   labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
+       x = "Iron and steel production (thousands of tons)",
+       y = "Count") +
+  theme_minimal()
+
+```
+
+Direction from here: The data set contains too many countries which makes it difficult to visualize- in the future, we can either try grouping the countries by continent (or some other variable) or just focus on a certain number of countries.
+We could then look at continents with the greatest conflicts and explore those countries in said continents specifically.
