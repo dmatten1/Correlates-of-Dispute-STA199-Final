@@ -75,6 +75,8 @@ Lastly, this section will include ideas for future work.
 library(tidyverse)
 library(readxl)
 library(countrycode)
+library(tidymodels)
+library(openintro)
 
 #main dataset abt resources
 
@@ -151,7 +153,7 @@ ggplot(country_join_edit, aes(x = irst, y = count)) +
 
 ```
 
-
+# Adding Continents 
 
 ```{r}
 #| label: continents 
@@ -236,10 +238,176 @@ country_join_continents <- country_join_countrynames |>
 
 
 
+
 ```
 
 
+# Which Country has the Highest Propensity for Conflict? 
 
+```{r}
+#| label: high-prop-conflict 
+#| message: false
+#| warning: false
+
+conflict_by_continent <- country_join_continents |>
+  group_by(Continent) |>
+  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  arrange(desc(total_conflict))
+
+
+conflict_by_continent |>
+  ggplot(aes(x = reorder(Continent, -total_conflict), y = total_conflict, fill = Continent)) +
+  geom_col() +
+  labs(
+    title = "Total Conflict Incidents by Continent",
+    x = "Continent",
+    y = "Total Conflict Incidents",
+    fill = "Continent"
+  ) +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Blues") #make it pretty 
+```
+
+Focus can be on the continent with the highest propensity for conflict (?)
+
+
+```{r}
+#| label: period-conflicts
+#| message: false
+#| warning: false
+
+#fliter by asia 
+asia <- country_join_continents |>
+  filter(Continent == "Asia")
+
+
+asia |>
+  group_by(styear) |>
+  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  ggplot(aes(x = styear, y = total_conflict)) +
+  geom_line() +
+  labs(
+    title = "Trends in Conflict Incidents in Asia",
+    x = "Year",
+    y = "Total Conflict Incidents"
+  ) +
+  theme_minimal()
+
+
+```
+
+Confict and Iron production start around the same years (?) 
+
+
+```{r}
+#| label: period-iron-production
+#| message: false
+#| warning: false
+
+#fliter by asia 
+asia <- country_join_continents |>
+  filter(Continent == "Asia")
+
+
+asia |>
+  group_by(styear) |>
+  summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
+  ggplot(aes(x = styear, y = total_iron_production)) +
+  geom_line() +
+  labs(
+    title = "Trends in Iron and steel production (thousands of tons) in Asia",
+    x = "Year",
+    y = "Total Conflict Incidents"
+  ) +
+  theme_minimal()
+```
+
+Countries in Asia that lead in Incident Count and Iron Production 
+
+```{r}
+#| label: top-countries-conflict-iron
+#| message: false
+#| warning: false
+
+
+asia |>
+  group_by(stabb) |>
+  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  arrange(desc(total_conflict))
+
+asia |>
+  group_by(stabb) |>
+  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  ggplot(aes(x = reorder(stabb, -total_conflict), y = total_conflict)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "Conflict Incidents by Country in Asia",
+    x = "Country",
+    y = "Total Conflict Incidents"
+  ) +
+  theme_minimal()
+
+
+
+
+asia |>
+  group_by(stabb) |>
+  summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
+  arrange(desc(total_iron_production))
+
+asia |>
+  group_by(stabb) |>
+  summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
+  ggplot(aes(x = reorder(stabb, -total_iron_production), y = total_iron_production)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "Iron Production by Country in Asia",
+    x = "Country",
+    y = "Total Iron Production"
+  ) +
+  theme_minimal()
+
+```
+
+#Explore 
+Relations between material capabilities and conflict frequency.
+
+
+```{r}
+#| label: top-countries-conflict-iron-cor
+#| message: false
+#| warning: false
+
+#milex: Military expenditure.
+#milper: Military personnel
+#irst: Iron and Steel production
+#cinc: Composite Index of National Capability.
+#count: Frequency of conflicts.
+
+asia |>
+  select(milex, milper, irst, cinc, count) |>
+  cor(use = "complete.obs")
+# calc correlations; no missing val accounted 
+
+
+```
+
+1: Perfect positive correlation (as one variable increases, the other always increases).
+0: No correlation.
+-1: Perfect negative correlation (as one variable increases, the other always decreases).
+
+
+```{r}
+#| label: countries-conflict-iron-model
+#| message: false
+#| warning: false
+
+country_conflict_incident_model <- linear_reg() |>
+  fit(count ~ milex + milper + irst + cinc, data = asia)
+
+tidy(country_conflict_incident_model)
+
+```
 Direction from here: The data set contains too many countries which makes it difficult to visualize- in the future, we can either try grouping the countries by continent (or some other variable) or just focus on a certain number of countries.
 We could then look at continents with the greatest conflicts and explore those countries in said continents specifically.
 

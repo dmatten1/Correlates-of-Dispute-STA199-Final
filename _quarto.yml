@@ -4,7 +4,7 @@ project:
   resources:
     - presentation.pdf
 
-author: "Add team name here in _quarto.yml"
+author: "Allison Yang, Ashley Deleon, Daniel Matten, Jacob Ominsky"
 
 website:
   navbar:
