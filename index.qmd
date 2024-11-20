@@ -16,6 +16,12 @@ Describe the data and definitions of key variables.
 It should also include some exploratory data analysis.
 All of the EDA won’t fit in the paper, so focus on the EDA for the response variable and a few other interesting variables and relationships.
 
+
+Question: 
+
+How do changes in national material capabilities influence the frequency of a country's conflicts?
+
+
 Motivation:
 
 The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts. Understanding how changes in a nation’s military capabilities—such as military expenditures and natural resources like iron—affect its involvement in international disputes is important for assessing political stability. This research aligns with the broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts.
@@ -68,6 +74,7 @@ Lastly, this section will include ideas for future work.
 #| message: false
 library(tidyverse)
 library(readxl)
+library(countrycode)
 
 #main dataset abt resources
 
@@ -144,6 +151,98 @@ ggplot(country_join_edit, aes(x = irst, y = count)) +
 
 ```
 
+
+
+```{r}
+#| label: continents 
+#| message: false
+#| warning: false
+
+#adding countries, the COW codes do not match the universal country codes so there are many nas using the countrycode package
+# cow code to country name --> to actual ISO code --> continents 
+#stabb_values <- country_join_edit[["stabb"]] isolating COW code
+#unique_stabb_values <- unique(stabb_values) removing duplicates 219 countries noted 
+
+
+
+CountryName <- data.frame(
+  COWn = c("ZIM", "ZAN", "ZAM", "YUG", "YPR", "YEM", "YAR", "WSM", "WRT", "VEN", "VAN", 
+           "UZB", "USA", "URU", "UKR", "UKG", "UGA", "UAE", "TUV", "TUS", "TUR", "TUN", "TRI", 
+           "TON", "TOG", "TKM", "THI", "TAZ", "TAW", "TAJ", "SYR", "SWZ", "SWD", "SWA", "SVG", 
+           "SUR", "SUD", "STP", "SSD", "SRI", "SPN", "SOM", "SOL", "SNM", "SLV", "SLU", "SLO", 
+           "SKN", "SIN", "SIE", "SIC", "SEY", "SEN", "SAX", "SAU", "SAL", "SAF", "RWA", "RVN", 
+           "RUS", "ROM", "ROK", "QAT", "PRK", "POR", "POL", "PNG", "PMA", "PHI", "PER", "PAR", 
+           "PAP", "PAN", "PAL", "PAK", "OMA", "NTH", "NOR", "NIR", "NIG", "NIC", "NEW", "NEP", 
+           "NAU", "NAM", "MZM", "MYA", "MSI", "MOR", "MON", "MOD", "MNG", "MNC", "MLT", "MLI", 
+           "MLD", "MEX", "MEC", "MAW", "MAS", "MAL", "MAG", "MAD", "MAC", "MAA", "LUX", "LIT", 
+           "LIE", "LIB", "LES", "LEB", "LBR", "LAT", "LAO", "KZK", "KYR", "KUW", "KOS", "KOR", 
+           "KIR", "KEN", "JPN", "JOR", "JAM", "ITA", "ISR", "IRQ", "IRN", "IRE", "INS", "IND", 
+           "ICE", "HUN", "HSG", "HSE", "HON", "HKG", "HAN", "HAI", "GUY", "GUI", "GUA", "GRN", 
+           "GRG", "GRC", "GNB", "GMY", "GHA", "GFR", "GDR", "GAM", "GAB", "FSM", "FRN", "FIN", 
+           "FIJ", "EU", "ETM", "ETH", "EST", "ERI", "EQG", "EGY", "ECU", "DRV", "DRC", "DOM", 
+           "DMA", "DJI", "DEN", "CZR", "CZE", "CYP", "CUB", "CRO", "COS", "CON", "COM", "COL", 
+           "CHN", "CHL", "CHA", "CEN", "CDI", "CAP", "CAO", "CAN", "CAM", "BUL", "BUI", "BRU", 
+           "BRA", "BOT", "BOS", "BOL", "BNG", "BLZ", "BLR", "BHU", "BHM", "BFO", "BEN", "BEL", 
+           "BAV", "BAR", "BAH", "BAD", "AZE", "AUS", "AUL", "AUH", "ARM", "ARG", "ANG", "AND", 
+           "ALG", "ALB", "AFG"),
+  Country = c("Zimbabwe", "Zanzibar", "Zambia", "Yugoslavia/Serbia", "Yemen People's Republic", 
+              "Yemen", "Yemen Arab Republic", "Samoa", "Wuerttemburg", "Venezuela", "Vanuatu", 
+              "Uzbekistan", "United States of America", "Uruguay", "Ukraine", "United Kingdom", 
+              "Uganda", "United Arab Emirates", "Tuvalu", "Tuscany", "Turkey", "Tunisia", 
+              "Trinidad and Tobago", "Tonga", "Togo", "Turkmenistan", "Thailand", "Tanzania", 
+              "Taiwan", "Tajikistan", "Syria", "Switzerland", "Sweden", "Swaziland", 
+              "St. Vincent and the Grenadines", "Suriname", "Sudan", "Sao Tome and Principe", 
+              "South Sudan", "Sri Lanka", "Spain", "Somalia", "Solomon Islands", "San Marino", 
+              "Slovenia", "St. Lucia", "Slovakia", "St. Kitts and Nevis", "Singapore", 
+              "Sierra Leone", "Two Sicilies", "Seychelles", "Senegal", "Saxony", "Saudi Arabia", 
+              "El Salvador", "South Africa", "Rwanda", "Republic of Vietnam", "Russia", "Romania", 
+              "South Korea", "Qatar", "North Korea", "Portugal", "Poland", "Papua New Guinea", 
+              "Parma", "Philippines", "Peru", "Paraguay", "Papal States", "Panama", "Palau", 
+              "Pakistan", "Oman", "Netherlands", "Norway", "Niger", "Nigeria", "Nicaragua", 
+              "New Zealand", "Nepal", "Nauru", "Namibia", "Mozambique", "Myanmar", "Marshall Islands", 
+              "Morocco", "Mongolia", "Modena", "Montenegro", "Monaco", "Malta", "Mali", "Moldova", 
+              "Mexico", "Mecklenburg Schwerin", "Malawi", "Mauritius", "Malaysia", "Madagascar", 
+              "Maldives", "Macedonia", "Mauritania", "Luxembourg", "Lithuania", "Liechtenstein", 
+              "Libya", "Lesotho", "Lebanon", "Liberia", "Latvia", "Laos", "Kazakhstan", 
+              "Kyrgyzstan", "Kuwait", "Kosovo", "Korea", "Kiribati", "Kenya", "Japan", "Jordan", 
+              "Jamaica", "Italy", "Israel", "Iraq", "Iran", "Ireland", "Indonesia", "India", "Iceland", 
+              "Hungary", "Hesse Grand Ducal", "Hesse Electoral", "Honduras", "Hong Kong", 
+              "Hanover", "Haiti", "Guyana", "Guinea", "Guatemala", "Grenada", "Georgia", "Greece", 
+              "Guinea-Bissau", "Germany", "Ghana", "German Federal Republic", "German Democratic Republic", 
+              "Gambia", "Gabon", "Federated States of Micronesia", "France", "Finland", "Fiji", 
+              "European Community/Union", "East Timor", "Ethiopia", "Estonia", "Eritrea", "Equatorial Guinea", 
+              "Egypt", "Ecuador", "Vietnam", "Democratic Republic of the Congo", "Dominican Republic", 
+              "Dominica", "Djibouti", "Denmark", "Czech Republic", "Czechoslovakia", "Cyprus", "Cuba", 
+              "Croatia", "Costa Rica", "Congo", "Comoros", "Colombia", "China", "Chile", "Chad", 
+              "Central African Republic", "Ivory Coast", "Cape Verde", "Cameroon", "Canada", "Cambodia", 
+              "Bulgaria", "Burundi", "Brunei", "Brazil", "Botswana", "Bosnia and Herzegovina", "Bolivia", 
+              "Bangladesh", "Belize", "Belarus", "Bhutan", "Bahamas", "Burkina Faso", "Benin", "Belgium", 
+              "Bavaria", "Barbados", "Bahrain", "Baden", "Azerbaijan", "Austria", "Australia", "Austria-Hungary", 
+              "Armenia", "Argentina", "Angola", "Andorra", "Algeria", "Albania", "Afghanistan")
+)
+
+country_join_countrynames <- country_join_edit |>
+  left_join(CountryName, by = c("stabb" = "COWn")) |> 
+  select(-Country.y)
+
+# country column to get the ISO codes and continents
+country_join_continents <- country_join_countrynames |>
+  mutate(
+    # join for country code conversion
+    Country_code = countrycode(Country.x, "country.name", "iso3c"),
+    # convert the ISO country code to continent
+    Continent = countrycode(Country_code, "iso3c", "continent")
+  )
+
+
+
+```
+
+
+
+
+
 Direction from here: The data set contains too many countries which makes it difficult to visualize- in the future, we can either try grouping the countries by continent (or some other variable) or just focus on a certain number of countries.
 We could then look at continents with the greatest conflicts and explore those countries in said continents specifically.
->>>>>>> aaf82ff03dd4a8da432ada97f649c17b802a80ec
+
+
