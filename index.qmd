@@ -242,7 +242,7 @@ country_join_continents <- country_join_countrynames |>
 ```
 
 
-# Which Country has the Highest Propensity for Conflict? 
+# Which Continent has the Highest Propensity for Conflict? 
 
 ```{r}
 #| label: high-prop-conflict 
@@ -369,7 +369,7 @@ asia |>
 
 ```
 
-#Explore 
+# Explore 
 Relations between material capabilities and conflict frequency.
 
 
