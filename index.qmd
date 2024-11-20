@@ -49,3 +49,4 @@ In this section you’ll include a summary of what you have learned about your r
 In addition, discuss the limitations of your analysis and provide suggestions on ways the analysis could be improved.
 Any potential issues pertaining to the reliability and validity of your data and appropriateness of the statistical analysis should also be discussed here.
 Lastly, this section will include ideas for future work.
+
