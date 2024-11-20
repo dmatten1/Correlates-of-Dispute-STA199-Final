@@ -240,8 +240,6 @@ country_join_continents <- country_join_countrynames |>
 
 
 
-
-
 Direction from here: The data set contains too many countries which makes it difficult to visualize- in the future, we can either try grouping the countries by continent (or some other variable) or just focus on a certain number of countries.
 We could then look at continents with the greatest conflicts and explore those countries in said continents specifically.
 
