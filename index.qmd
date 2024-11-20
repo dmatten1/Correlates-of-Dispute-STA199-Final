@@ -58,6 +58,24 @@ Lastly, this section will include ideas for future work.
 
 ## Data Exploration
 
+```{r}
+#| label: load-pkgs
+#| message: false
+library(tidyverse)
+library(readxl)
+
+#main dataset abt resources
+
+country_resource <- read_csv("data/NMC.csv")
+glimpse(country_resource)
+
+#main dataset abt conflict
+
+country_conflict <- read_csv("data/Conflict.csv")
+glimpse(country_conflict)
+
+```
+
 Joining datasets
 
 ```{r}
@@ -78,7 +96,7 @@ country_join <- country_conflict |>
     )
   )
 
-#glimpse(join_attempt)
+glimpse(country_join)
 
 number_of_disputes_df <- country_join |>
   group_by(stabb, styear) |>
