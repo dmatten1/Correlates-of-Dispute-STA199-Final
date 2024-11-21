@@ -16,15 +16,15 @@ Describe the data and definitions of key variables.
 It should also include some exploratory data analysis.
 All of the EDA won’t fit in the paper, so focus on the EDA for the response variable and a few other interesting variables and relationships.
 
-
-Question: 
+Question:
 
 How do changes in national material capabilities influence the frequency of a country's conflicts?
 
-
 Motivation:
 
-The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts. Understanding how changes in a nation’s military capabilities—such as military expenditures and natural resources like iron—affect its involvement in international disputes is important for assessing political stability. This research aligns with the broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts.
+The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts.
+Understanding how changes in a nation’s military capabilities—such as military expenditures and natural resources like iron—affect its involvement in international disputes is important for assessing political stability.
+This research aligns with the broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts.
 
 In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations.
 
@@ -37,7 +37,8 @@ National Material Capabilities (Dataset 1) This dataset includes data on militar
 
 The data is collected annually, providing a comprehensive look at the material capabilities of each nation over time.
 
-Militarized Interstate Disputes (Dataset 2) This dataset records instances where states threaten, display, or use force against one another. The data includes details such as the start and end dates of conflicts, number of combatants, casualties, and the outcomes of these disputes.
+Militarized Interstate Disputes (Dataset 2) This dataset records instances where states threaten, display, or use force against one another.
+The data includes details such as the start and end dates of conflicts, number of combatants, casualties, and the outcomes of these disputes.
 
 This dataset spans from 1816 to 2014 and provides insight into the frequency and intensity of conflicts between countries.
 
@@ -49,8 +50,7 @@ If you’ve chosen to do inference, make sure to include a justification for why
 If you’ve chosen to do modeling, describe the model(s) you’re fitting, predictor variables considered for the model including any interactions.
 Additionally, show how you arrived at the final model by describing the model selection process, interactions considered, variable transformations (if needed), assessment of conditions and diagnostics, and any other relevant considerations that were part of the model fitting process.
 
-
-to commit 
+to commit
 
 ## Results
 
@@ -65,8 +65,7 @@ In addition, discuss the limitations of your analysis and provide suggestions on
 Any potential issues pertaining to the reliability and validity of your data and appropriateness of the statistical analysis should also be discussed here.
 Lastly, this section will include ideas for future work.
 
-=======
-## Data Exploration
+======= \## Data Exploration
 
 ```{r}
 #| label: load-pkgs
@@ -152,7 +151,7 @@ ggplot(country_join_edit, aes(x = irst, y = count)) +
 
 ```
 
-# Adding Continents 
+# Adding Continents
 
 ```{r}
 #| label: continents 
@@ -240,8 +239,7 @@ country_join_continents <- country_join_countrynames |>
 
 ```
 
-
-# Which Continent has the Highest Propensity for Conflict? 
+# Which Continent has the Highest Propensity for Conflict?
 
 ```{r}
 #| label: high-prop-conflict 
@@ -269,7 +267,6 @@ conflict_by_continent |>
 
 Focus can be on the continent with the highest propensity for conflict (?)
 
-
 ```{r}
 #| label: period-conflicts
 #| message: false
@@ -295,8 +292,7 @@ asia |>
 
 ```
 
-Confict and Iron production start around the same years (?) 
-
+Confict and Iron production start around the same years (?)
 
 ```{r}
 #| label: period-iron-production
@@ -321,7 +317,7 @@ asia |>
   theme_minimal()
 ```
 
-Countries in Asia that lead in Incident Count and Iron Production 
+Countries in Asia that lead in Incident Count and Iron Production
 
 ```{r}
 #| label: top-countries-conflict-iron
@@ -368,9 +364,9 @@ asia |>
 
 ```
 
-# Explore 
-Relations between material capabilities and conflict frequency.
+# Explore
 
+Relations between material capabilities and conflict frequency.
 
 ```{r}
 #| label: top-countries-conflict-iron-cor
@@ -395,7 +391,6 @@ asia |>
 0: No correlation.
 -1: Perfect negative correlation (as one variable increases, the other always decreases).
 
-
 ```{r}
 #| label: countries-conflict-iron-model
 #| message: false
@@ -407,6 +402,7 @@ country_conflict_incident_model <- linear_reg() |>
 tidy(country_conflict_incident_model)
 
 ```
+
 Direction from here: The data set contains too many countries which makes it difficult to visualize- in the future, we can either try grouping the countries by continent (or some other variable) or just focus on a certain number of countries.
 We could then look at continents with the greatest conflicts and explore those countries in said continents specifically.
 
