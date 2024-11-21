@@ -75,7 +75,7 @@ Data Dictionary for MID -> country_conflict
 
 12. SideA: Dispute Side A (1 = yes; 0 = no)
 
-13. Fatality: Fatality leve of Incident
+13. Fatality: Fatality level of Incident
 -  0 None
 -  1: 1-25 deaths
 -  2: 26-100 deaths
