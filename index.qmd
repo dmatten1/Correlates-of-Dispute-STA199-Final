@@ -334,17 +334,17 @@ Countries in Asia that lead in Incident Count and Iron Production
 #| warning: false
 
   
-top_25_countries_in_asia <- asia |>
+top_15_countries_in_asia <- asia |>
   group_by(stabb) |>
   summarize(total_conflict = sum(count, na.rm = TRUE)) |>
   arrange(desc(total_conflict)) |>
-  head(25) |>
+  head(15) |>
   pull(stabb)
 
-asia_25 <- asia |>
-  filter(stabb %in% top_25_countries_in_asia)
+asia_15 <- asia |>
+  filter(stabb %in% top_15_countries_in_asia)
 
-asia_25 |>
+asia_15 |>
   group_by(stabb) |>
   summarize(total_conflict = sum(count, na.rm = TRUE)) |>
   ggplot(aes(x = reorder(stabb, -total_conflict), y = total_conflict)) +
@@ -359,12 +359,12 @@ asia_25 |>
 
 
 
-asia_25 |>
+asia_15 |>
   group_by(stabb) |>
   summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
   arrange(desc(total_iron_production))
 
-asia_25 |>
+asia_15 |>
   group_by(stabb) |>
   summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
   ggplot(aes(x = reorder(stabb, -total_iron_production), y = total_iron_production)) +
