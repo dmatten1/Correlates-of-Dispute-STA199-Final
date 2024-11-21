@@ -65,7 +65,6 @@ In addition, discuss the limitations of your analysis and provide suggestions on
 Any potential issues pertaining to the reliability and validity of your data and appropriateness of the statistical analysis should also be discussed here.
 Lastly, this section will include ideas for future work.
 
-<<<<<<< HEAD
 =======
 ## Data Exploration
 
@@ -136,7 +135,7 @@ ggplot(country_join_edit, aes(x = milex, y = count)) +
 #| message: false
 #| warning: false
 
-#colored bc countries (too many)
+#colored bc countries (too many).    #colors don't seem to work for me
 ggplot(country_join_edit, aes(x = irst, y = count, color = stabb)) +
   geom_point() + 
    labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
@@ -411,4 +410,27 @@ tidy(country_conflict_incident_model)
 Direction from here: The data set contains too many countries which makes it difficult to visualize- in the future, we can either try grouping the countries by continent (or some other variable) or just focus on a certain number of countries.
 We could then look at continents with the greatest conflicts and explore those countries in said continents specifically.
 
+#Doing EDA on the side
 
+```{r}
+#| label: explore
+select_country_join <- country_join_edit |>
+  select(stabb, styear, count, milex, milper, irst) |>
+  filter(irst != 0) |>
+  filter(styear > 1990) |>
+  distinct()
+select_country_join
+ggplot(select_country_join, aes(x = count, y = irst)) +
+  geom_point()
+big <- select_country_join |>
+  filter(stabb == "RUS" | stabb == "USA" | stabb == "GMY" | stabb == "CHN" | stabb == "IND" | stabb == "JPN")
+ggplot(big, aes(x = styear, y = irst, color = stabb)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+ggplot(big, aes(x = styear, y = milex, color = stabb)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+ggplot(big, aes(x = styear, y = count, color = stabb)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
