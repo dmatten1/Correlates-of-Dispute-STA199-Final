@@ -65,7 +65,7 @@ In addition, discuss the limitations of your analysis and provide suggestions on
 Any potential issues pertaining to the reliability and validity of your data and appropriateness of the statistical analysis should also be discussed here.
 Lastly, this section will include ideas for future work.
 
-======= \## Data Exploration
+## Data Exploration
 
 ```{r}
 #| label: load-pkgs
@@ -88,7 +88,7 @@ glimpse(country_conflict)
 
 ```
 
-##Joining datasets
+##Cleaning Data
 
 ```{r}
 #| label: join-datasets
@@ -126,7 +126,6 @@ ggplot(country_join_edit, aes(x = milex, y = count)) +
   geom_point() 
 
 ```
-# Adding Continents
 
 ```{r}
 #| label: continents 
