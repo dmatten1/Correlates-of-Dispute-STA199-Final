@@ -50,8 +50,6 @@ If you’ve chosen to do inference, make sure to include a justification for why
 If you’ve chosen to do modeling, describe the model(s) you’re fitting, predictor variables considered for the model including any interactions.
 Additionally, show how you arrived at the final model by describing the model selection process, interactions considered, variable transformations (if needed), assessment of conditions and diagnostics, and any other relevant considerations that were part of the model fitting process.
 
-to commit
-
 ## Results
 
 This is where you will discuss your overall finding and describe the key results from your analysis.
@@ -65,7 +63,7 @@ In addition, discuss the limitations of your analysis and provide suggestions on
 Any potential issues pertaining to the reliability and validity of your data and appropriateness of the statistical analysis should also be discussed here.
 Lastly, this section will include ideas for future work.
 
-======= \## Data Exploration
+## Data Exploration
 
 ```{r}
 #| label: load-pkgs
@@ -79,16 +77,14 @@ library(openintro)
 #main dataset abt resources
 
 country_resource <- read_csv("data/NMC.csv")
-glimpse(country_resource)
 
 #main dataset abt conflict
 
 country_conflict <- read_csv("data/Conflict.csv")
-glimpse(country_conflict)
 
 ```
 
-##Joining datasets
+##Cleaning Data
 
 ```{r}
 #| label: join-datasets
@@ -108,12 +104,9 @@ country_join <- country_conflict |>
     )
   )
 
-glimpse(country_join)
-
 number_of_disputes_df <- country_join |>
   group_by(stabb, styear) |>
   summarize(count = n(), .groups = "drop")
-glimpse(number_of_disputes_df)
 
 
 ```
@@ -121,13 +114,14 @@ glimpse(number_of_disputes_df)
 ```{r}
 country_join_edit <- country_join |>
   left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
-glimpse(country_join_edit)
-ggplot(country_join_edit, aes(x = milex, y = count)) +
-  geom_point() 
-
+#ggplot(country_join_edit, aes(x = milex, y = count)) +
+  #geom_point() 
 ```
+<<<<<<< HEAD
 
 # Adding Continents
+=======
+>>>>>>> a61b3f56e2ca256c87f656b498f81d3feec5aa35
 
 ```{r}
 #| label: continents 
@@ -142,9 +136,6 @@ ggplot(country_join_edit, aes(x = milex, y = count)) +
 
 country_join_edit <- country_join |>
   left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
-glimpse(country_join_edit)
-#ggplot(country_join_edit, aes(x = milex, y = count)) +
-  #geom_point() 
 
 country_join_shorter <- country_join_edit |>
   select(stabb, styear, count, milex, milper, irst, cinc) |>
@@ -233,14 +224,14 @@ country_join_continents
 #| warning: false
 
 #colored bc countries (too many).    #colors don't seem to work for me
-ggplot(country_join_edit, aes(x = irst, y = count, color = stabb)) +
+ggplot(country_join_continents, aes(x = irst, y = count, color = stabb)) +
   geom_point() + 
    labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
        x = "Iron and steel production (thousands of tons)",
        y = "Count") +
   theme_minimal()
 
-ggplot(country_join_edit, aes(x = irst, y = count)) +
+ggplot(country_join_continents, aes(x = irst, y = count)) +
   geom_point() + 
    labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
        x = "Iron and steel production (thousands of tons)",
@@ -334,17 +325,14 @@ Countries in Asia that lead in Incident Count and Iron Production
 #| message: false
 #| warning: false
 
-  
 top_15_countries_in_asia <- asia |>
   group_by(stabb) |>
   summarize(total_conflict = sum(count, na.rm = TRUE)) |>
   arrange(desc(total_conflict)) |>
   head(15) |>
   pull(stabb)
-
 asia_15 <- asia |>
   filter(stabb %in% top_15_countries_in_asia)
-
 asia_15 |>
   group_by(stabb) |>
   summarize(total_conflict = sum(count, na.rm = TRUE)) |>
@@ -356,10 +344,6 @@ asia_15 |>
     y = "Total Conflict Incidents"
   ) +
   theme_minimal()
-
-
-
-
 asia_15 |>
   group_by(stabb) |>
   summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
@@ -376,9 +360,7 @@ asia_15 |>
     y = "Total Iron Production"
   ) +
   theme_minimal()
-
 ```
-
 # Explore
 
 Relations between material capabilities and conflict frequency.
@@ -387,19 +369,15 @@ Relations between material capabilities and conflict frequency.
 #| label: top-countries-conflict-iron-cor
 #| message: false
 #| warning: false
-
 #milex: Military expenditure.
 #milper: Military personnel
 #irst: Iron and Steel production
 #cinc: Composite Index of National Capability.
 #count: Frequency of conflicts.
-
 asia |>
   select(milex, milper, irst, cinc, count) |>
   cor(use = "complete.obs")
 # calc correlations; no missing val accounted 
-
-
 ```
 
 1: Perfect positive correlation (as one variable increases, the other always increases).
@@ -420,34 +398,12 @@ tidy(country_conflict_incident_model)
 
 Direction from here: The data set contains too many countries which makes it difficult to visualize- in the future, we can either try grouping the countries by continent (or some other variable) or just focus on a certain number of countries.
 We could then look at continents with the greatest conflicts and explore those countries in said continents specifically.
-
-#Doing EDA on the side
+```
 
 ```{r}
-#| label: explore
-select_country_join <- country_join_edit |>
-  select(stabb, styear, count, milex, milper, irst) |>
-  filter(irst != 0) |>
-  filter(styear > 1990) |>
-  distinct()
-select_country_join
-ggplot(select_country_join, aes(x = count, y = irst)) +
-  geom_point()
-big <- select_country_join |>
-  filter(stabb == "RUS" | stabb == "USA" | stabb == "GMY" | stabb == "CHN" | stabb == "IND" | stabb == "JPN")
-ggplot(big, aes(x = styear, y = irst, color = stabb)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE)
-ggplot(big, aes(x = styear, y = milex, color = stabb)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE)
-ggplot(big, aes(x = styear, y = count, color = stabb)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE)
-select_country_join |>
-  summarize(mean_irst = mean(irst), median = median(irst))
-select_country_join |>
-  summarize(mean_milex = mean(milex), median = median(milex))
-select_country_join |>
-  summarize(mean_count = mean(count), median = median(count))
+#| label: disp-mean
+country_join_continents |>
+  summarize(mean = mean(count))
+
 ```
+
