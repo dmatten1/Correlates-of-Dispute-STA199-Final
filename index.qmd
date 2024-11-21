@@ -438,4 +438,10 @@ ggplot(big, aes(x = styear, y = milex, color = stabb)) +
 ggplot(big, aes(x = styear, y = count, color = stabb)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE)
+select_country_join |>
+  summarize(mean_irst = mean(irst), median = median(irst))
+select_country_join |>
+  summarize(mean_milex = mean(milex), median = median(milex))
+select_country_join |>
+  summarize(mean_count = mean(count), median = median(count))
 ```
