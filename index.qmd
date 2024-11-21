@@ -63,7 +63,7 @@ In addition, discuss the limitations of your analysis and provide suggestions on
 Any potential issues pertaining to the reliability and validity of your data and appropriateness of the statistical analysis should also be discussed here.
 Lastly, this section will include ideas for future work.
 
-## Data Exploration
+# Data Exploration
 
 ```{r}
 #| label: load-pkgs
@@ -84,7 +84,7 @@ country_conflict <- read_csv("data/Conflict.csv")
 
 ```
 
-##Cleaning Data
+# Cleaning Data
 
 ```{r}
 #| label: join-datasets
@@ -358,6 +358,7 @@ asia_15 |>
   ) +
   theme_minimal()
 ```
+
 # Explore
 
 Relations between material capabilities and conflict frequency.
@@ -395,7 +396,6 @@ tidy(country_conflict_incident_model)
 
 Direction from here: The data set contains too many countries which makes it difficult to visualize- in the future, we can either try grouping the countries by continent (or some other variable) or just focus on a certain number of countries.
 We could then look at continents with the greatest conflicts and explore those countries in said continents specifically.
-```
 
 ```{r}
 #| label: disp-mean
