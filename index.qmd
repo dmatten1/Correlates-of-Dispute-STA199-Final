@@ -50,8 +50,6 @@ If you’ve chosen to do inference, make sure to include a justification for why
 If you’ve chosen to do modeling, describe the model(s) you’re fitting, predictor variables considered for the model including any interactions.
 Additionally, show how you arrived at the final model by describing the model selection process, interactions considered, variable transformations (if needed), assessment of conditions and diagnostics, and any other relevant considerations that were part of the model fitting process.
 
-to commit
-
 ## Results
 
 This is where you will discuss your overall finding and describe the key results from your analysis.
@@ -126,6 +124,7 @@ ggplot(country_join_edit, aes(x = milex, y = count)) +
   geom_point() 
 
 ```
+
 # Adding Continents
 
 ```{r}
@@ -247,8 +246,6 @@ ggplot(country_join_edit, aes(x = irst, y = count)) +
   theme_minimal()
 
 ```
-
-
 
 # Which Continent has the Highest Propensity for Conflict?
 
@@ -452,3 +449,24 @@ select_country_join |>
 select_country_join |>
   summarize(mean_count = mean(count), median = median(count))
 ```
+
+# Logistic Regression Model for more than 50 disputes in Asia
+
+```{r}
+#| label: log-disp-asia 
+asia_log_raw <- country_join_continents |>
+  mutate(
+    disp_above_50 = if_else(count >= 50, "yes", "no"),
+    disp_above_50 = fct_relevel(disp_above_50, "yes", "no")
+  ) |>
+  filter(Continent == "Asia")
+
+asia_fit <- logistic_reg() |>
+  fit(disp_above_50 ~ irst + milex + milper, data = asia_log_raw)
+
+tidy(asia_fit)
+```
+
+$$
+\widehat{disp~above~50} = 5.077 - (1.353 * 10^{-6}) * irst - (2.528 * 10^{-9}) * milex - (6.643 * 10^{-6}) * milper
+$$
