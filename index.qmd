@@ -18,7 +18,7 @@ All of the EDA won’t fit in the paper, so focus on the EDA for the response va
 
 Question:
 
-How do changes in national material capabilities influence the frequency of a country's conflicts?
+How do changes in national material capabilities influence the frequency of a country's conflicts, focusing on the continent of Asia?
 
 Motivation:
 
@@ -126,6 +126,7 @@ ggplot(country_join_edit, aes(x = milex, y = count)) +
   geom_point() 
 
 ```
+
 # Adding Continents
 
 ```{r}
@@ -247,8 +248,6 @@ ggplot(country_join_edit, aes(x = irst, y = count)) +
   theme_minimal()
 
 ```
-
-
 
 # Which Continent has the Highest Propensity for Conflict?
 
