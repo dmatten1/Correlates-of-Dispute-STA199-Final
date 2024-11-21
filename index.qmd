@@ -165,6 +165,16 @@ ggplot(country_join_edit, aes(x = irst, y = count)) +
 #unique_stabb_values <- unique(stabb_values) removing duplicates 219 countries noted 
 
 
+country_join_edit <- country_join |>
+  left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
+glimpse(country_join_edit)
+ggplot(country_join_edit, aes(x = milex, y = count)) +
+  geom_point() 
+
+country_join_shorter <- country_join_edit |>
+  select(stabb, styear, count, milex, milper, irst, cinc, hostlev) |>
+  filter(styear>1950) |>
+  distinct()
 
 CountryName <- data.frame(
   COWn = c("ZIM", "ZAN", "ZAM", "YUG", "YPR", "YEM", "YAR", "WSM", "WRT", "VEN", "VAN", 
@@ -222,7 +232,7 @@ CountryName <- data.frame(
               "Armenia", "Argentina", "Angola", "Andorra", "Algeria", "Albania", "Afghanistan")
 )
 
-country_join_countrynames <- country_join_edit |>
+country_join_countrynames <- country_join_shorter|>
   left_join(CountryName, by = c("stabb" = "COWn")) 
 
 
@@ -234,8 +244,7 @@ country_join_continents <- country_join_countrynames |>
     # convert the ISO country code to continent
     Continent = countrycode(Country_code, "iso3c", "continent")
   )
-
-
+country_join_continents
 
 
 ```
