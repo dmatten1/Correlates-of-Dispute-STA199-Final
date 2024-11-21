@@ -50,8 +50,6 @@ If you’ve chosen to do inference, make sure to include a justification for why
 If you’ve chosen to do modeling, describe the model(s) you’re fitting, predictor variables considered for the model including any interactions.
 Additionally, show how you arrived at the final model by describing the model selection process, interactions considered, variable transformations (if needed), assessment of conditions and diagnostics, and any other relevant considerations that were part of the model fitting process.
 
-to commit
-
 ## Results
 
 This is where you will discuss your overall finding and describe the key results from your analysis.
@@ -79,12 +77,10 @@ library(openintro)
 #main dataset abt resources
 
 country_resource <- read_csv("data/NMC.csv")
-glimpse(country_resource)
 
 #main dataset abt conflict
 
 country_conflict <- read_csv("data/Conflict.csv")
-glimpse(country_conflict)
 
 ```
 
@@ -108,12 +104,9 @@ country_join <- country_conflict |>
     )
   )
 
-glimpse(country_join)
-
 number_of_disputes_df <- country_join |>
   group_by(stabb, styear) |>
   summarize(count = n(), .groups = "drop")
-glimpse(number_of_disputes_df)
 
 
 ```
@@ -121,10 +114,8 @@ glimpse(number_of_disputes_df)
 ```{r}
 country_join_edit <- country_join |>
   left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
-glimpse(country_join_edit)
-ggplot(country_join_edit, aes(x = milex, y = count)) +
-  geom_point() 
-
+#ggplot(country_join_edit, aes(x = milex, y = count)) +
+  #geom_point() 
 ```
 
 ```{r}
@@ -140,9 +131,6 @@ ggplot(country_join_edit, aes(x = milex, y = count)) +
 
 country_join_edit <- country_join |>
   left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
-glimpse(country_join_edit)
-#ggplot(country_join_edit, aes(x = milex, y = count)) +
-  #geom_point() 
 
 country_join_shorter <- country_join_edit |>
   select(stabb, styear, count, milex, milper, irst, cinc) |>
@@ -231,14 +219,14 @@ country_join_continents
 #| warning: false
 
 #colored bc countries (too many).    #colors don't seem to work for me
-ggplot(country_join_edit, aes(x = irst, y = count, color = stabb)) +
+ggplot(country_join_continents, aes(x = irst, y = count, color = stabb)) +
   geom_point() + 
    labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
        x = "Iron and steel production (thousands of tons)",
        y = "Count") +
   theme_minimal()
 
-ggplot(country_join_edit, aes(x = irst, y = count)) +
+ggplot(country_join_continents, aes(x = irst, y = count)) +
   geom_point() + 
    labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
        x = "Iron and steel production (thousands of tons)",
