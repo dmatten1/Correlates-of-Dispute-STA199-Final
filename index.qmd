@@ -74,7 +74,7 @@ Lastly, this section will include ideas for future work.
 #| message: false
 library(tidyverse)
 library(readxl)
-library(countrycode)
+library(countrycode) #this isn't working for me?
 library(tidymodels)
 library(openintro)
 
