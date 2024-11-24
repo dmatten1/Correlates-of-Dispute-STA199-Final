@@ -225,21 +225,12 @@ country_join_continents
 ```
 
 # Iron
-
+This scatterplot shows the relationship between iron and steel production (in thousands of tons) and the incident count across countries, categorized by continent. The data suggests that most countries with low iron and steel production have a wide range of incident counts, while countries with high production tend to have fewer incidents, concentrated at lower counts. Notably, Asia and Europe dominate the high-production range, while other continents exhibit more dispersed patterns in lower production ranges.
 ```{r}
 #| label: graph-Iron-and-IncidentCount
 #| message: false
 #| warning: false
-
-#colored bc countries (too many).    #colors don't seem to work for me
-ggplot(country_join_continents, aes(x = irst, y = count, color = stabb)) +
-  geom_point() + 
-   labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
-       x = "Iron and steel production (thousands of tons)",
-       y = "Count") +
-  theme_minimal()
-
-ggplot(country_join_continents, aes(x = irst, y = count)) +
+ggplot(country_join_continents, aes(x = irst, y = count, color = Continent)) +
   geom_point() + 
    labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
        x = "Iron and steel production (thousands of tons)",
@@ -274,8 +265,7 @@ conflict_by_continent |>
   scale_fill_brewer(palette = "Blues") #make it pretty 
 ```
 
-Focus can be on the continent with the highest propensity for conflict (?)
-
+Focus on the continent with the highest propensity for conflict, which is Asia.
 ```{r}
 #| label: period-conflicts
 #| message: false
@@ -301,7 +291,7 @@ asia |>
 
 ```
 
-Confict and Iron production start around the same years (?)
+Confict and Iron production start around the same years.
 
 ```{r}
 #| label: period-iron-production
@@ -413,8 +403,6 @@ tidy(country_conflict_incident_model)
 
 ```
 
-Direction from here: The data set contains too many countries which makes it difficult to visualize- in the future, we can either try grouping the countries by continent (or some other variable) or just focus on a certain number of countries.
-We could then look at continents with the greatest conflicts and explore those countries in said continents specifically.
 
 ```{r}
 #| label: disp-mean
