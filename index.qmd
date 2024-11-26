@@ -5,6 +5,9 @@ execute:
   echo: true
 ---
 
+AT THE END --> set echo to false to not display the code cells ; only plots, words, and messages; cite gpt in code cells  
+DOI citations or manually write refernces and citations > not a requirement 
+
 This study examines the relationship between a country's national material capabilities—such as military expenditures, personnel, and iron—and its frequency engaging in conflict.
 By analyzing data from the Correlates of War project, which tracks national capabilities and militarized interstate disputes, the research aims to identify whether increases in these capabilities correlate with higher frequencies of interstate conflict.
 The findings seek to enhance our understanding of how shifts in state power influence international stability and conflict dynamics.
@@ -270,6 +273,7 @@ Focus on the continent with the highest propensity for conflict, which is Asia.
 #| label: period-conflicts
 #| message: false
 #| warning: false
+#| layout-ncol: 2
 
 #fliter by asia 
 asia <- country_join_continents |>
@@ -289,19 +293,12 @@ asia |>
   theme_minimal()
 
 
-```
-
-Confict and Iron production start around the same years.
-
-```{r}
-#| label: period-iron-production
-#| message: false
-#| warning: false
-
 #fliter by asia 
 asia <- country_join_continents |>
   filter(Continent == "Asia")
 
+
+# Confict and Iron production start around the same years.
 
 asia |>
   group_by(styear) |>
@@ -311,10 +308,14 @@ asia |>
   labs(
     title = "Trends in Iron and steel production (thousands of tons) in Asia",
     x = "Year",
-    y = "Total Conflict Incidents"
+    y = "Total Conflict Incidents around the same years as conflict"
   ) +
   theme_minimal()
+
+
 ```
+
+
 
 Countries in Asia that lead in Incident Count and Iron Production
 
@@ -322,6 +323,7 @@ Countries in Asia that lead in Incident Count and Iron Production
 #| label: top-countries-conflict-iron
 #| message: false
 #| warning: false
+#| layout-ncol: 2
 
 top_15_countries_in_asia <- asia |>
   group_by(stabb) |>
