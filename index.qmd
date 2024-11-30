@@ -350,6 +350,14 @@ top_15_countries_in_asia <- asia |>
 asia_15 <- asia |>
   filter(stabb %in% top_15_countries_in_asia)
 
+low_15_countries_in_asia <- asia |>
+  group_by(stabb) |>
+  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  arrange(total_conflict) |>
+  head(15) |>
+  pull(stabb)
+asia_low_15 <- asia |>
+  filter(stabb %in% low_15_countries_in_asia)
 
 asia_15 |>
   group_by(stabb) |>
@@ -384,6 +392,35 @@ asia_15 |>
     y = "Total Iron Production"
   ) +
   theme_minimal()
+```
+
+```{r}
+#| label: top-low-countries
+top_5_countries_asia <- asia_15 |>
+  group_by(Country) |>
+  summarize(
+    total_count = sum(count),
+    total_irst = sum(irst),
+    total_milper = sum(milper),
+    total_milex = sum(milex)
+  ) |>
+  arrange(desc(total_count)) |>
+  head(5)
+
+top_5_countries_asia
+
+low_5_countries_asia <- asia_low_15 |>
+  group_by(Country) |>
+  summarize(
+    total_count = sum(count),
+    total_irst = sum(irst),
+    total_milper = sum(milper),
+    total_milex = sum(milex)
+  ) |>
+  arrange(total_count) |>
+  head(5)
+
+low_5_countries_asia
 ```
 
 # Explore
@@ -448,3 +485,72 @@ tidy(asia_fit)
 $$
 \widehat{disp~above~50} = 5.077 - (1.353 * 10^{-6}) * irst - (2.528 * 10^{-9}) * milex - (6.643 * 10^{-6}) * milper
 $$
+
+## Visualizations for the top and lowest asian countries
+
+a\.
+iron
+
+```{r}
+#| label: 5-visual-iron 
+
+top_5_countries_asia <- top_5_countries_asia |>
+  mutate(
+    type = "top 5"
+  )
+
+low_5_countries_asia <- low_5_countries_asia |>
+  mutate(
+    type = "low 5"
+  )
+
+all_asia_countries <- low_5_countries_asia |>
+  full_join(top_5_countries_asia)
+
+all_asia_countries |> 
+  ggplot(aes(x = Country, y = total_irst, fill = type)) +
+  geom_bar(stat = "identity") +
+  labs(
+    title = "Total Iron Production by Country", #add number of years tracked over 
+    subtitle = "Top 5 and Bottom 5 Asian Countries ranked by total incident count", 
+    x = "Country",
+    y = "Total Iron Production"
+  ) +
+  theme_minimal()
+```
+
+b\.
+visualization by milex
+
+```{r}
+#| label: 5-visual-milex 
+
+all_asia_countries |> 
+  ggplot(aes(x = Country, y = total_milex, fill = type)) +
+  geom_bar(stat = "identity") +
+  labs(
+    title = "Total Military Expenditures by Country", #add number of years tracked over 
+    subtitle = "Top 5 and Bottom 5 Asian Countries ranked by total incident count", 
+    x = "Country",
+    y = "Military Expenditures (thousands in British Pounds/US Dollars)"
+  ) +
+  theme_minimal()
+```
+
+c\.
+visual by milper
+
+```{r}
+#| label: 5-visual-milper
+
+all_asia_countries |>
+  ggplot(aes(x = Country, y = total_milper, fill = type)) +
+  geom_bar(stat = "identity") +
+  labs(
+    title = "Total Military Personnel by Country", #add number of years tracked over 
+    subtitle = "Top 5 and Bottom 5 Asian Countries ranked by total incident count", 
+    x = "Country",
+    y = "Military Personnel (thousands)"
+  ) +
+  theme_minimal()
+```
