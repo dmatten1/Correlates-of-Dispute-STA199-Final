@@ -45,19 +45,11 @@ If you’ve chosen to do modeling, describe the model(s) you’re fitting, predi
 Additionally, show how you arrived at the final model by describing the model selection process, interactions considered, variable transformations (if needed), assessment of conditions and diagnostics, and any other relevant considerations that were part of the model fitting process.
 
 Our project explored the relationship between military conflicts and various factors, including military expenditure, personnel, iron and steel production, and national capabilities.
-Given the extensive dataset, which covered numerous countries, we initially faced challenges with clarity and focus.
-To streamline our analysis, we narrowed the scope to Asia, which emerged as the continent with the highest conflict frequency during our initial exploration.
+Given the extensive dataset, which covered numerous countries, we initially faced challenges regarding clarity. To streamline our analysis, we narrowed the scope to Asia, which emerged as the continent with the highest conflict frequency during our initial exploration.
 
-To prepare the data, we addressed several challenges.
-Variables irrelevant to our analysis were removed, and we worked with unique country codes that didn’t align with standard naming conventions.
-These codes were manually mapped to their respective countries, and we classified nations by continent.
-This refinement allowed us to focus specifically on Asian countries.
-Using this dataset, we created visualizations to identify patterns in conflict frequency, iron production, and military strength metrics.
-For example, we examined the periods with the highest levels of conflict and iron production and determined which countries contributed most to these metrics.
-Early visualizations were cluttered due to the large number of countries, so we filtered the data to focus on the top 15 countries in terms of conflict frequency and iron production to improve clarity.
+In preparing the data, we addressed several challenges. Variables irrelevant to our analysis were removed, and we were forced to correct unique country codes that didn’t align with standard naming conventions. These codes were manually mapped to their respective countries, and we classified nations by continent, allowing us to focus solely on Asia. 
 
-We also investigated correlations between national capabilities—such as military expenditure and conflict frequency to identify potential predictors.
-To assess the impact of these variables, we used regression modeling, with predictor variables.
+Using this cleaned dataframe, we created visualizations to identify patterns in conflict frequency, iron production, and military strength metrics. For example, we examined the periods with the highest levels of conflict and iron production and determined which countries contributed most to these metrics. Early visualizations were cluttered due to the large number of countries, so we filtered the data to focus on the top 15 countries in terms of conflict frequency and iron production to improve clarity. We also investigated correlations between national capabilities, such as military expenditure and conflict frequency, to identify potential predictors. To assess the impact of these variables, we used regression modeling, with predictor variables.
 
 For our analysis, we utilized several key R libraries to streamline data manipulation, modeling, and visualization.
 The tidyverse suite was useful in providing tools for filtering and summarizing data and ggplot for crafting visualizations.
@@ -65,8 +57,8 @@ We used readxl to import Excel datasets into R.
 The countrycode package helped map country codes from the dataset to their corresponding country names, helping us to group data by continent and eventually determine the focus on Asian countries.
 For modeling and diagnostics, we relied on tidymodels for regression analysis.
 
-Combinging data preparation, visualization, statistical analysis, and modeling, we found meaningful trends and relationships that highlight how national capabilities influence military conflicts different countries in Asia.
-This comprehensive approach allowed us to derive insights into the multifaceted drivers of geopolitical events.
+Combining data preparation, visualization, statistical analysis, and modeling, we found meaningful trends and relationships that highlight how national capabilities influence military conflicts different countries in Asia.
+This comprehensive approach allowed us to derive insights into the multifaceted drivers of geopolitics.
 
 ## Results
 
