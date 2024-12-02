@@ -422,7 +422,7 @@ low_5_countries_asia
 Relations between material capabilities and conflict frequency.
 
 The hypothesis was that countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
-The data shows that military spending and resources are somewhat correlated with military capabilities, but conflict frequency does not strongly correlate with these factors. This weak or negligible correlation suggests that increased military capability (through spending, personnel) does not necessarily result in more conflict in this dataset.
+The findings partially support the hypothesis. While military expenditure and industrial production (iron) are associated with increased conflict frequency, other indicators such as personnel size and composite capabilities exhibit weaker or insignificant relationships. This suggests that while certain aspects of military strength contribute to conflicts, not all necessarily result in more conflict in this dataset.
 
 ```{r}
 #| label: top-countries-conflict-iron-cor
@@ -433,19 +433,19 @@ The data shows that military spending and resources are somewhat correlated with
 #irst: Iron and Steel production
 #cinc: Composite Index of National Capability.
 #count: Frequency of conflicts.
-asia_15 |>
+asia |>
   select(milex, milper, irst, cinc, count) |>
   cor(use = "complete.obs")
 # calc correlations; no missing val accounted 
 ```
 
-The graph demonstrates that conflict frequency (count) has a weak positive correlation (0.17) with military expenditure (milex) and virtually no correlation with other measures of military capability, such as military personnel (milper), iron production (irst), or composite index of national capability (cinc). These low correlation values indicate that conflict frequency is not strongly associated with military spending or overall military capabilities.
+While the data partially supports the hypothesis, the findings indicate that military expenditure is a stronger predictor of conflict frequency than personnel size or other capabilities. This suggests that conflicts may be more directly influenced by how resources are utilized (expenditure) rather than the sheer magnitude of military capabilities (personnel size or iron). 
 
 ```{r}
 #| label: coranalysus
 #| message: false
 #| warning: false
-selected_vars <- asia_15 |>
+selected_vars <- asia |>
   select(count, milex, milper, irst, cinc)
 
 cor_matrix <- cor(selected_vars, use = "pairwise.complete.obs")
@@ -469,7 +469,7 @@ cor_test_results
 #Source: Chatgpt Q:"How to visualize correlation between different variables?"
 ```
 
-The distribution of bootstrapped differences is centered around a negative value, approximately -4. This suggests that, on average, countries with higher military expenditures experience fewer conflicts than those with lower expenditures. The histogram's shape, with a clear peak and most values concentrated in a narrow range, supports this result.
+The distribution of bootstrapped differences is centered around a negative value, approximately -3. This suggests that, on average, countries with higher military expenditures experience fewer conflicts than those with lower expenditures. The histogram's shape, with a clear peak and most values concentrated in a narrow range between -4 and -2, supports this negative relationship.
 
 This finding contradicts the hypothesis that countries with higher military expenditures and personnel are more likely to participate in armed conflicts. Instead, the analysis suggests that higher military expenditures might correlate with fewer conflicts, potentially acting as a deterrent. 
 
@@ -483,13 +483,13 @@ This finding contradicts the hypothesis that countries with higher military expe
 set.seed(44) 
 
 # high vs. low military expenditure
-threshold <- median(asia_15$milex, na.rm = TRUE) 
+threshold <- median(asia$milex, na.rm = TRUE) 
 #  median as a threshold as it rovides a more accurate threshold by representing the central tendency of the data
-asia_15 <- asia_15 |>
+asia <- asia |>
   mutate(milex_level = ifelse(milex > threshold, "High", "Low"))
 
 bootstrap_means <- replicate(1000, {
-  sampled_data <- asia_15 |>
+  sampled_data <- asia |>
     sample_frac(replace = TRUE) 
   # Resample with replacement
   
