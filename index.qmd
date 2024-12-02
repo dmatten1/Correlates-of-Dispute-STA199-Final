@@ -101,7 +101,7 @@ Lastly, this section will include ideas for future work.
 #| message: false
 library(tidyverse)
 library(readxl)
-library(countrycode) #this isn't working for me? //you have to download it
+library(countrycode) 
 library(tidymodels)
 library(openintro)
 library(ggcorrplot)
@@ -347,7 +347,7 @@ asia |>
 Countries in Asia that lead in Incident Count and Iron Production
 
 ```{r}
-#| label: top-countries-conflict-iron
+#| label: top-countries-conflict-irona
 #| message: false
 #| warning: false
 #| layout-ncol: 2
@@ -404,6 +404,138 @@ asia_15 |>
   ) +
   theme_minimal()
 ```
+Countries in Asia that lead in Incident Count and Military expenditure (Milper).
+
+```{r}
+#| label: top-countries-conflict-ironb
+#| message: false
+#| warning: false
+#| layout-ncol: 2
+
+top_15_countries_in_asia <- asia |>
+  group_by(stabb) |>
+  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  arrange(desc(total_conflict)) |>
+  head(15) |>
+  pull(stabb)
+asia_15 <- asia |>
+  filter(stabb %in% top_15_countries_in_asia)
+
+low_15_countries_in_asia <- asia |>
+  group_by(stabb) |>
+  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  arrange(total_conflict) |>
+  head(15) |>
+  pull(stabb)
+asia_low_15 <- asia |>
+  filter(stabb %in% low_15_countries_in_asia)
+
+#asia_15 |>
+  #group_by(stabb) |>
+  #summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  #arrange(desc(total_conflict))
+
+
+asia_15 |>
+  group_by(stabb) |>
+  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  ggplot(aes(x = reorder(stabb, -total_conflict), y = total_conflict)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "Conflict Incidents by Country in Asia",
+    x = "Country",
+    y = "Total Conflict Incidents"
+  ) +
+  theme_minimal()
+
+
+#asia_15 |>
+  #group_by(stabb) |>
+  #summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
+  #arrange(desc(total_iron_production))
+
+asia_15 |>
+  group_by(stabb) |>
+  summarize(total_milex = sum(milex, na.rm = TRUE)) |>
+  ggplot(aes(x = reorder(stabb, -total_milex), y = total_milex)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "Military Expenditure by Country in Asia",
+    x = "Country",
+    y = "Total Military Expenditure"
+  ) +
+  theme_minimal()
+
+
+```
+Countries in Asia that lead in Incident Count and Military personnel (milper).
+
+```{r}
+#| label: top-countries-conflict-iron
+#| message: false
+#| warning: false
+#| layout-ncol: 2
+
+top_15_countries_in_asia <- asia |>
+  group_by(stabb) |>
+  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  arrange(desc(total_conflict)) |>
+  head(15) |>
+  pull(stabb)
+asia_15 <- asia |>
+  filter(stabb %in% top_15_countries_in_asia)
+
+low_15_countries_in_asia <- asia |>
+  group_by(stabb) |>
+  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  arrange(total_conflict) |>
+  head(15) |>
+  pull(stabb)
+asia_low_15 <- asia |>
+  filter(stabb %in% low_15_countries_in_asia)
+
+#asia_15 |>
+  #group_by(stabb) |>
+  #summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  #arrange(desc(total_conflict))
+
+
+asia_15 |>
+  group_by(stabb) |>
+  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  ggplot(aes(x = reorder(stabb, -total_conflict), y = total_conflict)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "Conflict Incidents by Country in Asia",
+    x = "Country",
+    y = "Total Conflict Incidents"
+  ) +
+  theme_minimal()
+
+
+#asia_15 |>
+  #group_by(stabb) |>
+  #summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
+  #arrange(desc(total_iron_production))
+
+asia_15 |>
+  group_by(stabb) |>
+  summarize(total_milper = sum(milper, na.rm = TRUE)) |>
+  ggplot(aes(x = reorder(stabb, -total_milper), y = total_milper)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "Military Personnel by Country in Asia",
+    x = "Country",
+    y = "Total Military Personnel"
+  ) +
+  theme_minimal()
+
+
+```
+
+
+
+
 
 ```{r}
 #| label: top-low-countries
@@ -452,6 +584,8 @@ This suggests that while certain aspects of military strength contribute to conf
 #irst: Iron and Steel production
 #cinc: Composite Index of National Capability.
 #count: Frequency of conflicts.
+
+
 asia |>
   select(milex, milper, irst, cinc, count) |>
   cor(use = "complete.obs")
@@ -499,7 +633,7 @@ This finding contradicts the hypothesis that countries with higher military expe
 Instead, the analysis suggests that higher military expenditures might correlate with fewer conflicts, potentially acting as a deterrent.
 
 ```{r}
-#| label: explore
+#| label: explorea
 #| message: false
 #| warning: false
 
@@ -537,7 +671,7 @@ ggplot(bootstrap_df, aes(x = boot_diff)) +
 
 
 ```{r}
-#| label: explore
+#| label: exploreb
 #| message: false
 #| warning: false
 
@@ -579,7 +713,7 @@ ggplot(bootstrap_df, aes(x = boot_diff)) +
 
 
 ```{r}
-#| label: explore
+#| label: explorec
 #| message: false
 #| warning: false
 
