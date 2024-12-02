@@ -9,7 +9,8 @@ AT THE END --\> set echo to false to not display the code cells ; only plots, wo
 DOI citations or manually write refernces and citations \> not a requirement
 
 This study examines the relationship between a country's national material capabilities — such as military expenditures, personnel, and iron — and its frequency engaging in conflict.
-By analyzing data from the Correlates of War project, which tracks national capabilities and militarized interstate disputes, this research aims to identify whether increases in these capabilities correlate with higher frequencies of interstate conflict. The findings seek to enhance our understanding of how shifts in state power influence international stability and conflict dynamics.
+By analyzing data from the Correlates of War project, which tracks national capabilities and militarized interstate disputes, this research aims to identify whether increases in these capabilities correlate with higher frequencies of interstate conflict.
+The findings seek to enhance our understanding of how shifts in state power influence international stability and conflict dynamics.
 
 ## Introduction and data
 
@@ -22,23 +23,26 @@ Question:
 
 How do changes in national material capabilities influence the frequency of a country's conflicts, focusing on the continent of Asia?
 
-Our hypothesis is:
-- Countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
-
+Our hypothesis is: - Countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
 
 Motivation:
 
 The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts.
-Understanding how changes in a nation’s military capabilities — such as military expenditures and natural resources like iron — affect its involvement in international disputes is important for assessing political stability. This research aligns with the broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts. In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations.
+Understanding how changes in a nation’s military capabilities — such as military expenditures and natural resources like iron — affect its involvement in international disputes is important for assessing political stability.
+This research aligns with the broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts.
+In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations.
 
 Source:
 
 The data used in this analysis comes from the Correlates of War (COW) project, which is widely used by political scientists.
 This project consists of two datasets that apply to our research:
 
-National Material Capabilities (Dataset 1): This dataset includes data on military power indicators such as military expenditures, military personnel, energy consumption, and total population for various countries. The data is collected annually, providing a comprehensive look at the material capabilities of each nation over time.
+National Material Capabilities (Dataset 1): This dataset includes data on military power indicators such as military expenditures, military personnel, energy consumption, and total population for various countries.
+The data is collected annually, providing a comprehensive look at the material capabilities of each nation over time.
 
-Militarized Interstate Disputes (Dataset 2): This dataset records instances where states threaten, display, or use force against one another. The data includes details such as the start and end dates of conflicts, number of combatants, casualties, and the outcomes of these disputes. This dataset spans from 1816 to 2014 and provides insight into the frequency and intensity of conflicts between countries.
+Militarized Interstate Disputes (Dataset 2): This dataset records instances where states threaten, display, or use force against one another.
+The data includes details such as the start and end dates of conflicts, number of combatants, casualties, and the outcomes of these disputes.
+This dataset spans from 1816 to 2014 and provides insight into the frequency and intensity of conflicts between countries.
 
 ## Methodology
 
@@ -49,11 +53,18 @@ If you’ve chosen to do modeling, describe the model(s) you’re fitting, predi
 Additionally, show how you arrived at the final model by describing the model selection process, interactions considered, variable transformations (if needed), assessment of conditions and diagnostics, and any other relevant considerations that were part of the model fitting process.
 
 Our project explored the relationship between military conflicts and various factors, including military expenditure, personnel, iron and steel production, and national capabilities.
-Given the extensive dataset, which covered numerous countries, we initially faced challenges regarding clarity. To streamline our analysis, we narrowed the scope to Asia, which emerged as the continent with the highest conflict frequency during our initial exploration.
+Given the extensive dataset, which covered numerous countries, we initially faced challenges regarding clarity.
+To streamline our analysis, we narrowed the scope to Asia, which emerged as the continent with the highest conflict frequency during our initial exploration.
 
-In preparing the data, we addressed several challenges. Variables irrelevant to our analysis were removed, and we were forced to correct unique country codes that didn’t align with standard naming conventions. These codes were manually mapped to their respective countries, and we classified nations by continent, allowing us to focus solely on Asia. 
+In preparing the data, we addressed several challenges.
+Variables irrelevant to our analysis were removed, and we were forced to correct unique country codes that didn’t align with standard naming conventions.
+These codes were manually mapped to their respective countries, and we classified nations by continent, allowing us to focus solely on Asia.
 
-Using this cleaned dataframe, we created visualizations to identify patterns in conflict frequency, iron production, and military strength metrics. For example, we examined the periods with the highest levels of conflict and iron production and determined which countries contributed most to these metrics. Early visualizations were cluttered due to the large number of countries, so we filtered the data to focus on the top 15 countries in terms of conflict frequency and iron production to improve clarity. We also investigated correlations between national capabilities, such as military expenditure and conflict frequency, to identify potential predictors. To assess the impact of these variables, we used regression modeling, with predictor variables.
+Using this cleaned dataframe, we created visualizations to identify patterns in conflict frequency, iron production, and military strength metrics.
+For example, we examined the periods with the highest levels of conflict and iron production and determined which countries contributed most to these metrics.
+Early visualizations were cluttered due to the large number of countries, so we filtered the data to focus on the top 15 countries in terms of conflict frequency and iron production to improve clarity.
+We also investigated correlations between national capabilities, such as military expenditure and conflict frequency, to identify potential predictors.
+To assess the impact of these variables, we used regression modeling, with predictor variables.
 
 For our analysis, we utilized several key R libraries to streamline data manipulation, modeling, and visualization.
 The tidyverse suite was useful in providing tools for filtering and summarizing data and ggplot for crafting visualizations.
@@ -309,7 +320,12 @@ asia |>
 asia <- country_join_continents |>
   filter(Continent == "Asia")
 
-
+asia <- asia |>
+  group_by(Country) |>
+  mutate(
+    mean_milex = mean(milex),
+    mean_irst = mean(irst)
+  )
 # Confict and Iron production start around the same years.
 
 asia |>
@@ -325,6 +341,16 @@ asia |>
   theme_minimal()
 
 
+```
+
+## Visualizations for Iron Production and Military Expenditures in Asia
+
+```{r}
+#| label: military-expenditure-asia 
+
+asia |>
+  ggplot(aes(x = Country, y = mean_milex)) + 
+  geom_bar(stat = "identity")
 ```
 
 Countries in Asia that lead in Incident Count and Iron Production
@@ -422,7 +448,9 @@ low_5_countries_asia
 Relations between material capabilities and conflict frequency.
 
 The hypothesis was that countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
-The findings partially support the hypothesis. While military expenditure and industrial production (iron) are associated with increased conflict frequency, other indicators such as personnel size and composite capabilities exhibit weaker or insignificant relationships. This suggests that while certain aspects of military strength contribute to conflicts, not all necessarily result in more conflict in this dataset.
+The findings partially support the hypothesis.
+While military expenditure and industrial production (iron) are associated with increased conflict frequency, other indicators such as personnel size and composite capabilities exhibit weaker or insignificant relationships.
+This suggests that while certain aspects of military strength contribute to conflicts, not all necessarily result in more conflict in this dataset.
 
 ```{r}
 #| label: top-countries-conflict-iron-cor
@@ -439,7 +467,8 @@ asia |>
 # calc correlations; no missing val accounted 
 ```
 
-While the data partially supports the hypothesis, the findings indicate that military expenditure is a stronger predictor of conflict frequency than personnel size or other capabilities. This suggests that conflicts may be more directly influenced by how resources are utilized (expenditure) rather than the sheer magnitude of military capabilities (personnel size or iron). 
+While the data partially supports the hypothesis, the findings indicate that military expenditure is a stronger predictor of conflict frequency than personnel size or other capabilities.
+This suggests that conflicts may be more directly influenced by how resources are utilized (expenditure) rather than the sheer magnitude of military capabilities (personnel size or iron).
 
 ```{r}
 #| label: coranalysus
@@ -469,10 +498,12 @@ cor_test_results
 #Source: Chatgpt Q:"How to visualize correlation between different variables?"
 ```
 
-The distribution of bootstrapped differences is centered around a negative value, approximately -3. This suggests that, on average, countries with higher military expenditures experience fewer conflicts than those with lower expenditures. The histogram's shape, with a clear peak and most values concentrated in a narrow range between -4 and -2, supports this negative relationship.
+The distribution of bootstrapped differences is centered around a negative value, approximately -3.
+This suggests that, on average, countries with higher military expenditures experience fewer conflicts than those with lower expenditures.
+The histogram's shape, with a clear peak and most values concentrated in a narrow range between -4 and -2, supports this negative relationship.
 
-This finding contradicts the hypothesis that countries with higher military expenditures and personnel are more likely to participate in armed conflicts. Instead, the analysis suggests that higher military expenditures might correlate with fewer conflicts, potentially acting as a deterrent. 
-
+This finding contradicts the hypothesis that countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
+Instead, the analysis suggests that higher military expenditures might correlate with fewer conflicts, potentially acting as a deterrent.
 
 ```{r}
 #| label: explore
@@ -523,7 +554,6 @@ country_conflict_incident_model <- linear_reg() |>
 tidy(country_conflict_incident_model)
 
 ```
-
 
 ```{r}
 #| label: disp-mean
