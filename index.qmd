@@ -23,6 +23,10 @@ Question:
 
 How do changes in national material capabilities influence the frequency of a country's conflicts, focusing on the continent of Asia?
 
+Our hypothesis is:
+- Countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
+
+
 Motivation:
 
 The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts.
@@ -100,6 +104,9 @@ library(readxl)
 library(countrycode) #this isn't working for me? //you have to download it
 library(tidymodels)
 library(openintro)
+library(ggcorrplot)
+library(broom)
+
 
 #main dataset abt resources
 
@@ -158,11 +165,12 @@ country_join_shorter <- country_join_edit |>
 #| message: false
 #| warning: false
 
-#adding countries, the COW codes do not match the universal country codes so there are many nas using the countrycode package
-# cow code to country name --> to actual ISO code --> continents 
-#stabb_values <- country_join_edit[["stabb"]] isolating COW code
-#unique_stabb_values <- unique(stabb_values) removing duplicates 219 countries noted 
+# Manually addded countried from the COW dataset, COW codes do not match universal country codes so there were many NAs using the country code package to use the continents 
 
+# cow code to country name --> to actual ISO code --> continents 
+
+#stabb_values <- country_join_edit[["stabb"]] isolating COW code
+#unique_stabb_values <- unique(stabb_values) removing duplicates; 219 countries unique 
 
 
 
@@ -261,6 +269,8 @@ ggplot(country_join_continents, aes(x = irst, y = count, color = Continent)) +
 ```
 
 # Which Continent has the Highest Propensity for Conflict?
+
+This bar plot shows that the continent with the highest propensity for conflict is Asia.
 
 ```{r}
 #| label: high-prop-conflict 
@@ -428,6 +438,9 @@ low_5_countries_asia
 
 Relations between material capabilities and conflict frequency.
 
+The hypothesis was that countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
+The data shows that military spending and resources are somewhat correlated with military capabilities, but conflict frequency does not strongly correlate with these factors. This weak or negligible correlation suggests that increased military capability (through spending, personnel) does not necessarily result in more conflict in this dataset.
+
 ```{r}
 #| label: top-countries-conflict-iron-cor
 #| message: false
@@ -437,15 +450,84 @@ Relations between material capabilities and conflict frequency.
 #irst: Iron and Steel production
 #cinc: Composite Index of National Capability.
 #count: Frequency of conflicts.
-asia |>
+asia_15 |>
   select(milex, milper, irst, cinc, count) |>
   cor(use = "complete.obs")
 # calc correlations; no missing val accounted 
 ```
 
-1: Perfect positive correlation (as one variable increases, the other always increases).
-0: No correlation.
--1: Perfect negative correlation (as one variable increases, the other always decreases).
+The graph demonstrates that conflict frequency (count) has a weak positive correlation (0.17) with military expenditure (milex) and virtually no correlation with other measures of military capability, such as military personnel (milper), iron production (irst), or composite index of national capability (cinc). These low correlation values indicate that conflict frequency is not strongly associated with military spending or overall military capabilities.
+
+```{r}
+#| label: coranalysus
+#| message: false
+#| warning: false
+selected_vars <- asia_15 |>
+  select(count, milex, milper, irst, cinc)
+
+cor_matrix <- cor(selected_vars, use = "pairwise.complete.obs")
+
+ggcorrplot(cor_matrix, 
+           method = "circle", 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlation of Material Capabilities and Conflict Frequency")
+
+# Hypothesis Testing: Correlation significance
+cor_test_results <- map_df(
+  c("milex", "milper", "irst", "cinc"),
+  ~ tidy(cor.test(asia_15$count, asia_15[[.x]], use = "pairwise.complete.obs")),
+  .id = "variable"
+)
+
+cor_test_results
+ 
+
+#Source: Chatgpt Q:"How to visualize correlation between different variables?"
+```
+
+The distribution of bootstrapped differences is centered around a negative value, approximately -4. This suggests that, on average, countries with higher military expenditures experience fewer conflicts than those with lower expenditures. The histogram's shape, with a clear peak and most values concentrated in a narrow range, supports this result.
+
+This finding contradicts the hypothesis that countries with higher military expenditures and personnel are more likely to participate in armed conflicts. Instead, the analysis suggests that higher military expenditures might correlate with fewer conflicts, potentially acting as a deterrent. 
+
+
+```{r}
+#| label: explore
+#| message: false
+#| warning: false
+
+
+set.seed(44) 
+
+# high vs. low military expenditure
+threshold <- median(asia_15$milex, na.rm = TRUE) 
+#  median as a threshold as it rovides a more accurate threshold by representing the central tendency of the data
+asia_15 <- asia_15 |>
+  mutate(milex_level = ifelse(milex > threshold, "High", "Low"))
+
+bootstrap_means <- replicate(1000, {
+  sampled_data <- asia_15 |>
+    sample_frac(replace = TRUE) 
+  # Resample with replacement
+  
+  means <- sampled_data |>
+    group_by(milex_level) |>
+    summarize(mean_count = mean(count, na.rm = TRUE))
+  
+  diff(means$mean_count) # diff in mean conflict frequency between High and Low `milex`
+})
+
+bootstrap_df <- tibble(boot_diff = bootstrap_means)
+ggplot(bootstrap_df, aes(x = boot_diff)) +
+  geom_histogram(binwidth = 0.5, fill = "steelblue", color = "white") +
+  labs(
+    title = "Bootstrapped Mean Differences in Conflict Frequency (High vs Low Milex)",
+    x = "Difference in Mean Conflict Frequency",
+    y = "Frequency"
+  ) + 
+  theme_minimal()
+
+```
 
 ```{r}
 #| label: countries-conflict-iron-model
@@ -458,6 +540,7 @@ country_conflict_incident_model <- linear_reg() |>
 tidy(country_conflict_incident_model)
 
 ```
+
 
 ```{r}
 #| label: disp-mean
