@@ -141,8 +141,14 @@ number_of_disputes_df <- country_join |>
 ```{r}
 country_join_edit <- country_join |>
   left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
-#ggplot(country_join_edit, aes(x = milex, y = count)) +
-  #geom_point() 
+
+country_join_edit <- country_join |>
+  left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
+
+country_join_shorter <- country_join_edit |>
+  select(stabb, styear, count, milex, milper, irst, cinc) |>
+  distinct() |>
+  filter(styear>1950)
 ```
 
 # Adding Continents
@@ -158,13 +164,7 @@ country_join_edit <- country_join |>
 #unique_stabb_values <- unique(stabb_values) removing duplicates 219 countries noted 
 
 
-country_join_edit <- country_join |>
-  left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
 
-country_join_shorter <- country_join_edit |>
-  select(stabb, styear, count, milex, milper, irst, cinc) |>
-  distinct() |>
-  filter(styear>1950)
 
 CountryName <- data.frame(
   COWn = c("ZIM", "ZAN", "ZAM", "YUG", "YPR", "YEM", "YAR", "WSM", "WRT", "VEN", "VAN", 
@@ -234,7 +234,8 @@ country_join_continents <- country_join_countrynames |>
     # convert the ISO country code to continent
     Continent = countrycode(Country_code, "iso3c", "continent")
   ) |>
-  filter(!is.na(Country))
+  filter(!is.na(Country)) |>
+  filter(!is.na(Continent))
 country_join_continents
 
 
@@ -251,7 +252,7 @@ Notably, Asia and Europe dominate the high-production range, while other contine
 #| message: false
 #| warning: false
 ggplot(country_join_continents, aes(x = irst, y = count, color = Continent)) +
-  geom_point() + 
+  geom_point(alpha = 0.4) + 
    labs(title = "Iron and steel production (thousands of tons) vs Incident Count by Country",
        x = "Iron and steel production (thousands of tons)",
        y = "Count") +
