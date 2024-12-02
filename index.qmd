@@ -495,6 +495,7 @@ iron
 ```{r}
 #| label: 5-visual-iron 
 
+#TIDY SPACING (we did it in one of the aes or maybe a lab recently?)
 top_5_countries_asia <- top_5_countries_asia |>
   mutate(
     type = "top 5"
