@@ -23,7 +23,7 @@ Question:
 How do changes in national material capabilities influence the frequency of a country's conflicts, focusing on the continent of Asia?
 
 Our hypothesis is:
-- Countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
+- Countries with higher military expenditures and material capabilities and personnel are more likely to participate in armed conflicts.
 
 
 Motivation:
@@ -353,10 +353,10 @@ low_15_countries_in_asia <- asia |>
 asia_low_15 <- asia |>
   filter(stabb %in% low_15_countries_in_asia)
 
-asia_15 |>
-  group_by(stabb) |>
-  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  arrange(desc(total_conflict))
+#asia_15 |>
+  #group_by(stabb) |>
+  #summarize(total_conflict = sum(count, na.rm = TRUE)) |>
+  #arrange(desc(total_conflict))
 
 
 asia_15 |>
@@ -370,10 +370,10 @@ asia_15 |>
     y = "Total Conflict Incidents"
   ) +
   theme_minimal()
-asia_15 |>
-  group_by(stabb) |>
-  summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
-  arrange(desc(total_iron_production))
+#asia_15 |>
+  #group_by(stabb) |>
+  #summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
+  #arrange(desc(total_iron_production))
 
 asia_15 |>
   group_by(stabb) |>
