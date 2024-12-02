@@ -599,7 +599,19 @@ This suggests that conflicts may be more directly influenced by how resources ar
 #| label: coranalysus
 #| message: false
 #| warning: false
+#| layout-ncol: 3
 
+#milex: Military expenditure.
+#milper: Military personnel
+#irst: Iron and Steel production
+#cinc: Composite Index of National Capability.
+#count: Frequency of conflicts.
+
+
+asia |>
+  select(milex, milper, irst, cinc, count) |>
+  cor(use = "complete.obs")
+# calc correlations; no missing val accounted 
 
 selected_vars <- asia |>
   select(count, milex, milper, irst, cinc)
