@@ -345,12 +345,40 @@ asia |>
 
 ## Visualizations for Iron Production and Military Expenditures in Asia
 
+a\.
+Total Incident Count vs. Military Expenditures
+
 ```{r}
 #| label: military-expenditure-asia 
 
 asia |>
-  ggplot(aes(x = Country, y = mean_milex)) + 
-  geom_bar(stat = "identity")
+  ggplot(aes(x = milex, y = count)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  labs(
+    title = "Total Incident Count vs. Military Expenditures",
+    subtitle = "In Asian Countries from 1951 to 2016",
+    x = "Military Expenditures (thousands)", 
+    y = "Total Incident Count"
+  )
+```
+
+b\.
+Total Incident Count vs. Iron Production
+
+```{r}
+#| label: iron-production-asia 
+
+asia |>
+  ggplot(aes(x = irst, y = count)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  labs(
+    title = "Total Incident Count vs. Iron and Steel Production",
+    subtitle = "In Asian Countries from 1951 to 2016",
+    x = "Iron and Steel Production (thousands of tons)", 
+    y = "Total Incident Count"
+  )
 ```
 
 Countries in Asia that lead in Incident Count and Iron Production
@@ -413,6 +441,7 @@ asia_15 |>
   ) +
   theme_minimal()
 ```
+
 Countries in Asia that lead in Incident Count and Military expenditure (Milper).
 
 ```{r}
@@ -477,6 +506,7 @@ asia_15 |>
 
 
 ```
+
 Countries in Asia that lead in Incident Count and Military personnel (milper).
 
 ```{r}
@@ -541,10 +571,6 @@ asia_15 |>
 
 
 ```
-
-
-
-
 
 ```{r}
 #| label: top-low-countries
@@ -649,15 +675,9 @@ cor_test_results
 #Source: Chatgpt Q:"How to visualize correlation between different variables?"
 ```
 
-<<<<<<< HEAD
 The distribution of bootstrapped differences is centered around a negative value, approximately -3.
 This suggests that, on average, countries with higher military expenditures experience fewer conflicts than those with lower expenditures.
 The histogram's shape, with a clear peak and most values concentrated in a narrow range between -4 and -2, supports this negative relationship.
-=======
-The distribution of bootstrapped differences is centered around a negative value, approximately 3.
-This suggests that, on average, countries with higher military expenditures experience fewer conflicts than those with lower expenditures.
-The histogram's shape, with a clear peak and most values concentrated in a narrow range between 4 and 2, supports this negative relationship.
->>>>>>> afb33bd413bbfa30e8e7056964a9a733a59a4ee4
 
 This finding contradicts the hypothesis that countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
 Instead, the analysis suggests that higher military expenditures might correlate with fewer conflicts, potentially acting as a deterrent.
@@ -699,7 +719,6 @@ ggplot(bootstrap_df, aes(x = boot_diff)) +
 
 ```
 
-
 ```{r}
 #| label: exploreb
 #| message: false
@@ -739,8 +758,6 @@ ggplot(bootstrap_df, aes(x = boot_diff)) +
   theme_minimal()
 
 ```
-
-
 
 ```{r}
 #| label: explorec
@@ -782,7 +799,6 @@ ggplot(bootstrap_df, aes(x = boot_diff)) +
 
 ```
 
-
 ```{r}
 #| label: countries-conflict-iron-model
 #| message: false
@@ -795,12 +811,6 @@ tidy(country_conflict_incident_model)
 
 ```
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> afb33bd413bbfa30e8e7056964a9a733a59a4ee4
 ```{r}
 #| label: disp-mean
 country_join_continents |>
