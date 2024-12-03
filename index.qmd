@@ -615,14 +615,15 @@ This suggests that while certain aspects of military strength contribute to conf
 
 ```{r}
 #| label: top-countries-conflict-iron-cor
-#| message: false
-#| warning: false
 #milex: Military expenditure.
 #milper: Military personnel
 #irst: Iron and Steel production
 #cinc: Composite Index of National Capability.
 #count: Frequency of conflicts.
 
+asia <- asia |>
+  mutate(count = as.numeric(count)) |>
+  ungroup()
 
 asia |>
   select(milex, milper, irst, cinc, count) |>
