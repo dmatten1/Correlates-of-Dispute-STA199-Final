@@ -5,6 +5,28 @@ execute:
   echo: true
 ---
 
+```{r}
+#| label: load-pkgs
+#| message: false
+library(tidyverse)
+library(readxl)
+library(countrycode) 
+library(tidymodels)
+library(openintro)
+library(ggcorrplot)
+library(broom)
+library(kableExtra)
+
+#main dataset abt resources
+
+country_resource <- read_csv("data/NMC.csv")
+
+#main dataset abt conflict
+
+country_conflict <- read_csv("data/Conflict.csv")
+
+```
+
 AT THE END --\> set echo to false to not display the code cells ; only plots, words, and messages; cite gpt in code cells\
 DOI citations or manually write refernces and citations \> not a requirement
 
@@ -31,6 +53,27 @@ The data is collected annually, providing a comprehensive look at the material c
 **Militarized Interstate Disputes** (Dataset 2): This dataset records instances where states threaten, display, or use force against one another.
 The data includes details such as the start and end dates of conflicts, number of combatants, casualties, and the outcomes of these disputes.
 This dataset spans from 1816 to 2014 and provides insight into the frequency and intensity of conflicts between countries.
+
+@tbl-dict provides an overview of relevant variables used in this analysis
+
+```{r}
+#| label: tbl-dict
+#| tbl-cap: "Excerpt of Data Dictionary"
+
+
+variable_info <- tibble::tribble(
+  ~Variable,      ~Definition,                                                                 ~Type,
+  "country",      "Nation of observation",                         "categorical",
+  "continent",    "Geographic area of the country (e.g., Asia)",                 "categorical",
+  "count",        "Number of incidents of conflict",                    "numerical",
+  "milex",        "Military expenditures in local currency(?) (in thousands)",      "numerical",
+  "irst",         "Iron and Steel production levels in metric tons",             "numerical"
+)
+
+variable_info |>
+kable()
+```
+
 
 ## Methodology
 
@@ -72,29 +115,7 @@ Lastly, this section will include ideas for future work.
 
 # Data Exploration
 
-```{r}
-#| label: load-pkgs
-#| message: false
-library(tidyverse)
-library(readxl)
-library(countrycode) 
-library(tidymodels)
-library(openintro)
-library(ggcorrplot)
-library(broom)
-library(kableExtra)
-
-#main dataset abt resources
-
-country_resource <- read_csv("data/NMC.csv")
-
-#main dataset abt conflict
-
-country_conflict <- read_csv("data/Conflict.csv")
-
-```
-
-# Cleaning Data
+## Cleaning Data
 
 ```{r}
 #| label: join-datasets
