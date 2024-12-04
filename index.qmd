@@ -308,7 +308,7 @@ conflict_by_continent |>
   scale_fill_brewer(palette = "Blues") 
 ```
 
-We were interested in what periods were their heightened levels of both conflict and military capabilities, focusing on Iron. @fig-period-conflicts shows that they both increase around the same time indicating that there could be a potential relationship and its a worthy quesiton to pursue. 
+We were interested in what periods were their heightened levels of both conflict and military capabilities, focusing on Iron.  shows that they both increase around the same time indicating that there could be a potential relationship and its a worthy quesiton to pursue. 
 
 ```{r}
 #| label: fig-period-conflicts
@@ -370,7 +370,7 @@ asia |>
 
 #### Correlation between National Material Capabilities and Total Incident Counts
 
-This matrix provides a foundation understanding of how key material capabilities such as military expenditure, personnel, and iron production are related to conflict frequency. This graph establishes whether material capabilities are significantly correlated with conflict frequency. This is done in order to justify the variables selected for deeper analyses, showing which ones have potentially stronger predictive power. @fig-correlation-matrix shows that military expenditure and iron production has the highest correlation among the variables. 
+This matrix provides a foundation understanding of how key material capabilities such as military expenditure, personnel, and iron production are related to conflict frequency. This graph establishes whether material capabilities are significantly correlated with conflict frequency. This is done in order to justify the variables selected for deeper analyses, showing which ones have potentially stronger predictive power. shows that military expenditure and iron production has the highest correlation among the variables. 
 
 ```{r}
 #| label: fig-correlation-matrix 
@@ -457,7 +457,7 @@ a\.
 asia |>
   ggplot(aes(x = milex, y = count)) + 
   geom_point() + 
-  geom_smooth() + 
+  geom_smooth(method = "lm") + 
   labs(
     title = "Total Incident Count vs. Military Expenditures",
     subtitle = "In Asian Countries from 1951 to 2016",
@@ -481,7 +481,7 @@ b\.
 asia |>
   ggplot(aes(x = irst, y = count)) + 
   geom_point() + 
-  geom_smooth() + 
+  geom_smooth(method = "lm") + 
   labs(
     title = "Total Incident Count vs. Iron and Steel Production",
     subtitle = "In Asian Countries from 1951 to 2016",
