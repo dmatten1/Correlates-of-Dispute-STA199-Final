@@ -441,12 +441,30 @@ asia <- asia |>
     ),
     
     irst_class = case_when(
-      irst < quantile(milex, 0.25, na.rm = TRUE) ~ "low",
-      irst > quantile(milex, 0.75, na.rm = TRUE) ~ "high",
+      irst < quantile(irst, 0.25, na.rm = TRUE) ~ "low",
+      irst > quantile(irst, 0.75, na.rm = TRUE) ~ "high",
       .default = "medium"
   )
 )
 ```
+
+## Visualization of Iron + Steel Production and Military Expenditure Classes
+
+```{r}
+#| label: visual-irst-class
+
+asia |>
+  group_by(milex_class)
+  ggplot(
+    aes(y = )
+  )
+```
+
+
+
+
+
+
 
 Countries in Asia that lead in Incident Count and Iron Production
 
