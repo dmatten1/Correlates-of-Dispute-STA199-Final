@@ -100,7 +100,7 @@ library(tidymodels)
 library(openintro)
 library(ggcorrplot)
 library(broom)
-
+library(kableExtra)
 
 #main dataset abt resources
 
@@ -341,6 +341,66 @@ asia |>
   theme_minimal()
 
 
+```
+
+# Exploration focusing on Asian Countries
+
+## Correlation between National Material Capabilities and Total Incident Counts
+
+```{r}
+#| label: correlation-matrix 
+#| message: false
+#| warning: false
+#| layout-ncol: 3
+
+#milex: Military expenditure.
+#milper: Military personnel
+#irst: Iron and Steel production
+#cinc: Composite Index of National Capability.
+#count: Frequency of conflicts.
+
+asia |>
+  select(milex, milper, irst, cinc, count) |>
+  cor(use = "complete.obs")
+# calc correlations; no missing val accounted 
+
+selected_vars <- asia |>
+  select(count, milex, milper, irst, cinc)
+
+cor_matrix <- cor(selected_vars, use = "pairwise.complete.obs")
+
+ggcorrplot(cor_matrix, 
+           method = "circle", 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlation of Material Capabilities and Conflict Frequency")
+
+# Hypothesis Testing: Correlation significance
+cor_test_results <- map_df(
+  c("milex", "milper", "irst", "cinc"),
+  ~ tidy(cor.test(asia_15$count, asia_15[[.x]], use = "pairwise.complete.obs")),
+  .id = "variable"
+)
+
+# cor_test_results
+ 
+
+#Source: Chatgpt Q:"How to visualize correlation between different variables?"
+```
+
+# Correlation specifically between Total Incident Counts and Material Capabilities
+
+```{r}
+#| label: cor-table 
+
+asia_cor_table <- tibble(
+  `Military Capability` = c("Military Expenditures (thousands)", "Military Personnel (thousands)", "Iron and Steel Production (thousands of tons)"),
+  `Correlation To Incident Count` = c(cor(asia$count, asia$milex), cor(asia$count, asia$milper), cor(asia$count, asia$irst))
+)
+
+asia_cor_table |>
+  knitr::kable() |>
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 ```
 
 ## Visualizations for Iron Production and Military Expenditures in Asia
