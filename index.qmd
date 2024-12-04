@@ -671,15 +671,13 @@ bootstrap_medians <- replicate(1000, {
 
 bootstrap_df <- tibble(boot_diff = bootstrap_medians)
 ggplot(bootstrap_df, aes(x = boot_diff)) +
-  geom_histogram(binwidth = 0.5, fill = "steelblue", color = "white") +
+  geom_histogram(binwidth = 0.0001, fill = "steelblue", color = "white") +
   labs(
     title = "Does High Iron and Steel Production Correlate with Conflict Frequency?",
     x = "Iron and Steel Production (irst)",
     y = "Average Number of Armed Conflicts"
   ) + 
   theme_minimal()
-
-
 ```
 
 ## Hypothesis Test 
