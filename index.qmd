@@ -448,14 +448,7 @@ asia <- asia |>
 
 ## Visualization of Iron + Steel Production and Military Expenditure Classes
 
-```{r}
-#| label: visual-irst-class
 
-asia |>
-  group_by(milex_class) |>
-  ggplot(aes(y = count)) + 
-    geom_boxplot()
-```
 
 
 
