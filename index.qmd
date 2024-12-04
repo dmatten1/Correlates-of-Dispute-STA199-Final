@@ -76,7 +76,6 @@ variable_info |>
 kable()
 ```
 
-
 ## Methodology
 
 Our project explored the relationship between military conflicts and various factors, including military expenditure, personnel, iron and steel production, and national capabilities.
@@ -277,10 +276,10 @@ country_join_continents
 
 ```
 
-
 # Which Continent has the Highest Propensity for Conflict?
 
-In order to narrow our search for proper analyses we decided to focus on the continent with the highest propensity for conflict. @fig-high-prop-conflict shows that the continent with the highest propensity for conflict is Asia.
+In order to narrow our search for proper analyses we decided to focus on the continent with the highest propensity for conflict.
+@fig-high-prop-conflict shows that the continent with the highest propensity for conflict is Asia.
 
 ```{r}
 #| label: fig-high-prop-conflict 
@@ -308,7 +307,8 @@ conflict_by_continent |>
   scale_fill_brewer(palette = "Blues") 
 ```
 
-We were interested in what periods were their heightened levels of both conflict and military capabilities, focusing on Iron.  shows that they both increase around the same time indicating that there could be a potential relationship and its a worthy quesiton to pursue. 
+We were interested in what periods were their heightened levels of both conflict and military capabilities, focusing on Iron.
+@fig-period-conflicts shows that they both increase around the same time indicating that there could be a potential relationship and its a worthy quesiton to pursue.
 
 ```{r}
 #| label: fig-period-conflicts
@@ -317,7 +317,6 @@ We were interested in what periods were their heightened levels of both conflict
 #|   - "Trends in Conflict Incidents in Asia"
 #|   - "Trends in Iron and steel production"
 #| message: false
-#| echo: false
 #| warning: false
 
 
@@ -366,11 +365,14 @@ asia |>
 
 ```
 
-# Methodology Exploration focusing on Asian Countries
+# Exploration focusing on Asian Countries
 
 #### Correlation between National Material Capabilities and Total Incident Counts
 
-This matrix provides a foundation understanding of how key material capabilities such as military expenditure, personnel, and iron production are related to conflict frequency. This graph establishes whether material capabilities are significantly correlated with conflict frequency. This is done in order to justify the variables selected for deeper analyses, showing which ones have potentially stronger predictive power. shows that military expenditure and iron production has the highest correlation among the variables. 
+This matrix provides a foundation understanding of how key material capabilities such as military expenditure, personnel, and iron production are related to conflict frequency.
+This graph establishes whether material capabilities are significantly correlated with conflict frequency.
+This is done in order to justify the variables selected for deeper analyses, showing which ones have potentially stronger predictive power.
+@fig-correlation-matrix shows that military expenditure and iron production has the highest correlation among the variables.
 
 ```{r}
 #| label: fig-correlation-matrix 
@@ -425,7 +427,9 @@ ggcorrplot(cor_matrix,
 ```
 
 ### Correlation specifically between Total Incident Counts and Material Capabilities
-@tbl-cor-table further supports the matrix findings. 
+
+@tbl-cor-table further supports the matrix findings.
+
 ```{r}
 #| label: tbl-cor-table
 #| echo: false
@@ -441,18 +445,19 @@ asia_cor_table |>
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 ```
 
-# Visualizing Incident Count and Military Capablities in Asia 
-To identify the relationship between conflict frequency and military capabilities we decided to do a series of visualizations using scatter plots in order to uncovering patterns, clusters, and outliers. Focusing on the Military Expenditures and Iron production as they had the highest correlation within the set. 
+# Visualizing Incident Count and Military Capablities in Asia
+
+To identify the relationship between conflict frequency and military capabilities we decided to do a series of visualizations using scatter plots in order to uncovering patterns, clusters, and outliers.
+Focusing on the Military Expenditures and Iron production as they had the highest correlation within the set.
 
 a\.
-@fig-military-expenditure-asia shows ***
+@fig-military-expenditure-asia shows \*\*\*
 
 ```{r}
 #| label: fig-military-expenditure-asia 
 #| fig-cap: "Total Incident Count vs. Military Expenditures"
 #| message: false
 #| warning: false
-#| echo: false
 
 asia |>
   ggplot(aes(x = milex, y = count)) + 
@@ -469,14 +474,13 @@ asia |>
 
 b\.
 
-@fig-iron-production-asia  shows *** 
+@fig-iron-production-asia shows \*\*\*
 
 ```{r}
 #| label: fig-iron-production-asia 
 #| fig-cap: "Total Incident Count vs. Iron and Steel Production" 
 #| message: false
 #| warning: false
-#| echo: false
 
 asia |>
   ggplot(aes(x = irst, y = count)) + 
@@ -496,7 +500,7 @@ We decided to highlight Key Dimensions of Military Power, classifying countries 
 
 ```{r}
 #| label: mutate-data 
-#| echo: false
+
 asia <- asia |> 
   mutate(
     milex_class = case_when(
@@ -513,19 +517,19 @@ asia <- asia |>
 
 ### Visualization for Military Expenditure
 
-By grouping countries into "high" and "low" military expenditure classes (relative to the median), the visualization explores whether military spending is associated with the frequency of incidents. Using a histogram to properly demonstrate how spending levels relate to incident distribution. 
+By grouping countries into "high" and "low" military expenditure classes (relative to the median), the visualization explores whether military spending is associated with the frequency of incidents.
+Using a histogram to properly demonstrate how spending levels relate to incident distribution.
 
-In order to determine: 
+In order to determine:
 
 Are countries with higher spending involved in more conflicts (offensive posture)?
 
 Are countries with lower spending involved in fewer conflicts (lack of resources or deterrence by other nations)?
 
-@fig-visual-milex-class demonstrates that *** connection to hypothesis 
+@fig-visual-milex-class demonstrates that \*\*\* connection to hypothesis
 
 ```{r}
 #| label: fig-visual-milex-class
-#| echo: false
 #| fig-cap: "Distribution of conflicts for countries with different military spending levels."
 
 asia |>
@@ -545,17 +549,16 @@ asia |>
 ```
 
 ### Visualization for Iron and Steel Production
+
 Grouping countries by "high" and "low" iron/steel production examines the link between industrial capacity and incident frequency.
 
-In order to determine: 
-Do countries with high production experience more conflicts due to their industrial capabilities being militarized?
+In order to determine: Do countries with high production experience more conflicts due to their industrial capabilities being militarized?
 
 Are countries with low production capacity less involved in conflicts due to industrial limitations?
-@fig-visual-irst-class demonstrates that *** connection to hypothesis 
+@fig-visual-irst-class demonstrates that \*\*\* connection to hypothesis
 
 ```{r}
 #| label: fig-visual-irst-class
-#| echo: false
 #| fig-cap: "Distribution of conflicts for countries with different industrial power/production"
 
 asia |>
@@ -574,26 +577,30 @@ asia |>
 
 ```
 
-# Results - Hypothesis Exploration
+# Hypothesis Exploration
 
-In order to directly test our hypothesis regarding whether high military capabilities correlate with higher conflict frequencies we decided to include a bootstrap histogram. The graph helps validates whether differences in conflict frequency are significant or due to random variation. 
+In order to directly test our hypothesis regarding whether high military capabilities correlate with higher conflict frequencies we decided to include a bootstrap histogram.
+The graph helps validates whether differences in conflict frequency are significant or due to random variation.
 
 The bootstrap test evaluates whether the difference in the mean conflict frequency (count) between countries with differnent military capablities, is significant.
 
-If the Mean Difference is Consistently Positive: This suggests that countries with higher military capablities are associated with higher conflict frequencies. This would support a hypothesis suggesting a positive correlation between military expenditures and conflict involvement.
+If the Mean Difference is Consistently Positive: This suggests that countries with higher military capablities are associated with higher conflict frequencies.
+This would support a hypothesis suggesting a positive correlation between military expenditures and conflict involvement.
 
 If the Mean Difference is Near Zero or Negative: This implies little to no difference or a negative association, which could contradict the hypothesis.
 
-## Bootstrap Test for Military expenditure and Conflict Frequency 
+## Bootstrap Test for Military expenditure and Conflict Frequency
 
 @fig-explorea demonstrates that the distribution of bootstrapped differences is centered around a positive value, approximately 2.5.
 
-This suggests that, on average, countries with higher military expenditures are associated with higher conflict frequencies. 
+This suggests that, on average, countries with higher military expenditures are associated with higher conflict frequencies.
 
 The histogram's shape, with a clear peak and most values concentrated in a narrow range between 1 and 3.5, supports this postive relationship.
 
-This suggests that countries with higher military expenditures are associated with higher conflict frequencies. This finding supports the hypothesis suggesting a positive correlation suggesting that countries with higher military expenditures are more likely to participate in armed conflicts. However, this value, due to its size, is moderate. Its a moderate positive correlation.
-
+This suggests that countries with higher military expenditures are associated with higher conflict frequencies.
+This finding supports the hypothesis suggesting a positive correlation suggesting that countries with higher military expenditures are more likely to participate in armed conflicts.
+However, this value, due to its size, is moderate.
+Its a moderate positive correlation.
 
 ```{r}
 #| label: fig-explorea
@@ -638,15 +645,18 @@ ggplot(bootstrap_df, aes(x = boot_diff)) +
 
 ```
 
-## Bootstrap Test for Iron Production and Conflict Frequency 
+## Bootstrap Test for Iron Production and Conflict Frequency
 
 @fig-exploreb demonstrates that the distribution of bootstrapped differences is centered around a positive value, approximately 1.75.
 
-This suggests that, on average, countries with higher military expenditures are associated with higher conflict frequencies. 
+This suggests that, on average, countries with higher military expenditures are associated with higher conflict frequencies.
 
 The histogram's shape, with a clear peak and most values concentrated in a narrow range between 1 and 3, supports this postive relationship.
 
-This suggests that countries with higher military expenditures are associated with higher conflict frequencies. This finding supports the hypothesis suggesting a positive correlation suggesting that countries with higher military expenditures are more likely to participate in armed conflicts. However, this value, due to its size, is moderate. Its a moderate positive correlation. 
+This suggests that countries with higher military expenditures are associated with higher conflict frequencies.
+This finding supports the hypothesis suggesting a positive correlation suggesting that countries with higher military expenditures are more likely to participate in armed conflicts.
+However, this value, due to its size, is moderate.
+Its a moderate positive correlation.
 
 ```{r}
 #| label: fig-exploreb
@@ -684,10 +694,24 @@ ggplot(bootstrap_df, aes(x = boot_diff)) +
     y = "Average Number of Armed Conflicts"
   ) + 
   theme_minimal()
+
 ```
 
-## Hypothesis Test 
-The shows ***, supports our hypothesis 
+```{r}
+#| label: yeah
+
+
+bootstrap_df |>
+  summarize(
+  lower = quantile(boot_diff, 0.025),
+  upper = quantile(boot_diff, 0.975)
+)
+
+```
+
+## Hypothesis Test
+
+The shows \*\*\*, supports our hypothesis
 
 $$
 Null~H_{0}: μ_{lorem} = μ_{lorem}: no
@@ -696,8 +720,6 @@ $$
 $$
 Alternative~H_{A}: μ_{lorem} ≠ μ_{lorem}: yes
 $$
-
-
 
 ```{r}
 #| label: hypothesis-testing-milex
@@ -752,8 +774,7 @@ null_distribution_irst |>
   kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))
 ```
 
-
-@tbl-countries-conflict-iron-model shows ***, supports our hypothesis 
+@tbl-countries-conflict-iron-model shows \*\*\*, supports our hypothesis
 
 ```{r}
 #| label: tbl-countries-conflict-iron-model
@@ -769,8 +790,7 @@ kable(digits = 4)
 
 ```
 
-@tbl-log-disp-asia shows ***, supports our hypothesis 
-
+@tbl-log-disp-asia shows \*\*\*, supports our hypothesis
 
 ```{r}
 #| label: tbl-log-disp-asia 
