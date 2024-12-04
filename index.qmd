@@ -14,30 +14,14 @@ The findings seek to enhance our understanding of how shifts in state power infl
 
 ## Introduction and data
 
-This section includes an introduction to the project motivation, data, and research question.
-Describe the data and definitions of key variables.
-It should also include some exploratory data analysis.
-All of the EDA won’t fit in the paper, so focus on the EDA for the response variable and a few other interesting variables and relationships.
+Our research question is as follows: how do changes in national material capabilities influence the frequency of a country's conflicts, focusing on the continent of Asia? We hypothesize that countries with higher military expenditures and personnel are more likely to participate in armed conflicts. The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts. Understanding how changes in a nation’s military capabilities — such as military expenditures and natural resources like iron — affect its involvement in international disputes is important for assessing political stability.
 
-Question:
-
-How do changes in national material capabilities influence the frequency of a country's conflicts, focusing on the continent of Asia?
-
-Our hypothesis is: - Countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
-
-Motivation:
-
-The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts.
-Understanding how changes in a nation’s military capabilities — such as military expenditures and natural resources like iron — affect its involvement in international disputes is important for assessing political stability.
-This research aligns with the broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts.
-In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations.
-
-Source:
+This research aligns with a broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts. In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations.
 
 The data used in this analysis comes from the Correlates of War (COW) project, which is widely used by political scientists.
 This project consists of two datasets that apply to our research:
 
-National Material Capabilities (Dataset 1): This dataset includes data on military power indicators such as military expenditures, military personnel, energy consumption, and total population for various countries.
+\bNational \bMaterial \bCapabilities (Dataset 1): This dataset includes data on military power indicators such as military expenditures, military personnel, energy consumption, and total population for various countries.
 The data is collected annually, providing a comprehensive look at the material capabilities of each nation over time.
 
 Militarized Interstate Disputes (Dataset 2): This dataset records instances where states threaten, display, or use force against one another.
