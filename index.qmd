@@ -14,9 +14,13 @@ The findings seek to enhance our understanding of how shifts in state power infl
 
 ## Introduction and data
 
-Our research question is as follows: how do changes in national material capabilities influence the frequency of a country's conflicts, focusing on the continent of Asia? We hypothesize that countries with higher military expenditures and personnel are more likely to participate in armed conflicts. The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts. Understanding how changes in a nation’s military capabilities — such as military expenditures and natural resources like iron — affect its involvement in international disputes is important for assessing political stability.
+Our research question is as follows: how do changes in national material capabilities influence the frequency of a country's conflicts, focusing on the continent of Asia?
+We hypothesize that countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
+The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts.
+Understanding how changes in a nation’s military capabilities — such as military expenditures and natural resources like iron — affect its involvement in international disputes is important for assessing political stability.
 
-This research aligns with a broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts. In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations.
+This research aligns with a broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts.
+In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations.
 
 The data used in this analysis comes from the Correlates of War (COW) project, which is widely used by political scientists.
 This project consists of two datasets that apply to our research:
@@ -371,7 +375,7 @@ ggcorrplot(cor_matrix,
 #Source: Chatgpt Q:"How to visualize correlation between different variables?"
 ```
 
-# Correlation specifically between Total Incident Counts and Material Capabilities
+## Correlation specifically between Total Incident Counts and Material Capabilities
 
 ```{r}
 #| label: cor-table 
@@ -422,6 +426,26 @@ asia |>
     x = "Iron and Steel Production (thousands of tons)", 
     y = "Total Incident Count"
   )
+```
+## Classifying Asian Countries by Military Expenditures and Iron + Steel Production 
+
+```{r}
+#| label: mutate-data 
+
+asia <- asia |> 
+  mutate(
+    milex_class = case_when(
+      milex < quantile(milex, 0.25, na.rm = TRUE) ~ "low",
+      milex > quantile(milex, 0.75, na.rm = TRUE) ~ "high",
+      .default = "medium"
+    ),
+    
+    irst_class = case_when(
+      irst < quantile(milex, 0.25, na.rm = TRUE) ~ "low",
+      irst > quantile(milex, 0.75, na.rm = TRUE) ~ "high",
+      .default = "medium"
+  )
+)
 ```
 
 Countries in Asia that lead in Incident Count and Iron Production
