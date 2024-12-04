@@ -387,16 +387,20 @@ asia <- asia |>
   filter(!is.na(count)) |>
   ungroup()
 
-asia |>
-  select(milex, milper, irst, cinc, count) |>
-  cor(use = "complete.obs")
+#asia |>
+ # select(milex, milper, irst, cinc, count) |>
+  #cor(use = "complete.obs")
 
 
 selected_vars <- asia |>
   select(count, milex, milper, irst, cinc)
 
+
 cor_matrix <- cor(selected_vars, use = "pairwise.complete.obs")
 
+cor_matrix |>
+  knitr::kable() |>
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))
 ggcorrplot(cor_matrix, 
            method = "circle", 
            type = "lower", 
