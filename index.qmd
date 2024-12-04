@@ -440,7 +440,7 @@ asia <- asia |>
     ),
     
     irst_class = case_when(
-      irst < quantile(irst, 0.25, na.rm = TRUE) ~ "low",
+      irst < quantile(irst, 0.50, na.rm = TRUE) ~ "low",
       .default = "high"
   )
 )
@@ -448,6 +448,21 @@ asia <- asia |>
 
 ## Visualization of Iron + Steel Production and Military Expenditure Classes
 
+```{r}
+#| label: visual-irst-class
+
+asia |>
+  ggplot(aes(fill = milex_class, x = count)) + 
+  geom_histogram(alpha = 0.6) +
+  labs(
+    title = "Military Expenditures compared to Incident Counts", 
+    subtitle = "Grouped by higher than median military expenditure or lower than median military expenditure", 
+    y = "Military Expenditure (relative to median)", 
+    x = "Incident Counts (thousands)",
+  ) +
+  xlim(0, 20)
+
+```
 
 
 
@@ -983,44 +998,4 @@ all_asia_countries |>
     y = "Military Personnel (thousands)"
   ) +
   theme_minimal()
-```
-
-
-```{r}
-#| label: hypothesis-testing-milex
-
-asia_hypothesis <- asia
-
-set.seed(44)
-null_distribution_milex <- asia_hypothesis |>
-  specify(response = count, explanatory = milex_class) |>
-  hypothesize(null = "independence") |>
-  generate(reps = 100, type = "permute") |>
-  calculate(stat = "diff in means", order = c("high", "low"))
-
-observed_mean_milex <- asia_hypothesis |>
-  specify(response = count, explanatory = milex_class) |>
-  calculate(stat = "diff in means", order = c("high", "low")) |>
-  pull(stat)
-
-null_distribution_milex |>
-  get_p_value(obs_stat = observed_mean_milex, direction = "two-sided")
-null_distribution_milex |>
-  get_confidence_interval()
-
-null_distribution_irst <- asia_hypothesis |>
-  specify(response = count, explanatory = irst_class) |>
-  hypothesize(null = "independence") |>
-  generate(reps = 100, type = "permute") |>
-  calculate(stat = "diff in means", order = c("high", "low"))
-
-observed_mean_irst <- asia_hypothesis |>
-  specify(response = count, explanatory = irst_class) |>
-  calculate(stat = "diff in means", order = c("high", "low")) |>
-  pull(stat)
-
-null_distribution_irst |>
-  get_p_value(obs_stat = observed_mean_irst, direction = "two-sided")
-null_distribution_irst |>
-  get_confidence_interval()
 ```
