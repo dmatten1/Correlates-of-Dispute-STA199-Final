@@ -2,6 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-
 /.quarto/
 docs/
+index.qmd
