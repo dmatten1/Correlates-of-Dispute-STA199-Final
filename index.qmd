@@ -33,7 +33,9 @@ By analyzing data from the Correlates of War project, which tracks national capa
 The findings seek to enhance our understanding of how shifts in state power influence international stability and conflict dynamics.
 
 ## Introduction and data
+
 <!--- cleaning -->
+
 ```{r}
 #| label: taking-out-unnecessary-variables
 #| echo: false
@@ -184,26 +186,20 @@ country_join_continents <- country_join_countrynames |>
   filter(!is.na(Country)) |>
   filter(!is.na(Continent))
 
+#fliter by asia 
+asia <- country_join_continents |>
+  filter(Continent == "Asia")
 
 ```
 
-Our research question is as follows: how do changes in national material capabilities influence the frequency of a country's conflicts, focusing on the continent of Asia?
-We hypothesize that countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
 The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts.
 Understanding how changes in a nation’s military capabilities — such as military expenditures and natural resources like iron — affect its involvement in international disputes is important for assessing political stability.
 
-This research aligns with a broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts.
-In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations.
+The data used in our analysis comes from the Correlates of War (COW) project, which consists of two datasets that apply to our research- **National Material Capabilitie**s and **Militarized Interstate Disputes**.
+The former data set includes annually collected data on military power indicators for each nation, such as military expenditures, military personnel, etc.
+The latter records instances where states threaten, display, or use force against one another every year from 1816 to 2014. 
 
-The data used in this analysis comes from the Correlates of War (COW) project, which is widely used by political scientists.
-This project consists of two datasets that apply to our research:
-
-**National Material Capabilities** (Dataset 1): This dataset includes data on military power indicators such as military expenditures, military personnel, energy consumption, and total population for various countries.
-The data is collected annually, providing a comprehensive look at the material capabilities of each nation over time.
-
-**Militarized Interstate Disputes** (Dataset 2): This dataset records instances where states threaten, display, or use force against one another.
-The data includes details such as the start and end dates of conflicts, number of combatants, casualties, and the outcomes of these disputes.
-This dataset spans from 1816 to 2014 and provides insight into the frequency and intensity of conflicts between countries.
+After joining these two data sets we mutated our data set to include the variables: “count” (summing up the total incident count for a given country in a given year), “milex_class” (classifying the military expenditure as being either above or below the median military expenditure), and “irst_class”(classifying the iron and steel production as being either above or below the median iron and steel Production). 
 
 @tbl-dict provides an overview of relevant variables used in this analysis
 
@@ -225,6 +221,13 @@ variable_info <- tibble::tribble(
 variable_info |>
 kable()
 ```
+
+Our research question is as follows: How do changes in national material capabilities influence the frequency of a country's conflicts, focusing on the continent of Asia?
+
+We hypothesize that countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
+
+This research aligns with a broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts.
+In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations. 
 
 ### Data Exploration
 
@@ -258,118 +261,8 @@ conflict_by_continent |>
   theme_minimal() +
   scale_fill_brewer(palette = "Blues") 
 ```
-#### Exploration Focusing on Asian Countries
-
-```{r}
-#| label: fig-period-conflicts
-#| layout-ncol: 2
-#| fig-cap: 
-#|   - "Trends in Conflict Incidents in Asia"
-#|   - "Trends in Iron and steel production"
-#| message: false
-#| warning: false
-
-
-#fliter by asia 
-asia <- country_join_continents |>
-  filter(Continent == "Asia")
-
-
-asia |>
-  group_by(styear) |>
-  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  ggplot(aes(x = styear, y = total_conflict)) +
-  geom_line() +
-  labs(
-    title = "Trends in Conflict Incidents in Asia",
-    x = "Year",
-    y = "Total Conflict Incidents"
-  ) +
-  theme_minimal()
-
-
-#fliter by asia 
-asia <- country_join_continents |>
-  filter(Continent == "Asia")
-
-asia <- asia |>
-  group_by(Country) |>
-  mutate(
-    mean_milex = mean(milex),
-    mean_irst = mean(irst)
-  )
-# Confict and Iron production start around the same years.
-
-asia |>
-  group_by(styear) |>
-  summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
-  ggplot(aes(x = styear, y = total_iron_production)) +
-  geom_line() +
-  labs(
-    title = "Trends in Iron and steel production (thousands of tons) in Asia",
-    x = "Year",
-    y = "Total Conflict Incidents around the same years as conflict"
-  ) +
-  theme_minimal()
-
-
-```
 
 #### Correlation between National Material Capabilities and Total Incident Counts
-
-```{r}
-#| label: fig-correlation-matrix 
-#| fig-cap: "Correlation Matrix"
-#| message: false
-#| warning: false
-#| echo: false
-
-
-#milex: Military expenditure.
-#milper: Military personnel
-#irst: Iron and Steel production
-#cinc: Composite Index of National Capability.
-#count: Frequency of conflicts.
-
-asia <- asia |>
-  mutate(count = as.numeric(count)) |>
-  filter(!is.na(count)) |>
-  ungroup()
-
-#asia |>
- # select(milex, milper, irst, cinc, count) |>
-  #cor(use = "complete.obs")
-
-
-selected_vars <- asia |>
-  select(count, milex, milper, irst, cinc)
-
-
-cor_matrix <- cor(selected_vars, use = "pairwise.complete.obs")
-
-cor_matrix |>
-  knitr::kable() |>
-  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))
-ggcorrplot(cor_matrix, 
-           method = "circle", 
-           type = "lower", 
-           lab = TRUE, 
-           title = "Correlation of Material Capabilities and Conflict Frequency")
-
-# Hypothesis Testing: Correlation significance
-# cor_test_results <- map_df(
-#   c("milex", "milper", "irst", "cinc"),
-#   ~ tidy(cor.test(asia_15$count, asia_15[[.x]], use = "pairwise.complete.obs")),
-#   .id = "variable"
-# )
-
-# cor_test_results
- 
-
-#Source: Chatgpt Q:"How to visualize correlation between different variables?"
-```
-
-#### Correlation specifically between Total Incident Counts and Material Capabilities
 
 ```{r}
 #| label: tbl-cor-table
@@ -393,14 +286,18 @@ Focusing on the Military Expenditures and Iron production as they had the highes
 
 ```{r}
 #| label: fig-military-expenditure-asia 
-#| fig-cap: "Total Incident Count vs. Military Expenditures"
+#| layout-ncol: 2
+#| fig-cap: 
+#| - "Total Incident Count vs. Military Expenditures"
+#| - "Total Incident Count vs. Iron and Steel Production"
 #| message: false
 #| warning: false
+
 
 asia |>
   ggplot(aes(x = milex, y = count)) + 
   geom_point() + 
-  geom_smooth(method = "lm") + 
+  # geom_smooth(method = "lm") + 
   labs(
     title = "Total Incident Count vs. Military Expenditures",
     subtitle = "In Asian Countries from 1951 to 2016",
@@ -408,27 +305,22 @@ asia |>
     y = "Total Incident Count"
   ) + 
   theme_minimal()
-```
-
-```{r}
-#| label: fig-iron-production-asia 
-#| fig-cap: "Total Incident Count vs. Iron and Steel Production" 
-#| message: false
-#| warning: false
 
 asia |>
   ggplot(aes(x = irst, y = count)) + 
   geom_point() + 
-  geom_smooth(method = "lm") + 
+  # geom_smooth(method = "lm") + 
   labs(
     title = "Total Incident Count vs. Iron and Steel Production",
     subtitle = "In Asian Countries from 1951 to 2016",
     x = "Iron and Steel Production (thousands of tons)", 
     y = "Total Incident Count"
-  )
+  ) + 
+  theme_minimal()
 ```
 
 <!--- classifying -->
+
 ```{r}
 #| label: mutate-data 
 
@@ -446,11 +338,14 @@ asia <- asia |>
 )
 ```
 
-#### Visualization for Military Expenditure
+#### Visualization for Military Expenditure and Iron & Steel Production 
 
 ```{r}
-#| label: fig-visual-milex-class
-#| fig-cap: "Distribution of conflicts for countries with different military spending levels."
+#| label: fig-visual-milex-irst-class
+#| layout-ncol: 2
+#| fig-cap: 
+#| - "Distribution of conflicts for countries with different military spending levels."
+#| - "Distribution of conflicts for countries with different industrial power/production"
 
 asia |>
   ggplot(aes(fill = milex_class, x = count)) + 
@@ -465,14 +360,6 @@ asia |>
   coord_cartesian(xlim = c(0, 30)) + 
   theme_minimal() +
   theme(legend.position = "bottom")
-
-```
-
-#### Visualization for Iron and Steel Production
-
-```{r}
-#| label: fig-visual-irst-class
-#| fig-cap: "Distribution of conflicts for countries with different industrial power/production"
 
 asia |>
   ggplot(aes(fill = irst_class, x = count)) + 
@@ -706,8 +593,3 @@ In this section you’ll include a summary of what you have learned about your r
 In addition, discuss the limitations of your analysis and provide suggestions on ways the analysis could be improved.
 Any potential issues pertaining to the reliability and validity of your data and appropriateness of the statistical analysis should also be discussed here.
 Lastly, this section will include ideas for future work.
-
-
-
-
-
