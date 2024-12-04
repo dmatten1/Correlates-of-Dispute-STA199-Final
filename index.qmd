@@ -366,7 +366,7 @@ asia |>
 
 ```
 
-# Exploration focusing on Asian Countries
+# Methodology Exploration focusing on Asian Countries
 
 #### Correlation between National Material Capabilities and Total Incident Counts
 
@@ -576,7 +576,7 @@ asia |>
 
 ```
 
-# Hypothesis Exploration
+# Results - Hypothesis Exploration
 
 In order to directly test our hypothesis regarding whether high military capabilities correlate with higher conflict frequencies we decided to include a bootstrap histogram. The graph helps validates whether differences in conflict frequency are significant or due to random variation. 
 
