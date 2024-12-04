@@ -698,8 +698,8 @@ bootstrap_medians_df2 <- bind_rows(bootstrap_medians_irst)
 #| label: irst-bootstrap-tibble
 
 bootstrap_medians_avg_irst <- tibble(
-  `(avg high irst) incident count median` = mean(as.numeric(bootstrap_medians_df$high), na.rm = TRUE),
-  `(avg low irst) incident count median` = mean(as.numeric(bootstrap_medians_df$low), na.rm = TRUE),
+  `(avg high irst) incident count median` = mean(as.numeric(bootstrap_medians_df2$high), na.rm = TRUE),
+  `(avg low irst) incident count median` = mean(as.numeric(bootstrap_medians_df2$low), na.rm = TRUE),
   )
 
 bootstrap_medians_avg_irst |>
