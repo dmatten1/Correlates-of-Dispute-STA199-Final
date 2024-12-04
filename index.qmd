@@ -441,7 +441,7 @@ asia <- asia |>
     ),
     
     irst_class = case_when(
-      irst < median(irst, na.rm = TRUE) ~ "low",
+      irst <= median(irst, na.rm = TRUE) ~ "low",
       .default = "high"
   )
 )
@@ -598,8 +598,6 @@ set.seed(44)
 #Military personnel
 threshold <- median(asia$irst, na.rm = TRUE) 
 #  median as a threshold as it rovides a more accurate threshold by representing the central tendency of the data
-asia <- asia |>
-  mutate(irst_level = ifelse(irst > threshold, "High", "Low"))
 
 bootstrap_means <- replicate(1000, {
   sampled_data <- asia |>
@@ -607,7 +605,7 @@ bootstrap_means <- replicate(1000, {
   # Resample with replacement
   
   means <- sampled_data |>
-    group_by(irst_level) |>
+    group_by(irst_class) |>
     summarize(mean_count = mean(count, na.rm = TRUE))
   
   -diff(means$mean_count) # diff in mean conflict frequency between High and Low `milex`
@@ -659,13 +657,13 @@ null_distribution_milex |>
   get_confidence_interval()
 
 null_distribution_irst <- asia_hypothesis |>
-  specify(response = count, explanatory = irst_level) |>
+  specify(response = count, explanatory = irst_class) |>
   hypothesize(null = "independence") |>
   generate(reps = 1000, type = "permute") |>
-  calculate(stat = "diff in means", order = c("High", "Low"))
+  calculate(stat = "diff in means", order = c("high", "low"))
 observed_mean_irst <- asia_hypothesis |>
-  specify(response = count, explanatory = irst_level) |>
-  calculate(stat = "diff in means", order = c("High", "Low")) |>
+  specify(response = count, explanatory = irst_class) |>
+  calculate(stat = "diff in means", order = c("high", "low")) |>
   pull(stat)
 null_distribution_irst |>
   get_p_value(obs_stat = observed_mean_irst, direction = "two-sided")
