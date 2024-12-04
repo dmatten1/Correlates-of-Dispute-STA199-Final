@@ -984,3 +984,43 @@ all_asia_countries |>
   ) +
   theme_minimal()
 ```
+
+
+```{r}
+#| label: hypothesis-testing-milex
+
+asia_hypothesis <- asia
+
+set.seed(44)
+null_distribution_milex <- asia_hypothesis |>
+  specify(response = count, explanatory = milex_class) |>
+  hypothesize(null = "independence") |>
+  generate(reps = 100, type = "permute") |>
+  calculate(stat = "diff in means", order = c("high", "low"))
+
+observed_mean_milex <- asia_hypothesis |>
+  specify(response = count, explanatory = milex_class) |>
+  calculate(stat = "diff in means", order = c("high", "low")) |>
+  pull(stat)
+
+null_distribution_milex |>
+  get_p_value(obs_stat = observed_mean_milex, direction = "two-sided")
+null_distribution_milex |>
+  get_confidence_interval()
+
+null_distribution_irst <- asia_hypothesis |>
+  specify(response = count, explanatory = irst_class) |>
+  hypothesize(null = "independence") |>
+  generate(reps = 100, type = "permute") |>
+  calculate(stat = "diff in means", order = c("high", "low"))
+
+observed_mean_irst <- asia_hypothesis |>
+  specify(response = count, explanatory = irst_class) |>
+  calculate(stat = "diff in means", order = c("high", "low")) |>
+  pull(stat)
+
+null_distribution_irst |>
+  get_p_value(obs_stat = observed_mean_irst, direction = "two-sided")
+null_distribution_irst |>
+  get_confidence_interval()
+```
