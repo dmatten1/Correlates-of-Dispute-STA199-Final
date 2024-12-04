@@ -315,61 +315,6 @@ asia |>
 
 ```
 
-## Methodology
-
-Our project explored the relationship between military conflicts and various factors, including military expenditure, personnel, iron and steel production, and national capabilities.
-Given the extensive dataset, which covered numerous countries, we initially faced challenges regarding clarity.
-To streamline our analysis, we narrowed the scope to Asia, which emerged as the continent with the highest conflict frequency during our initial exploration.
-
-In preparing the data, we addressed several challenges.
-Variables irrelevant to our analysis were removed, and we were forced to correct unique country codes that didn’t align with standard naming conventions.
-These codes were manually mapped to their respective countries, and we classified nations by continent, allowing us to focus solely on Asia.
-
-Using this cleaned dataframe, we created visualizations to identify patterns in conflict frequency, iron production, and military strength metrics.
-For example, we examined the periods with the highest levels of conflict and iron production and determined which countries contributed most to these metrics.
-We also investigated correlations between national capabilities, such as military expenditure and conflict frequency, to identify potential predictors.
-
-For our analysis, we utilized several key R libraries to streamline data manipulation, modeling, and visualization.
-The tidyverse suite was useful in providing tools for filtering and summarizing data and ggplot for crafting visualizations.
-We used readxl to import Excel datasets into R.
-The countrycode package helped map country codes from the dataset to their corresponding country names, helping us to group data by continent and eventually determine the focus on Asian countries.
-For modeling and diagnostics, we relied on tidymodels for regression analysis.
-
-Combining data preparation, visualization, statistical analysis, and modeling, we found meaningful trends and relationships that highlight how national capabilities influence military conflicts different countries in Asia.
-This comprehensive approach allowed us to derive insights into the multifaceted drivers of geopolitics.
-
-## Results
-
-All aspects of our analysis point to an essentially-nonexistent correlation between the number of conflicts and any of the variables in our dataset.
-When including all countries, the correlation matrix, which includes correlation coefficients such as 0.21 and 0.16 when checking for correlation with count, shows positive, linear, and very weak relationships.
-Visualizations such as @fig-military-expenditure-asia and @fig-iron-production-asia demonstrate this well; the linear regressions are positive, but they fit the data very poorly.
-When using a binary variable to differentiate between “high” and “low” military expenditure and iron production, a similar pattern of statistical insignificance emerges.
-In general, with such a skewed dataset with the median being equal to the low, models will not fit well at all.
-
-The histogram @fig-visual-milex-class comparing incident count and binary categories of `milex_class` and `irst_class` reflects this as well.
-Although the proportion of highly militarized countries in each bin increases as the number of conflicts increases, the difference is small.
-In each bin (i.e., how many conflicts entered), there are similar amounts of countries with “low” and “high” military expenditure.
-The same occurs for iron production in @fig-visual-irst-class.
-
-So far, our visualizations have given a surface-level insight regarding the influence of material capabilities and military expenditures.
-To quantify these observations, we decided to employ bootstrapping and hypothesis testing.
-Bootstrapping to find a difference in medians was not a useful exercise; the medians of both the “low” group and the “high” group for `milex_class` and `irst_class` were 1.
-This points to a further bolstering of the claim that there is no correlation between either metric and number of conflicts entered.
-Using hypothesis testing, the null hypotheses read as follows: “There is no correlation between military expenditures and number of conflicts entered” and “There is no correlation between iron production and number of conflicts entered.” For military expenditures, the confidence interval for the difference in means of number of conflicts is \[-0.70.
-0.64\] with a p-value of 0.998, and for iron production, the confidence interval for the difference in means of number of conflicts is \[-0.65, 0.68\] with a p-value of 0.998.
-These staggering p-values combined with confidence intervals centered around 0 confirm the null hypothesis, or the lack of correlation between the metrics and number of conflicts, with extreme confidence.
-As a result, we reject the alternative hypotheses that there are correlations between military expenditures, iron production, and number of conflicts.
-The p-values and confidence intervals provide a useful metric to quantify the lack of correlation, and confidently answer the research question with a resounding no – there is no relationship.
-
-## Discussion
-
-In this section you’ll include a summary of what you have learned about your research question along with statistical arguments supporting your conclusions.
-In addition, discuss the limitations of your analysis and provide suggestions on ways the analysis could be improved.
-Any potential issues pertaining to the reliability and validity of your data and appropriateness of the statistical analysis should also be discussed here.
-Lastly, this section will include ideas for future work.
-
-
-
 #### Correlation between National Material Capabilities and Total Incident Counts
 
 ```{r}
@@ -424,7 +369,7 @@ ggcorrplot(cor_matrix,
 #Source: Chatgpt Q:"How to visualize correlation between different variables?"
 ```
 
-### Correlation specifically between Total Incident Counts and Material Capabilities
+#### Correlation specifically between Total Incident Counts and Material Capabilities
 
 ```{r}
 #| label: tbl-cor-table
@@ -441,7 +386,7 @@ asia_cor_table |>
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 ```
 
-# Visualizing Incident Count and Military Capablities in Asia
+#### Visualizing Incident Count and Military Capablities in Asia
 
 To identify the relationship between conflict frequency and military capabilities we decided to do a series of visualizations using scatter plots in order to uncovering patterns, clusters, and outliers.
 Focusing on the Military Expenditures and Iron production as they had the highest correlation within the set.
@@ -483,8 +428,7 @@ asia |>
   )
 ```
 
-## Classifying Asian Countries by Military Expenditures and Iron + Steel Production
-
+<!--- classifying -->
 ```{r}
 #| label: mutate-data 
 
@@ -502,7 +446,7 @@ asia <- asia |>
 )
 ```
 
-### Visualization for Military Expenditure
+#### Visualization for Military Expenditure
 
 ```{r}
 #| label: fig-visual-milex-class
@@ -524,7 +468,7 @@ asia |>
 
 ```
 
-### Visualization for Iron and Steel Production
+#### Visualization for Iron and Steel Production
 
 ```{r}
 #| label: fig-visual-irst-class
@@ -546,9 +490,55 @@ asia |>
 
 ```
 
-# Hypothesis Exploration
+## Methodology
 
-## Bootstrap Test for Military expenditure and Conflict Frequency
+Our project explored the relationship between military conflicts and various factors, including military expenditure, personnel, iron and steel production, and national capabilities.
+Given the extensive dataset, which covered numerous countries, we initially faced challenges regarding clarity.
+To streamline our analysis, we narrowed the scope to Asia, which emerged as the continent with the highest conflict frequency during our initial exploration.
+
+In preparing the data, we addressed several challenges.
+Variables irrelevant to our analysis were removed, and we were forced to correct unique country codes that didn’t align with standard naming conventions.
+These codes were manually mapped to their respective countries, and we classified nations by continent, allowing us to focus solely on Asia.
+
+Using this cleaned dataframe, we created visualizations to identify patterns in conflict frequency, iron production, and military strength metrics.
+For example, we examined the periods with the highest levels of conflict and iron production and determined which countries contributed most to these metrics.
+We also investigated correlations between national capabilities, such as military expenditure and conflict frequency, to identify potential predictors.
+
+For our analysis, we utilized several key R libraries to streamline data manipulation, modeling, and visualization.
+The tidyverse suite was useful in providing tools for filtering and summarizing data and ggplot for crafting visualizations.
+We used readxl to import Excel datasets into R.
+The countrycode package helped map country codes from the dataset to their corresponding country names, helping us to group data by continent and eventually determine the focus on Asian countries.
+For modeling and diagnostics, we relied on tidymodels for regression analysis.
+
+Combining data preparation, visualization, statistical analysis, and modeling, we found meaningful trends and relationships that highlight how national capabilities influence military conflicts different countries in Asia.
+This comprehensive approach allowed us to derive insights into the multifaceted drivers of geopolitics.
+
+## Results
+
+All aspects of our analysis point to an essentially-nonexistent correlation between the number of conflicts and any of the variables in our dataset.
+When including all countries, the correlation matrix, which includes correlation coefficients such as 0.21 and 0.16 when checking for correlation with count, shows positive, linear, and very weak relationships.
+Visualizations such as @fig-military-expenditure-asia and @fig-iron-production-asia demonstrate this well; the linear regressions are positive, but they fit the data very poorly.
+When using a binary variable to differentiate between “high” and “low” military expenditure and iron production, a similar pattern of statistical insignificance emerges.
+In general, with such a skewed dataset with the median being equal to the low, models will not fit well at all.
+
+The histogram @fig-visual-milex-class comparing incident count and binary categories of `milex_class` and `irst_class` reflects this as well.
+Although the proportion of highly militarized countries in each bin increases as the number of conflicts increases, the difference is small.
+In each bin (i.e., how many conflicts entered), there are similar amounts of countries with “low” and “high” military expenditure.
+The same occurs for iron production in @fig-visual-irst-class.
+
+So far, our visualizations have given a surface-level insight regarding the influence of material capabilities and military expenditures.
+To quantify these observations, we decided to employ bootstrapping and hypothesis testing.
+Bootstrapping to find a difference in medians was not a useful exercise; the medians of both the “low” group and the “high” group for `milex_class` and `irst_class` were 1.
+This points to a further bolstering of the claim that there is no correlation between either metric and number of conflicts entered.
+Using hypothesis testing, the null hypotheses read as follows: “There is no correlation between military expenditures and number of conflicts entered” and “There is no correlation between iron production and number of conflicts entered.” For military expenditures, the confidence interval for the difference in means of number of conflicts is \[-0.70.
+0.64\] with a p-value of 0.998, and for iron production, the confidence interval for the difference in means of number of conflicts is \[-0.65, 0.68\] with a p-value of 0.998.
+These staggering p-values combined with confidence intervals centered around 0 confirm the null hypothesis, or the lack of correlation between the metrics and number of conflicts, with extreme confidence.
+As a result, we reject the alternative hypotheses that there are correlations between military expenditures, iron production, and number of conflicts.
+The p-values and confidence intervals provide a useful metric to quantify the lack of correlation, and confidently answer the research question with a resounding no – there is no relationship.
+
+### Hypothesis Exploration
+
+#### Bootstrap Test for Military expenditure and Conflict Frequency
 
 ```{r}
 #| label: fig-explorea
@@ -598,7 +588,7 @@ bootstrap_medians_avg_milex |>
   kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))  
 ```
 
-## Bootstrap Test for Iron Production and Conflict Frequency
+#### Bootstrap Test for Iron Production and Conflict Frequency
 
 ```{r}
 #| label: fig-exploreb
@@ -644,7 +634,7 @@ bootstrap_medians_avg_irst |>
   kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))  
 ```
 
-## Hypothesis Test
+#### Hypothesis Test
 
 The shows \*\*\*, supports our hypothesis
 
@@ -709,3 +699,15 @@ null_distribution_irst |>
   knitr::kable() |> 
   kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))
 ```
+
+## Discussion
+
+In this section you’ll include a summary of what you have learned about your research question along with statistical arguments supporting your conclusions.
+In addition, discuss the limitations of your analysis and provide suggestions on ways the analysis could be improved.
+Any potential issues pertaining to the reliability and validity of your data and appropriateness of the statistical analysis should also be discussed here.
+Lastly, this section will include ideas for future work.
+
+
+
+
+
