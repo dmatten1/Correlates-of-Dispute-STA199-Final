@@ -349,7 +349,6 @@ asia <- asia |>
 asia |>
   select(milex, milper, irst, cinc, count) |>
   cor(use = "complete.obs")
-# calc correlations; no missing val accounted 
 
 selected_vars <- asia |>
   select(count, milex, milper, irst, cinc)
@@ -427,7 +426,8 @@ asia |>
     y = "Total Incident Count"
   )
 ```
-## Classifying Asian Countries by Military Expenditures and Iron + Steel Production 
+
+## Classifying Asian Countries by Military Expenditures and Iron + Steel Production
 
 ```{r}
 #| label: mutate-data 
@@ -448,7 +448,7 @@ asia <- asia |>
 
 ## Visualization of Iron + Steel Production and Military Expenditure Classes
 
-## Visualization for Military Expenditure 
+## Visualization for Military Expenditure
 
 ```{r}
 #| label: visual-milex-class
@@ -469,7 +469,7 @@ asia |>
 
 ```
 
-## Visualization for Iron and Steel Production 
+## Visualization for Iron and Steel Production
 
 ```{r}
 #| label: visual-irst-class
@@ -488,227 +488,6 @@ asia |>
   theme_minimal() +
   theme(legend.position = "bottom")
 
-```
-
-
-Countries in Asia that lead in Incident Count and Iron Production
-
-```{r}
-#| label: top-countries-conflict-irona
-#| message: false
-#| warning: false
-#| layout-ncol: 2
-
-top_15_countries_in_asia <- asia |>
-  group_by(stabb) |>
-  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  arrange(desc(total_conflict)) |>
-  head(15) |>
-  pull(stabb)
-asia_15 <- asia |>
-  filter(stabb %in% top_15_countries_in_asia)
-
-low_15_countries_in_asia <- asia |>
-  group_by(stabb) |>
-  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  arrange(total_conflict) |>
-  head(15) |>
-  pull(stabb)
-asia_low_15 <- asia |>
-  filter(stabb %in% low_15_countries_in_asia)
-
-#asia_15 |>
-  #group_by(stabb) |>
-  #summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  #arrange(desc(total_conflict))
-
-
-asia_15 |>
-  group_by(stabb) |>
-  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  ggplot(aes(x = reorder(stabb, -total_conflict), y = total_conflict)) +
-  geom_col(fill = "steelblue") +
-  labs(
-    title = "Conflict Incidents by Country in Asia",
-    x = "Country",
-    y = "Total Conflict Incidents"
-  ) +
-  theme_minimal()
-#asia_15 |>
-  #group_by(stabb) |>
-  #summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
-  #arrange(desc(total_iron_production))
-
-asia_15 |>
-  group_by(stabb) |>
-  summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
-  ggplot(aes(x = reorder(stabb, -total_iron_production), y = total_iron_production)) +
-  geom_col(fill = "steelblue") +
-  labs(
-    title = "Iron Production by Country in Asia",
-    x = "Country",
-    y = "Total Iron Production"
-  ) +
-  theme_minimal()
-```
-
-Countries in Asia that lead in Incident Count and Military expenditure (Milper).
-
-```{r}
-#| label: top-countries-conflict-ironb
-#| message: false
-#| warning: false
-#| layout-ncol: 2
-
-top_15_countries_in_asia <- asia |>
-  group_by(stabb) |>
-  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  arrange(desc(total_conflict)) |>
-  head(15) |>
-  pull(stabb)
-asia_15 <- asia |>
-  filter(stabb %in% top_15_countries_in_asia)
-
-low_15_countries_in_asia <- asia |>
-  group_by(stabb) |>
-  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  arrange(total_conflict) |>
-  head(15) |>
-  pull(stabb)
-asia_low_15 <- asia |>
-  filter(stabb %in% low_15_countries_in_asia)
-
-#asia_15 |>
-  #group_by(stabb) |>
-  #summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  #arrange(desc(total_conflict))
-
-
-asia_15 |>
-  group_by(stabb) |>
-  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  ggplot(aes(x = reorder(stabb, -total_conflict), y = total_conflict)) +
-  geom_col(fill = "steelblue") +
-  labs(
-    title = "Conflict Incidents by Country in Asia",
-    x = "Country",
-    y = "Total Conflict Incidents"
-  ) +
-  theme_minimal()
-
-
-#asia_15 |>
-  #group_by(stabb) |>
-  #summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
-  #arrange(desc(total_iron_production))
-
-asia_15 |>
-  group_by(stabb) |>
-  summarize(total_milex = sum(milex, na.rm = TRUE)) |>
-  ggplot(aes(x = reorder(stabb, -total_milex), y = total_milex)) +
-  geom_col(fill = "steelblue") +
-  labs(
-    title = "Military Expenditure by Country in Asia",
-    x = "Country",
-    y = "Total Military Expenditure"
-  ) +
-  theme_minimal()
-
-
-```
-
-Countries in Asia that lead in Incident Count and Military personnel (milper).
-
-```{r}
-#| label: top-countries-conflict-iron
-#| message: false
-#| warning: false
-#| layout-ncol: 2
-
-top_15_countries_in_asia <- asia |>
-  group_by(stabb) |>
-  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  arrange(desc(total_conflict)) |>
-  head(15) |>
-  pull(stabb)
-asia_15 <- asia |>
-  filter(stabb %in% top_15_countries_in_asia)
-
-low_15_countries_in_asia <- asia |>
-  group_by(stabb) |>
-  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  arrange(total_conflict) |>
-  head(15) |>
-  pull(stabb)
-asia_low_15 <- asia |>
-  filter(stabb %in% low_15_countries_in_asia)
-
-#asia_15 |>
-  #group_by(stabb) |>
-  #summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  #arrange(desc(total_conflict))
-
-
-asia_15 |>
-  group_by(stabb) |>
-  summarize(total_conflict = sum(count, na.rm = TRUE)) |>
-  ggplot(aes(x = reorder(stabb, -total_conflict), y = total_conflict)) +
-  geom_col(fill = "steelblue") +
-  labs(
-    title = "Conflict Incidents by Country in Asia",
-    x = "Country",
-    y = "Total Conflict Incidents"
-  ) +
-  theme_minimal()
-
-
-#asia_15 |>
-  #group_by(stabb) |>
-  #summarize(total_iron_production = sum(irst, na.rm = TRUE)) |>
-  #arrange(desc(total_iron_production))
-
-asia_15 |>
-  group_by(stabb) |>
-  summarize(total_milper = sum(milper, na.rm = TRUE)) |>
-  ggplot(aes(x = reorder(stabb, -total_milper), y = total_milper)) +
-  geom_col(fill = "steelblue") +
-  labs(
-    title = "Military Personnel by Country in Asia",
-    x = "Country",
-    y = "Total Military Personnel"
-  ) +
-  theme_minimal()
-
-
-```
-
-```{r}
-#| label: top-low-countries
-top_5_countries_asia <- asia_15 |>
-  group_by(Country) |>
-  summarize(
-    total_count = sum(count),
-    total_irst = sum(irst),
-    total_milper = sum(milper),
-    total_milex = sum(milex)
-  ) |>
-  arrange(desc(total_count)) |>
-  head(5)
-
-top_5_countries_asia
-
-low_5_countries_asia <- asia_low_15 |>
-  group_by(Country) |>
-  summarize(
-    total_count = sum(count),
-    total_irst = sum(irst),
-    total_milper = sum(milper),
-    total_milex = sum(milex)
-  ) |>
-  arrange(total_count) |>
-  head(5)
-
-low_5_countries_asia
 ```
 
 # Explore
@@ -798,6 +577,10 @@ Instead, the analysis suggests that higher military expenditures might correlate
 #| message: false
 #| warning: false
 
+#milex: Military expenditure.
+#milper: Military personnel
+#irst: Iron and Steel production
+
 set.seed(44) 
 
 # high vs. low military expenditure
@@ -822,9 +605,9 @@ bootstrap_df <- tibble(boot_diff = bootstrap_means)
 ggplot(bootstrap_df, aes(x = boot_diff)) +
   geom_histogram(binwidth = 0.5, fill = "steelblue", color = "white") +
   labs(
-    title = "Bootstrapped Mean Differences in Conflict Frequency (High vs Low Milex)",
-    x = "Difference in Mean Conflict Frequency",
-    y = "Frequency"
+    title = "Do High Military Expenditures Correlate with Conflict Frequency?",
+    x = "Military Expenditure (milex)",
+    y = "Average Number of Armed Conflicts"
   ) + 
   theme_minimal()
 
@@ -862,9 +645,9 @@ bootstrap_df <- tibble(boot_diff = bootstrap_means)
 ggplot(bootstrap_df, aes(x = boot_diff)) +
   geom_histogram(binwidth = 0.5, fill = "steelblue", color = "white") +
   labs(
-    title = "Bootstrapped Mean Differences in Conflict Frequency (High vs Low  Military personnel)",
-    x = "Difference in Mean Conflict Frequency",
-    y = "Frequency"
+    title = "Does High Military Personnel Correlate with Conflict Frequency?",
+    x = "Military Personnel (milper)",
+    y = "Average Number of Armed Conflicts"
   ) + 
   theme_minimal()
 
@@ -902,11 +685,12 @@ bootstrap_df <- tibble(boot_diff = bootstrap_means)
 ggplot(bootstrap_df, aes(x = boot_diff)) +
   geom_histogram(binwidth = 0.5, fill = "steelblue", color = "white") +
   labs(
-    title = "Bootstrapped Mean Differences in Conflict Frequency (High vs Low  Military personnel)",
-    x = "Difference in Mean Conflict Frequency",
-    y = "Frequency"
+    title = "Does High Iron and Steel Production Correlate with Conflict Frequency?",
+    x = "Iron and Steel Production (irst)",
+    y = "Average Number of Armed Conflicts"
   ) + 
   theme_minimal()
+
 
 ```
 
