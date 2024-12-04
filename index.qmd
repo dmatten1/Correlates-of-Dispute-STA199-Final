@@ -312,11 +312,13 @@ We were interested in what periods were their heightened levels of both conflict
 
 ```{r}
 #| label: fig-period-conflicts
-#| fig-cap: "Trends in Conflict and Iron Production"
+#| layout-ncol: 2
+#| fig-cap: 
+#|   - "Trends in Conflict Incidents in Asia"
+#|   - "Trends in Iron and steel production"
 #| message: false
 #| warning: false
-#| echo: false
-#| layout-ncol: 2
+
 
 #fliter by asia 
 asia <- country_join_continents |>
@@ -375,6 +377,7 @@ This matrix provides a foundation understanding of how key material capabilities
 #| message: false
 #| warning: false
 #| echo: false
+
 
 #milex: Military expenditure.
 #milper: Military personnel
@@ -447,9 +450,7 @@ a\.
 #| label: fig-military-expenditure-asia 
 #| fig-cap: "Total Incident Count vs. Military Expenditures"
 #| message: false
-#| echo: false
 #| warning: false
-
 
 asia |>
   ggplot(aes(x = milex, y = count)) + 
@@ -472,7 +473,6 @@ b\.
 #| label: fig-iron-production-asia 
 #| fig-cap: "Total Incident Count vs. Iron and Steel Production" 
 #| message: false
-#| echo: false
 #| warning: false
 
 asia |>
