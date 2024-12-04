@@ -511,8 +511,6 @@ asia <- asia |>
 )
 ```
 
-## Visualization of Iron + Steel Production and Military Expenditure Classes
-
 ### Visualization for Military Expenditure
 
 By grouping countries into "high" and "low" military expenditure classes (relative to the median), the visualization explores whether military spending is associated with the frequency of incidents. Using a histogram to properly demonstrate how spending levels relate to incident distribution. 
@@ -711,28 +709,47 @@ null_distribution_milex <- asia_hypothesis |>
   hypothesize(null = "independence") |>
   generate(reps = 1000, type = "permute") |>
   calculate(stat = "diff in means", order = c("high", "low"))
+
 observed_median_milex <- asia_hypothesis |>
   specify(response = count, explanatory = milex_class) |>
   calculate(stat = "diff in medians", order = c("high", "low")) |>
   pull(stat)
+
 null_distribution_milex |>
-  get_p_value(obs_stat = observed_median_milex, direction = "two-sided")
+  get_p_value(obs_stat = observed_median_milex, direction = "two-sided") |>
+  rename("p-value of milex" = "p_value") |>
+  knitr::kable() |>
+  kable_styling(full_width = FALSE, position = "left", bootstrap_options = c("striped", "hover", "condensed"))
+
 null_distribution_milex |>
-  get_confidence_interval()
+  get_confidence_interval()  |>
+  rename("lower_ci of milex" = "lower_ci", "upper_ci of milex" = "upper_ci") |>
+  knitr::kable() |> 
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))
 
 null_distribution_irst <- asia_hypothesis |>
   specify(response = count, explanatory = irst_class) |>
   hypothesize(null = "independence") |>
   generate(reps = 1000, type = "permute") |>
   calculate(stat = "diff in means", order = c("high", "low"))
+
 observed_median_irst <- asia_hypothesis |>
   specify(response = count, explanatory = irst_class) |>
   calculate(stat = "diff in medians", order = c("high", "low")) |>
   pull(stat)
+
 null_distribution_irst |>
-  get_p_value(obs_stat = observed_median_irst, direction = "two-sided")
+  get_p_value(obs_stat = observed_median_irst, direction = "two-sided") |>
+  rename("p-value of irst" = "p_value") |>
+  knitr::kable() |>
+  kable_styling(full_width = FALSE, position = "left", bootstrap_options = c("striped", "hover", "condensed"))
+
+
 null_distribution_irst |>
-  get_confidence_interval()
+  get_confidence_interval() |>
+  rename("lower_ci of irst" = "lower_ci", "upper_ci of irst" = "upper_ci") |>
+  knitr::kable() |> 
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))
 ```
 
 
