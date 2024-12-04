@@ -343,6 +343,11 @@ asia |>
 #cinc: Composite Index of National Capability.
 #count: Frequency of conflicts.
 
+asia <- asia |>
+  mutate(count = as.numeric(count)) |>
+  filter(!is.na(count)) |>
+  ungroup()
+
 asia |>
   select(milex, milper, irst, cinc, count) |>
   cor(use = "complete.obs")
@@ -360,11 +365,11 @@ ggcorrplot(cor_matrix,
            title = "Correlation of Material Capabilities and Conflict Frequency")
 
 # Hypothesis Testing: Correlation significance
-cor_test_results <- map_df(
-  c("milex", "milper", "irst", "cinc"),
-  ~ tidy(cor.test(asia_15$count, asia_15[[.x]], use = "pairwise.complete.obs")),
-  .id = "variable"
-)
+# cor_test_results <- map_df(
+#   c("milex", "milper", "irst", "cinc"),
+#   ~ tidy(cor.test(asia_15$count, asia_15[[.x]], use = "pairwise.complete.obs")),
+#   .id = "variable"
+# )
 
 # cor_test_results
  
