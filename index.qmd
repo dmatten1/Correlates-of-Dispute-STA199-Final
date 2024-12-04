@@ -708,11 +708,11 @@ bootstrap_medians_avg_irst |>
 The shows \*\*\*, supports our hypothesis
 
 $$
-Null~H_{0}: μ_{lorem} = μ_{lorem}: no
+H_{0}: μ_{sample} = μ_{bootstrap}: no
 $$
 
 $$
-Alternative~H_{A}: μ_{lorem} ≠ μ_{lorem}: yes
+H_{A}: μ_{sample} ≠ μ_{bootstrap}: yes
 $$
 
 ```{r}
