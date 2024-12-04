@@ -629,6 +629,14 @@ ggplot(bootstrap_df, aes(x = boot_diff)) +
 ## Hypothesis Test 
 The shows ***, supports our hypothesis 
 
+$$
+Null~H_{0}: μ_{lorem} = μ_{lorem}: no
+$$
+
+$$
+Alternative~H_{A}: μ_{lorem} ≠ μ_{lorem}: yes
+$$
+
 
 
 ```{r}
@@ -784,7 +792,7 @@ visual by milper
 ```
 
 
-# Iron move this down 
+# Iron( move this down // delete?
 
 This scatterplot shows the relationship between iron and steel production (in thousands of tons) and the incident count across countries, categorized by continent.
 The data suggests that most countries with low iron and steel production have a wide range of incident counts, while countries with high production tend to have fewer incidents, concentrated at lower counts.
