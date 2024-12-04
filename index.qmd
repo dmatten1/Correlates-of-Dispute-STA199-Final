@@ -2,8 +2,9 @@
 title: Influence of National Resources on Country Conflict
 subtitle: Report
 execute:
-  echo: true
+  echo: false
 ---
+
 ```{r}
 #| label: load-pkgs
 #| message: false
@@ -41,7 +42,7 @@ Understanding how changes in a nation’s military capabilities — such as mili
 This research aligns with a broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts.
 In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations.
 
-The data used in this analysis comes from the Correlates of War (COW) project, which is widely used by political scientists. 
+The data used in this analysis comes from the Correlates of War (COW) project, which is widely used by political scientists.
 This project consists of two datasets that apply to our research:
 
 **National Material Capabilities** (Dataset 1): This dataset includes data on military power indicators such as military expenditures, military personnel, energy consumption, and total population for various countries.
@@ -97,11 +98,26 @@ This comprehensive approach allowed us to derive insights into the multifaceted 
 
 ## Results
 
-All aspects of our analysis point to an essentially-nonexistent correlation between the number of conflicts and any of the variables in our dataset. When including all countries, the correlation matrix, which includes correlation coefficients such as 0.21 and 0.16 when checking for correlation with count, shows positive, linear, and very weak relationships. Visualizations such as @fig-military-expenditure-asia and @fig-iron-production-asia demonstrate this well; the linear regressions are positive, but they fit the data very poorly. When using a binary variable to differentiate between “high” and “low” military expenditure and iron production, a similar pattern of statistical insignificance emerges. In general, with such a skewed dataset with the median being equal to the low, models will not fit well at all.
+All aspects of our analysis point to an essentially-nonexistent correlation between the number of conflicts and any of the variables in our dataset.
+When including all countries, the correlation matrix, which includes correlation coefficients such as 0.21 and 0.16 when checking for correlation with count, shows positive, linear, and very weak relationships.
+Visualizations such as @fig-military-expenditure-asia and @fig-iron-production-asia demonstrate this well; the linear regressions are positive, but they fit the data very poorly.
+When using a binary variable to differentiate between “high” and “low” military expenditure and iron production, a similar pattern of statistical insignificance emerges.
+In general, with such a skewed dataset with the median being equal to the low, models will not fit well at all.
 
-The histogram @fig-visual-milex-class comparing incident count and binary categories of `milex_class` and `irst_class` reflects this as well. Although the proportion of highly militarized countries in each bin increases as the number of conflicts increases, the difference is small. In each bin (i.e., how many conflicts entered), there are similar amounts of countries with “low” and “high” military expenditure. The same occurs for iron production in @fig-visual-irst-class. 
+The histogram @fig-visual-milex-class comparing incident count and binary categories of `milex_class` and `irst_class` reflects this as well.
+Although the proportion of highly militarized countries in each bin increases as the number of conflicts increases, the difference is small.
+In each bin (i.e., how many conflicts entered), there are similar amounts of countries with “low” and “high” military expenditure.
+The same occurs for iron production in @fig-visual-irst-class.
 
-So far, our visualizations have given a surface-level insight regarding the influence of material capabilities and military expenditures. To quantify these observations, we decided to employ bootstrapping and hypothesis testing. Bootstrapping to find a difference in medians was not a useful exercise; the medians of both the “low” group and the “high” group for `milex_class` and `irst_class` were 1. This points to a further bolstering of the claim that there is no correlation between either metric and number of conflicts entered. Using hypothesis testing, the null hypotheses read as follows: “There is no correlation between military expenditures and number of conflicts entered” and “There is no correlation between iron production and number of conflicts entered.” For military expenditures, the confidence interval for the difference in means of number of conflicts is [-0.70. 0.64] with a p-value of 0.998, and for iron production, the confidence interval for the difference in means of number of conflicts is [-0.65, 0.68] with a p-value of 0.998. These staggering p-values combined with confidence intervals centered around 0 confirm the null hypothesis, or the lack of correlation between the metrics and number of conflicts, with extreme confidence. As a result, we reject the alternative hypotheses that there are correlations between military expenditures, iron production, and number of conflicts. The p-values and confidence intervals provide a useful metric to quantify the lack of correlation, and confidently answer the research question with a resounding no – there is no relationship. 
+So far, our visualizations have given a surface-level insight regarding the influence of material capabilities and military expenditures.
+To quantify these observations, we decided to employ bootstrapping and hypothesis testing.
+Bootstrapping to find a difference in medians was not a useful exercise; the medians of both the “low” group and the “high” group for `milex_class` and `irst_class` were 1.
+This points to a further bolstering of the claim that there is no correlation between either metric and number of conflicts entered.
+Using hypothesis testing, the null hypotheses read as follows: “There is no correlation between military expenditures and number of conflicts entered” and “There is no correlation between iron production and number of conflicts entered.” For military expenditures, the confidence interval for the difference in means of number of conflicts is \[-0.70.
+0.64\] with a p-value of 0.998, and for iron production, the confidence interval for the difference in means of number of conflicts is \[-0.65, 0.68\] with a p-value of 0.998.
+These staggering p-values combined with confidence intervals centered around 0 confirm the null hypothesis, or the lack of correlation between the metrics and number of conflicts, with extreme confidence.
+As a result, we reject the alternative hypotheses that there are correlations between military expenditures, iron production, and number of conflicts.
+The p-values and confidence intervals provide a useful metric to quantify the lack of correlation, and confidently answer the research question with a resounding no – there is no relationship.
 
 ## Discussion
 
