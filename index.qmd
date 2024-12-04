@@ -653,19 +653,19 @@ set.seed(44)
 threshold <- median(asia$irst, na.rm = TRUE) 
 #  median as a threshold as it rovides a more accurate threshold by representing the central tendency of the data
 
-bootstrap_means <- replicate(1000, {
+bootstrap_medians <- replicate(1000, {
   sampled_data <- asia |>
     sample_frac(replace = TRUE) 
   # Resample with replacement
   
-  means <- sampled_data |>
+  medians <- sampled_data |>
     group_by(irst_class) |>
-    summarize(mean_count = mean(count, na.rm = TRUE))
+    summarize(median_count = median(count, na.rm = TRUE))
   
-  -diff(means$mean_count) # diff in mean conflict frequency between High and Low `milex`
+  -diff(medians$median_count) # diff in mean conflict frequency between High and Low `milex`
 })
 
-bootstrap_df <- tibble(boot_diff = bootstrap_means)
+bootstrap_df <- tibble(boot_diff = bootstrap_medians)
 ggplot(bootstrap_df, aes(x = boot_diff)) +
   geom_histogram(binwidth = 0.5, fill = "steelblue", color = "white") +
   labs(
@@ -701,12 +701,12 @@ null_distribution_milex <- asia_hypothesis |>
   hypothesize(null = "independence") |>
   generate(reps = 1000, type = "permute") |>
   calculate(stat = "diff in means", order = c("high", "low"))
-observed_mean_milex <- asia_hypothesis |>
+observed_median_milex <- asia_hypothesis |>
   specify(response = count, explanatory = milex_class) |>
-  calculate(stat = "diff in means", order = c("high", "low")) |>
+  calculate(stat = "diff in medians", order = c("high", "low")) |>
   pull(stat)
 null_distribution_milex |>
-  get_p_value(obs_stat = observed_mean_milex, direction = "two-sided")
+  get_p_value(obs_stat = observed_median_milex, direction = "two-sided")
 null_distribution_milex |>
   get_confidence_interval()
 
@@ -715,12 +715,12 @@ null_distribution_irst <- asia_hypothesis |>
   hypothesize(null = "independence") |>
   generate(reps = 1000, type = "permute") |>
   calculate(stat = "diff in means", order = c("high", "low"))
-observed_mean_irst <- asia_hypothesis |>
+observed_median_irst <- asia_hypothesis |>
   specify(response = count, explanatory = irst_class) |>
-  calculate(stat = "diff in means", order = c("high", "low")) |>
+  calculate(stat = "diff in medians", order = c("high", "low")) |>
   pull(stat)
 null_distribution_irst |>
-  get_p_value(obs_stat = observed_mean_irst, direction = "two-sided")
+  get_p_value(obs_stat = observed_median_irst, direction = "two-sided")
 null_distribution_irst |>
   get_confidence_interval()
 ```
