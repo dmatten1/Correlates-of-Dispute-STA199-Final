@@ -435,12 +435,12 @@ asia |>
 asia <- asia |> 
   mutate(
     milex_class = case_when(
-      milex < quantile(milex, 0.50, na.rm = TRUE) ~ "low",
+      milex < median(milex, na.rm = TRUE) ~ "low",
       .default = "high"
     ),
     
     irst_class = case_when(
-      irst < quantile(irst, 0.50, na.rm = TRUE) ~ "low",
+      irst < median(irst, na.rm = TRUE) ~ "low",
       .default = "high"
   )
 )
@@ -800,11 +800,11 @@ Instead, the analysis suggests that higher military expenditures might correlate
 
 set.seed(44) 
 
-# high vs. low military expenditure
-threshold <- median(asia$milex, na.rm = TRUE) 
-#  median as a threshold as it rovides a more accurate threshold by representing the central tendency of the data
-asia <- asia |>
-  mutate(milex_level = ifelse(milex > threshold, "High", "Low"))
+# # high vs. low military expenditure
+# threshold <- median(asia$milex, na.rm = TRUE) 
+# #  median as a threshold as it rovides a more accurate threshold by representing the central tendency of the data
+# asia <- asia |>
+#   mutate(milex_level = ifelse(milex > threshold, "High", "Low"))
 
 bootstrap_means <- replicate(1000, {
   sampled_data <- asia |>
@@ -812,7 +812,7 @@ bootstrap_means <- replicate(1000, {
   # Resample with replacement
   
   means <- sampled_data |>
-    group_by(milex_level) |>
+    group_by(milex_class) |>
     summarize(mean_count = mean(count, na.rm = TRUE))
   
   -diff(means$mean_count) # diff in mean conflict frequency between High and Low `milex`
@@ -1026,13 +1026,13 @@ asia_hypothesis <- asia
 set.seed(44)
 
 null_distribution_milex <- asia_hypothesis |>
-  specify(response = count, explanatory = milex_level) |>
+  specify(response = count, explanatory = milex_class) |>
   hypothesize(null = "independence") |>
-  generate(reps = 100, type = "permute") |>
-  calculate(stat = "diff in means", order = c("High", "Low"))
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in means", order = c("high", "low"))
 observed_mean_milex <- asia_hypothesis |>
-  specify(response = count, explanatory = milex_level) |>
-  calculate(stat = "diff in means", order = c("High", "Low")) |>
+  specify(response = count, explanatory = milex_class) |>
+  calculate(stat = "diff in means", order = c("high", "low")) |>
   pull(stat)
 null_distribution_milex |>
   get_p_value(obs_stat = observed_mean_milex, direction = "two-sided")
@@ -1040,13 +1040,13 @@ null_distribution_milex |>
   get_confidence_interval()
 
 null_distribution_irst <- asia_hypothesis |>
-  specify(response = count, explanatory = irst_level) |>
+  specify(response = count, explanatory = irst_class) |>
   hypothesize(null = "independence") |>
-  generate(reps = 100, type = "permute") |>
-  calculate(stat = "diff in means", order = c("High", "Low"))
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in means", order = c("high", "low"))
 observed_mean_irst <- asia_hypothesis |>
-  specify(response = count, explanatory = irst_level) |>
-  calculate(stat = "diff in means", order = c("High", "Low")) |>
+  specify(response = count, explanatory = irst_class) |>
+  calculate(stat = "diff in means", order = c("high", "low")) |>
   pull(stat)
 null_distribution_irst |>
   get_p_value(obs_stat = observed_mean_irst, direction = "two-sided")
