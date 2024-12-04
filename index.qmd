@@ -21,20 +21,14 @@ This research aligns with a broader theme of examining how data can explain poli
 The data used in this analysis comes from the Correlates of War (COW) project, which is widely used by political scientists.
 This project consists of two datasets that apply to our research:
 
-\bNational \bMaterial \bCapabilities (Dataset 1): This dataset includes data on military power indicators such as military expenditures, military personnel, energy consumption, and total population for various countries.
+**National Material Capabilities** (Dataset 1): This dataset includes data on military power indicators such as military expenditures, military personnel, energy consumption, and total population for various countries.
 The data is collected annually, providing a comprehensive look at the material capabilities of each nation over time.
 
-Militarized Interstate Disputes (Dataset 2): This dataset records instances where states threaten, display, or use force against one another.
+**Militarized Interstate Disputes** (Dataset 2): This dataset records instances where states threaten, display, or use force against one another.
 The data includes details such as the start and end dates of conflicts, number of combatants, casualties, and the outcomes of these disputes.
 This dataset spans from 1816 to 2014 and provides insight into the frequency and intensity of conflicts between countries.
 
 ## Methodology
-
-This section includes a brief description of your analysis process.
-Explain the reasoning for the types of analyses you do, exploratory, inferential, or modeling.
-If you’ve chosen to do inference, make sure to include a justification for why that inferential approach is appropriate.
-If you’ve chosen to do modeling, describe the model(s) you’re fitting, predictor variables considered for the model including any interactions.
-Additionally, show how you arrived at the final model by describing the model selection process, interactions considered, variable transformations (if needed), assessment of conditions and diagnostics, and any other relevant considerations that were part of the model fitting process.
 
 Our project explored the relationship between military conflicts and various factors, including military expenditure, personnel, iron and steel production, and national capabilities.
 Given the extensive dataset, which covered numerous countries, we initially faced challenges regarding clarity.
