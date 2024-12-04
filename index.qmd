@@ -8,6 +8,7 @@ execute:
 ```{r}
 #| label: load-pkgs
 #| message: false
+#| echo: false
 library(tidyverse)
 library(readxl)
 library(countrycode) 
@@ -58,6 +59,7 @@ This dataset spans from 1816 to 2014 and provides insight into the frequency and
 
 ```{r}
 #| label: tbl-dict
+#| echo: false
 #| tbl-cap: "Excerpt of Data Dictionary"
 
 
@@ -118,7 +120,8 @@ Lastly, this section will include ideas for future work.
 ## Cleaning Data
 
 ```{r}
-#| label: join-datasets
+#| label: taking-out-unnecessary-variables
+#| echo: false
 
 country_resource <- country_resource |>
   select(-ccode, -version)
@@ -128,6 +131,8 @@ country_conflict <- country_conflict |>
 ```
 
 ```{r}
+#| label: join-datasets
+#| echo: false
 country_join <- country_conflict |>
   full_join(country_resource, by = join_by(
       stabb == stateabb, 
@@ -143,6 +148,8 @@ number_of_disputes_df <- country_join |>
 ```
 
 ```{r}
+#| label: filter-dataset
+#| echo: false
 country_join_edit <- country_join |>
   left_join(number_of_disputes_df, by = c("stabb" = "stabb", "styear" = "styear"))
 
@@ -163,6 +170,7 @@ After a series of attempting visualizations we found that there were too many co
 #| label: continents 
 #| message: false
 #| warning: false
+#| echo: false
 
 # Manually addded countried from the COW dataset, COW codes do not match universal country codes so there were many NAs using the country code package to use the continents 
 
