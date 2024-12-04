@@ -287,6 +287,7 @@ In order to narrow our search for proper analyses we decided to focus on the con
 #| fig-cap: "Continent with the Highest Propensity for Conflict"
 #| message: false
 #| warning: false
+#| echo: false
 
 conflict_by_continent <- country_join_continents |>
   group_by(Continent) |>
@@ -314,6 +315,7 @@ We were interested in what periods were their heightened levels of both conflict
 #| fig-cap: "Trends in Conflict and Iron Production"
 #| message: false
 #| warning: false
+#| echo: false
 #| layout-ncol: 2
 
 #fliter by asia 
@@ -372,6 +374,7 @@ This matrix provides a foundation understanding of how key material capabilities
 #| fig-cap: "Correlation Matrix"
 #| message: false
 #| warning: false
+#| echo: false
 
 #milex: Military expenditure.
 #milper: Military personnel
@@ -417,6 +420,7 @@ ggcorrplot(cor_matrix,
 @tbl-cor-table further supports the matrix findings. 
 ```{r}
 #| label: tbl-cor-table
+#| echo: false
 #| tbl-cap: "Table Demonstrating Correlation between Total Incident Counts and Material Capabilities"
 
 asia_cor_table <- tibble(
