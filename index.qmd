@@ -447,7 +447,9 @@ a\.
 #| label: fig-military-expenditure-asia 
 #| fig-cap: "Total Incident Count vs. Military Expenditures"
 #| message: false
+#| echo: false
 #| warning: false
+
 
 asia |>
   ggplot(aes(x = milex, y = count)) + 
@@ -470,6 +472,7 @@ b\.
 #| label: fig-iron-production-asia 
 #| fig-cap: "Total Incident Count vs. Iron and Steel Production" 
 #| message: false
+#| echo: false
 #| warning: false
 
 asia |>
