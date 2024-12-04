@@ -317,6 +317,7 @@ We were interested in what periods were their heightened levels of both conflict
 #|   - "Trends in Conflict Incidents in Asia"
 #|   - "Trends in Iron and steel production"
 #| message: false
+#| echo: false
 #| warning: false
 
 
@@ -451,11 +452,12 @@ a\.
 #| fig-cap: "Total Incident Count vs. Military Expenditures"
 #| message: false
 #| warning: false
+#| echo: false
 
 asia |>
   ggplot(aes(x = milex, y = count)) + 
   geom_point() + 
-  geom_smooth(method = "lm") + 
+  geom_smooth() + 
   labs(
     title = "Total Incident Count vs. Military Expenditures",
     subtitle = "In Asian Countries from 1951 to 2016",
@@ -474,11 +476,12 @@ b\.
 #| fig-cap: "Total Incident Count vs. Iron and Steel Production" 
 #| message: false
 #| warning: false
+#| echo: false
 
 asia |>
   ggplot(aes(x = irst, y = count)) + 
   geom_point() + 
-  geom_smooth(method = "lm") + 
+  geom_smooth() + 
   labs(
     title = "Total Incident Count vs. Iron and Steel Production",
     subtitle = "In Asian Countries from 1951 to 2016",
@@ -493,7 +496,7 @@ We decided to highlight Key Dimensions of Military Power, classifying countries 
 
 ```{r}
 #| label: mutate-data 
-
+#| echo: false
 asia <- asia |> 
   mutate(
     milex_class = case_when(
@@ -524,6 +527,7 @@ Are countries with lower spending involved in fewer conflicts (lack of resources
 
 ```{r}
 #| label: fig-visual-milex-class
+#| echo: false
 #| fig-cap: "Distribution of conflicts for countries with different military spending levels."
 
 asia |>
@@ -553,6 +557,7 @@ Are countries with low production capacity less involved in conflicts due to ind
 
 ```{r}
 #| label: fig-visual-irst-class
+#| echo: false
 #| fig-cap: "Distribution of conflicts for countries with different industrial power/production"
 
 asia |>
