@@ -448,27 +448,47 @@ asia <- asia |>
 
 ## Visualization of Iron + Steel Production and Military Expenditure Classes
 
+## Visualization for Military Expenditure 
+
+```{r}
+#| label: visual-milex-class
+
+asia |>
+  ggplot(aes(fill = milex_class, x = count)) + 
+  geom_histogram(alpha = 0.6, binwidth = 3, position = "dodge") +
+  labs(
+    title = "Distribution of Incident Counts", 
+    subtitle = "Grouped by higher than median military expenditure or lower than median military expenditure", 
+    y = "Number of Observations", 
+    x = "Incident Counts (thousands)",
+    fill = "Military Expenditure Class (relative to median)"
+  ) +
+  coord_cartesian(xlim = c(0, 30)) + 
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+## Visualization for Iron and Steel Production 
+
 ```{r}
 #| label: visual-irst-class
 
 asia |>
-  ggplot(aes(fill = milex_class, x = count)) + 
-  geom_histogram(alpha = 0.6) +
+  ggplot(aes(fill = irst_class, x = count)) + 
+  geom_histogram(alpha = 0.6, binwidth = 3, position = "dodge") +
   labs(
-    title = "Military Expenditures compared to Incident Counts", 
-    subtitle = "Grouped by higher than median military expenditure or lower than median military expenditure", 
-    y = "Military Expenditure (relative to median)", 
+    title = "Distribution of Incident Counts", 
+    subtitle = "Grouped by higher or lower than median iron and steel production", 
+    y = "Number of Observations", 
     x = "Incident Counts (thousands)",
+    fill = "Iron and Steel Production Class (relative to median)"
   ) +
-  xlim(0, 20)
+  coord_cartesian(xlim = c(0, 30)) + 
+  theme_minimal() +
+  theme(legend.position = "bottom")
 
 ```
-
-
-
-
-
-
 
 
 Countries in Asia that lead in Incident Count and Iron Production
@@ -999,38 +1019,3 @@ all_asia_countries |>
   ) +
   theme_minimal()
 ```
-
-```{r}
-#| label: hypothesis-testing-milex
-asia_hypothesis <- asia
-set.seed(44)
-
-null_distribution_milex <- asia_hypothesis |>
-  specify(response = count, explanatory = milex_level) |>
-  hypothesize(null = "independence") |>
-  generate(reps = 100, type = "permute") |>
-  calculate(stat = "diff in means", order = c("High", "Low"))
-observed_mean_milex <- asia_hypothesis |>
-  specify(response = count, explanatory = milex_level) |>
-  calculate(stat = "diff in means", order = c("High", "Low")) |>
-  pull(stat)
-null_distribution_milex |>
-  get_p_value(obs_stat = observed_mean_milex, direction = "two-sided")
-null_distribution_milex |>
-  get_confidence_interval()
-
-null_distribution_irst <- asia_hypothesis |>
-  specify(response = count, explanatory = irst_level) |>
-  hypothesize(null = "independence") |>
-  generate(reps = 100, type = "permute") |>
-  calculate(stat = "diff in means", order = c("High", "Low"))
-observed_mean_irst <- asia_hypothesis |>
-  specify(response = count, explanatory = irst_level) |>
-  calculate(stat = "diff in means", order = c("High", "Low")) |>
-  pull(stat)
-null_distribution_irst |>
-  get_p_value(obs_stat = observed_mean_irst, direction = "two-sided")
-null_distribution_irst |>
-  get_confidence_interval()
-```
-
