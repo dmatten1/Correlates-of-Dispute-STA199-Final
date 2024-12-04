@@ -733,6 +733,7 @@ $$
 
 ```{r}
 #| label: hypothesis-testing-milex
+#| message: false
 asia_hypothesis <- asia
 set.seed(44)
 
@@ -783,49 +784,3 @@ null_distribution_irst |>
   knitr::kable() |> 
   kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))
 ```
-
-@tbl-countries-conflict-iron-model shows \*\*\*, supports our hypothesis
-
-```{r}
-#| label: tbl-countries-conflict-iron-model
-#| tbl-cap: "Linear Regression Model for Conflict and Military Capablites"
-#| message: false
-#| warning: false
-
-country_conflict_incident_model <- linear_reg() |>
-  fit(count ~ milex + milper + irst + cinc, data = asia)
-
-tidy(country_conflict_incident_model) |> 
-kable(digits = 4)
-
-```
-
-@tbl-log-disp-asia shows \*\*\*, supports our hypothesis
-
-```{r}
-#| label: tbl-log-disp-asia 
-#| tbl-cap: "Logistic Regression Model for more than 50 disputes in Asia"
-
-
-country_join_continents |>
-  summarize(mean = mean(count))
-
-  
-  asia_log_raw <- country_join_continents |>
-  mutate(
-    disp_above_50 = if_else(count >= 50, "yes", "no"),
-    disp_above_50 = fct_relevel(disp_above_50, "yes", "no")
-  ) |>
-  filter(Continent == "Asia")
-
-asia_fit <- logistic_reg() |>
-  fit(disp_above_50 ~ irst + milex + milper, data = asia_log_raw)
-
-tidy(asia_fit) |>
-kable(digits = 4)
-
-```
-
-$$
-\widehat{disp~above~50} = 5.077 - (1.353 * 10^{-6}) * irst - (2.528 * 10^{-9}) * milex - (6.643 * 10^{-6}) * milper
-$$
