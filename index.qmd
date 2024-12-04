@@ -615,34 +615,39 @@ Its a moderate positive correlation.
 
 set.seed(44) 
 
-# # high vs. low military expenditure
-# threshold <- median(asia$milex, na.rm = TRUE) 
-# #  median as a threshold as it rovides a more accurate threshold by representing the central tendency of the data
-# asia <- asia |>
-#   mutate(milex_level = ifelse(milex > threshold, "High", "Low"))
+threshold_milex <- median(asia$milex, na.rm = TRUE) 
 
-bootstrap_means <- replicate(1000, {
-  sampled_data <- asia |>
+# Bootstrap medians
+bootstrap_medians_milex <- replicate(1000, {
+  sampled_data_milex <- asia |>
     sample_frac(replace = TRUE) 
   # Resample with replacement
   
-  means <- sampled_data |>
+  medians_milex <- sampled_data_milex |>
     group_by(milex_class) |>
-    summarize(mean_count = mean(count, na.rm = TRUE))
+    summarize(median_count = median(count, na.rm = TRUE), .groups = "drop")
   
-  -diff(means$mean_count) # diff in mean conflict frequency between High and Low `milex`
-})
+  # Return the medians for both groups as a tibble
+bootstrap_medians_df1 <- tibble(
+    high = medians_milex$median_count[medians_milex$milex_class == "high"],
+    low = medians_milex$median_count[medians_milex$milex_class == "low"]
+  )
+}, simplify = FALSE) 
 
-bootstrap_df <- tibble(boot_diff = bootstrap_means)
-ggplot(bootstrap_df, aes(x = boot_diff)) +
-  geom_histogram(binwidth = 0.5, fill = "steelblue", color = "white") +
-  labs(
-    title = "Do High Military Expenditures Correlate with Conflict Frequency?",
-    x = "Military Expenditure (milex)",
-    y = "Average Number of Armed Conflicts"
-  ) + 
-  theme_minimal()
+bootstrap_medians_df1 <- bind_rows(bootstrap_medians_milex)
+```
 
+```{r}
+#| label: bootstrap-milex-tibble
+
+bootstrap_medians_avg_milex <- tibble(
+  `(avg high milex) incident count median` = mean(as.numeric(bootstrap_medians_df1$high), na.rm = TRUE),
+  `(avg low milex) incident count median` = mean(as.numeric(bootstrap_medians_df1$low), na.rm = TRUE),
+)
+
+bootstrap_medians_avg_milex |>
+  knitr::kable() |>
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))  
 ```
 
 ## Bootstrap Test for Iron Production and Conflict Frequency
@@ -666,47 +671,40 @@ Its a moderate positive correlation.
 
 set.seed(44) 
 
-#irst: Iron and Steel production
+threshold_irst <- median(asia$irst, na.rm = TRUE) 
 
-
-#Military personnel
-threshold <- median(asia$irst, na.rm = TRUE) 
-#  median as a threshold as it rovides a more accurate threshold by representing the central tendency of the data
-
-bootstrap_medians <- replicate(1000, {
-  sampled_data <- asia |>
+# Bootstrap medians
+bootstrap_medians_irst <- replicate(1000, {
+  sampled_data_irst <- asia |>
     sample_frac(replace = TRUE) 
   # Resample with replacement
   
-  medians <- sampled_data |>
+  medians_irst <- sampled_data_irst |>
     group_by(irst_class) |>
-    summarize(median_count = median(count, na.rm = TRUE))
+    summarize(median_count = median(count, na.rm = TRUE), .groups = "drop")
   
-  -diff(medians$median_count) # diff in mean conflict frequency between High and Low `milex`
-})
+  # Return the medians for both groups as a tibble
+bootstrap_medians_df2 <- tibble(
+    high = medians_irst$median_count[medians_irst$irst_class == "high"],
+    low = medians_irst$median_count[medians_irst$irst_class == "low"]
+  )
+}, simplify = FALSE) 
 
-bootstrap_df <- tibble(boot_diff = bootstrap_medians)
-ggplot(bootstrap_df, aes(x = boot_diff)) +
-  geom_histogram(binwidth = 0.0001, fill = "steelblue", color = "white") +
-  labs(
-    title = "Does High Iron and Steel Production Correlate with Conflict Frequency?",
-    x = "Iron and Steel Production (irst)",
-    y = "Average Number of Armed Conflicts"
-  ) + 
-  theme_minimal()
+bootstrap_medians_df2 <- bind_rows(bootstrap_medians_irst)
 
 ```
 
 ```{r}
-#| label: yeah
+#| label: irst-bootstrap-tibble
 
+bootstrap_medians_avg_irst <- tibble(
+  `(avg high irst) incident count median` = mean(as.numeric(bootstrap_medians_df$high), na.rm = TRUE),
+  `(avg low irst) incident count median` = mean(as.numeric(bootstrap_medians_df$low), na.rm = TRUE),
+  )
 
-bootstrap_df |>
-  summarize(
-  lower = quantile(boot_diff, 0.025),
-  upper = quantile(boot_diff, 0.975)
-)
-
+bootstrap_medians_avg_irst |>
+  knitr::kable() |>
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))  
 ```
 
 ## Hypothesis Test
