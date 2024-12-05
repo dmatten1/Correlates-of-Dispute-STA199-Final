@@ -373,12 +373,12 @@ asia |>
 ## Methodology
 
 As a baseline, we found the correlation coefficients between different military capabilities and the total incident count to focus our analysis on the most relevant variables.
-We generated scatterplots for said variables afterwards, however, we could not normalize the data as several countries had 0 total incident counts.
-Thus, we could not take the natural log to improve our visualization as this would remove a lot of our data.
+We generated scatterplots for said variables afterwards as we were comparing discrete numeric variables (military expenditure, iron and steel production, total incident count).
+Though there were visible outliers, we could not normalize the data as several countries had 0 total incident counts, meaning we would lose a lot of our data.
 
-To answer our research question, we conducted two hypothesis tests and two bootstrap simulations to determine if there was a statistically significant relationship between an Asian total incident number and military expenditure alongside iron and steel production respectively.
+To answer our research question, we conducted two hypothesis tests and two bootstrap simulations to determine if there was a statistically significant relationship between an Asian country's total incident number and military expenditure alongside iron and steel production respectively.
 Our hypothesis tests allowed us to assess the relationship between military expenditures, iron production, and conflict frequency.
-Our hypothesis tests were based on difference in medians rather than means because of how heavily skewed our data was.
+Our hypothesis tests were based on differences in medians rather than means because of how heavily skewed our data was.
 
 The null and alternative hypotheses for our hypothesis tests are as shown:
 
