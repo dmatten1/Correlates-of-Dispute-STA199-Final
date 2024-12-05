@@ -621,7 +621,7 @@ Additionally, extremely high p-values led us to fail to reject the null hypothes
 
 Overall, with such a heavily right-skewed data set and a median equal to the lower values, such models fail to provide a good fit for our data.
 
-**Limitations/Improvements**
+**Limitations & Improvements**
 
 A major limitation we faced in this project was that we were constrained to the methods we had learned in class.
 Although we wanted to employ a logistic or linear regression model, we found that both wouldn’t have been representative of our data – from the correlation coefficient and our visualization, we could see that there was not a significant linear correlation between the military capabilities we were analyzing and the total incident counts, and so linear regression did not make sense.
