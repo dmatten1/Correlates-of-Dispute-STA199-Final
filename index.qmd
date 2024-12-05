@@ -32,7 +32,7 @@ This study examines the relationship between a country's national material capab
 By analyzing data from the Correlates of War project, which tracks national capabilities and militarized interstate disputes, this research aims to identify whether increases in these capabilities correlate with higher frequencies of interstate conflict.
 The findings seek to enhance our understanding of how shifts in state power influence international stability and conflict dynamics.
 
-## Introduction and data
+## Introduction and Data
 
 <!--- cleaning -->
 
@@ -192,16 +192,13 @@ asia <- country_join_continents |>
 
 ```
 
-The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts.
-Understanding how changes in a nation’s military capabilities — such as military expenditures and natural resources like iron — affect its involvement in international disputes is important for assessing political stability.
+The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts. Understanding how changes in a nation’s military capabilities — such as military expenditures and natural resources like iron — affect its involvement in international disputes is important for assessing political stability.
 
-The data used in our analysis comes from the **Correlates of War (COW) project**, which consists of two datasets that apply to our research- **National Material Capabilities** and **Militarized Interstate Disputes**.
-The former data set includes annually collected data on military power indicators for each nation, such as military expenditures, military personnel, etc.
-The latter records instances where states threaten, display, or use force against one another every year from 1816 to 2014. 
+The data used in our analysis comes from the Correlates of War (COW) project, which consists of two datasets that apply to our research- National Material Capabilities and Militarized Interstate Disputes. The former dataset includes annually collected data on military power indicators for each nation, such as military expenditures, military personnel, etc. The latter records instances where states threaten, display, or use force against one another every year from 1816 to 2014. 
 
-After joining these two data sets we mutated our data set to include the variables: “count” (summing up the total incident count for a given country in a given year), “milex_class” (classifying the military expenditure as being either above or below the median military expenditure), and “irst_class”(classifying the iron and steel production as being either above or below the median iron and steel Production). 
+After joining these two datasets we mutated our dataset to include the variables: “count” (summing up the total incident count for a given country in a given year), “milex_class” (classifying the military expenditure as being either above or below the median military expenditure), and “irst_class”(classifying the iron and steel production as being either above or below the median iron and steel Production). 
 
-@tbl-dict provides an overview of relevant variables used in this analysis
+@tbl-dict provides an overview of relevant variables used in this analysis:
 
 ```{r}
 #| label: tbl-dict
@@ -226,15 +223,10 @@ Our research question is as follows: How do changes in national material capabil
 
 We hypothesize that countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
 
-This research aligns with a broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts.
-In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations. 
-
-### Data Exploration
-
-#### Which Continent has the Highest Propensity for Conflict?
+This research aligns with a broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts. In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations. 
 
 In order to narrow our search for proper analyses we decided to focus on the continent with the highest propensity for conflict.
-@fig-high-prop-conflict shows that the continent with the highest propensity for conflict is Asia.
+@fig-high-prop-conflict identifies Asia as the continent with the highest propensity for conflict.
 
 ```{r}
 #| label: fig-high-prop-conflict 
@@ -262,27 +254,10 @@ conflict_by_continent |>
   scale_fill_brewer(palette = "Blues") 
 ```
 
-#### Correlation between National Material Capabilities and Total Incident Counts
+Explanatory analysis of the response variable count showed a variation in conflict frequency across countries, with some nations consistently engaging in dispute. Patterns in military expenditure and iron and steel production were also examined in order to determine the relationships between material capabilities and conflict frequency. 
 
-```{r}
-#| label: tbl-cor-table
-#| echo: false
-#| tbl-cap: "Table Demonstrating Correlation between Total Incident Counts and Material Capabilities"
+We aimed to explore whether it would be worthwhile to investigate a potential relationship, so we visualized periods with heightened levels of both conflict and military capabilities, with a particular focus on iron. Figures 2 and 3 shows an increase in activity around the same periods. 
 
-asia_cor_table <- tibble(
-  `Military Capability` = c("Military Expenditures (thousands)", "Military Personnel (thousands)", "Iron and Steel Production (thousands of tons)"),
-  `Correlation To Incident Count` = c(cor(asia$count, asia$milex), cor(asia$count, asia$milper), cor(asia$count, asia$irst))
-)
-
-asia_cor_table |>
-  knitr::kable() |>
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
-```
-
-#### Visualizing Incident Count and Military Capablities in Asia
-
-To identify the relationship between conflict frequency and military capabilities we decided to do a series of visualizations using scatter plots in order to uncovering patterns, clusters, and outliers.
-Focusing on the Military Expenditures and Iron production as they had the highest correlation within the set.
 
 ```{r}
 #| label: fig-military-expenditure-asia 
@@ -319,6 +294,27 @@ asia |>
   theme_minimal()
 ```
 
+We decided to do a correlation tibble to showm how key material capabilities such as military expenditure, personnel, and iron production are related to conflict frequency. 
+
+@tbl-cor-table demonstrates that the correlations between incident count and military expenditures, military personnel, and iron and steel production, are 0.21, 0.106, and 0.163 respectively. While all relatively low, this finding caused us to narrow our focus onto military expenditures and iron and steel production, as those had the highest linear correlation with total incident count. 
+
+
+```{r}
+#| label: tbl-cor-table
+#| echo: false
+#| tbl-cap: "Demonstrating Correlation between Total Incident Counts and Material Capabilities"
+
+asia_cor_table <- tibble(
+  `Military Capability` = c("Military Expenditures (thousands)", "Military Personnel (thousands)", "Iron and Steel Production (thousands of tons)"),
+  `Correlation To Incident Count` = c(cor(asia$count, asia$milex), cor(asia$count, asia$milper), cor(asia$count, asia$irst))
+)
+
+asia_cor_table |>
+  knitr::kable() |>
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+
 <!--- classifying -->
 
 ```{r}
@@ -338,7 +334,9 @@ asia <- asia |>
 )
 ```
 
-#### Visualization for Military Expenditure and Iron & Steel Production
+To identify the relationship between conflict frequency and military capabilities we decided to do a series of visualizations using histograms. Focusing on the Military Expenditures and Iron production as they had the highest correlation within the set.
+
+By grouping countries into “high” and “low” military capability classes (relative to the median), the visualization explores whether military spending is associated with the frequency of incidents. 
 
 ```{r}
 #| label: fig-visual-milex-irst-class
