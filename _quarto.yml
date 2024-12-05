@@ -12,7 +12,7 @@ website:
       - text: Home
         href: index.qmd
       - text: Presentation
-        href: presentation.pdf  
+        href: presentation.pdf
       - text: Proposal
         href: proposal.qmd
       - text: About
