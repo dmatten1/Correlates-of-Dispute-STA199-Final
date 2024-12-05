@@ -195,7 +195,7 @@ asia <- country_join_continents |>
 The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts.
 Understanding how changes in a nation’s military capabilities — such as military expenditures and natural resources like iron — affect its involvement in international disputes is important for assessing political stability.
 
-The data used in our analysis comes from the Correlates of War (COW) project, which consists of two datasets that apply to our research- National Material Capabilities and Militarized Interstate Disputes.
+The data used in our analysis comes from the [Correlates of War (COW) project](<https://correlatesofwar.org/data-sets/>), which consists of two datasets that apply to our research- [National Material Capabilities](<https://correlatesofwar.org/data-sets/national-material-capabilities/>) and [Militarized Interstate Disputes](<https://correlatesofwar.org/data-sets/mids/>).
 The former dataset includes annually collected data on military power indicators for each nation, such as military expenditures, military personnel, etc.
 The latter records instances where states threaten, display, or use force against one another every year from 1816 to 2014.
 
