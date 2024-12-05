@@ -28,10 +28,6 @@ country_conflict <- read_csv("data/Conflict.csv")
 
 ```
 
-This study examines the relationship between a country's national material capabilities — such as military expenditures, personnel, and iron — and its frequency engaging in conflict.
-By analyzing data from the Correlates of War project, which tracks national capabilities and militarized interstate disputes, this research aims to identify whether increases in these capabilities correlate with higher frequencies of interstate conflict.
-The findings seek to enhance our understanding of how shifts in state power influence international stability and conflict dynamics.
-
 ## Introduction and Data
 
 <!--- cleaning -->
@@ -195,15 +191,14 @@ asia <- country_join_continents |>
 The primary motivation for this research is to explore the relationship between national material capabilities and a country’s likelihood of being involved in conflicts.
 Understanding how changes in a nation’s military capabilities — such as military expenditures and natural resources like iron — affect its involvement in international disputes is important for assessing political stability.
 
-The data used in our analysis comes from the [Correlates of War (COW) project](<https://correlatesofwar.org/data-sets/>), which consists of two datasets that apply to our research- [National Material Capabilities](<https://correlatesofwar.org/data-sets/national-material-capabilities/>) and [Militarized Interstate Disputes](<https://correlatesofwar.org/data-sets/mids/>).
+The data used in our analysis comes from the [Correlates of War (COW) project](https://correlatesofwar.org/data-sets/), which consists of two datasets that apply to our research- [National Material Capabilities](https://correlatesofwar.org/data-sets/national-material-capabilities/) and [Militarized Interstate Disputes](https://correlatesofwar.org/data-sets/mids/).
 The former dataset includes annually collected data on military power indicators for each nation, such as military expenditures, military personnel, etc.
 The latter records instances where states threaten, display, or use force against one another every year from 1816 to 2014.
 
 After joining these two datasets we mutated our dataset to include the variables: “count” (summing up the total incident count for a given country in a given year), “milex_class” (classifying the military expenditure as being either above or below the median military expenditure), and “irst_class”(classifying the iron and steel production as being either above or below the median iron and steel Production).
 In preparing the data, we addressed several challenges.
 Variables irrelevant to our analysis were removed, and we were forced to correct the unique country codes used in the dataser as they didn’t align with standard naming conventions.
-These codes were manually mapped to their respective countries (so as to not introduce a new dataset), and we classified nations adding new variables, country and continent, to narrow the scope of analysis.
-\
+These codes were manually mapped to their respective countries (so as to not introduce a new dataset), and we classified nations adding new variables, country and continent, to narrow the scope of analysis.\
 
 @tbl-dict provides an overview of relevant variables used in this analysis:
 
@@ -389,9 +384,10 @@ asia |>
 Due to the extensive nature of the dataset (covering numerous countries), we narrowed the focus of our project to Asia, which after visualizing the data, we found to be the continent with the highest Incident Count.
 
 To answer our research question, we conducted two hypothesis tests and two bootstrap simulations to determine if there was a statistically significant relationship between an Asian total incident number and military expenditure alongside iron and steel production respectively.
-Our hypothesis tests allowed us to assess the relationship between military expenditures, iron production and conflict frequency.
+Our hypothesis tests allowed us to assess the relationship between military expenditures, iron production, and conflict frequency.
+Our hypothesis tests were based on the difference in medians rather than difference in means because of how heavily skewed our data was.
 
-The null and alternative hypothesis for our hypothesis tests are shown below:
+The null and alternative hypotheses for our hypothesis tests are shown below:
 
 **Military Expenditure**
 
@@ -418,7 +414,88 @@ A logistic regression model would not have been insightful as there were no clea
 
 ## Results
 
-#### Bootstrap Test for Military expenditure and Conflict Frequency
+**Figures**
+
+*Figure 1*: Reflects that out of all the continents, Asia has the highest number of total conflicts. 
+
+*Figure 2/Figure 3*: Both scatter plots reveal that there is not a linear relationship between military expenditure (milex) or iron and steel production (irst) and total incident number.
+In both visualizations, most of the total incident counts remain around 0, with milex mainly clustering between 0 to 5 \* 10\^7 thousands of international currency and iron and steel production mainly between 0 to 1.25 \* 10\^5 thousands of tons.
+
+*Figure 4/Figure 5*: The visualization reveals there is a highly right-skewed unimodal relationship between both an Asian country’s military expenditure (milex) and iron and steel production (irst) with its total incident count.
+However, it appears that countries with milex or irst above the median tend to be the outliers, as slightly more countries with higher milex or irst compared to lower milex or irst respectively have greater incident counts. 
+
+#### Hypothesis Test
+
+$$
+H_{0}: μ_{sample} = μ_{bootstrap}: no
+$$
+
+$$
+H_{A}: μ_{sample} ≠ μ_{bootstrap}: yes
+$$
+
+```{r}
+#| label: hypothesis-testing-milex
+#| message: false
+asia_hypothesis <- asia
+set.seed(44)
+
+null_distribution_milex <- asia_hypothesis |>
+  specify(response = count, explanatory = milex_class) |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in means", order = c("high", "low"))
+
+observed_median_milex <- asia_hypothesis |>
+  specify(response = count, explanatory = milex_class) |>
+  calculate(stat = "diff in medians", order = c("high", "low")) |>
+  pull(stat)
+
+null_distribution_milex |>
+  get_p_value(obs_stat = observed_median_milex, direction = "two-sided") |>
+  rename("p-value of milex" = "p_value") |>
+  knitr::kable() |>
+  kable_styling(full_width = FALSE, position = "left", bootstrap_options = c("striped", "hover", "condensed"))
+
+null_distribution_milex |>
+  get_confidence_interval()  |>
+  rename(`Lower Bound for milex` = "lower_ci", `Upper Bound for milex` = "upper_ci") |>
+  knitr::kable() |> 
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+```{r}
+#| label: hypothesis-testing-irst
+#| message: false
+
+set.seed(44)
+
+null_distribution_irst <- asia_hypothesis |>
+  specify(response = count, explanatory = irst_class) |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in means", order = c("high", "low"))
+
+observed_median_irst <- asia_hypothesis |>
+  specify(response = count, explanatory = irst_class) |>
+  calculate(stat = "diff in medians", order = c("high", "low")) |>
+  pull(stat)
+
+null_distribution_irst |>
+  get_p_value(obs_stat = observed_median_irst, direction = "two-sided") |>
+  rename("p-value of irst" = "p_value") |>
+  knitr::kable() |>
+  kable_styling(full_width = FALSE, position = "left", bootstrap_options = c("striped", "hover", "condensed"))
+
+
+null_distribution_irst |>
+  get_confidence_interval() |>
+  rename(`Lower Bound for irst` = "lower_ci", `Upper Bound for irst` = "upper_ci") |>
+  knitr::kable() |> 
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+#### Bootstrap Test for Military Expenditure and Conflict Frequency
 
 ```{r}
 #| label: fig-explorea
@@ -514,96 +591,26 @@ bootstrap_medians_avg_irst |>
   kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))  
 ```
 
-#### Hypothesis Test
+**Hypothesis Test:** This analysis suggests that there is no statistically significant correlation between military expenditures or iron and steel production and the number of conflicts entered.
+Specifically, the p-value for our military expenditures hypothesis was 0.998 with a confidence interval for the difference in median number of conflicts being  \[-0.70.
+0.64\].
+For our iron and steel production hypothesis, the p-value was 0.998 with a confidence interval of \[-0.65, 0.68\].
+These large p-values indicate that we fail to reject the null hypothesis.
 
-The shows \*\*\*, supports our hypothesis
-
-$$
-H_{0}: μ_{sample} = μ_{bootstrap}: no
-$$
-
-$$
-H_{A}: μ_{sample} ≠ μ_{bootstrap}: yes
-$$
-
-```{r}
-#| label: hypothesis-testing-milex
-#| message: false
-asia_hypothesis <- asia
-set.seed(44)
-
-null_distribution_milex <- asia_hypothesis |>
-  specify(response = count, explanatory = milex_class) |>
-  hypothesize(null = "independence") |>
-  generate(reps = 1000, type = "permute") |>
-  calculate(stat = "diff in means", order = c("high", "low"))
-
-observed_median_milex <- asia_hypothesis |>
-  specify(response = count, explanatory = milex_class) |>
-  calculate(stat = "diff in medians", order = c("high", "low")) |>
-  pull(stat)
-
-null_distribution_milex |>
-  get_p_value(obs_stat = observed_median_milex, direction = "two-sided") |>
-  rename("p-value of milex" = "p_value") |>
-  knitr::kable() |>
-  kable_styling(full_width = FALSE, position = "left", bootstrap_options = c("striped", "hover", "condensed"))
-
-null_distribution_milex |>
-  get_confidence_interval()  |>
-  rename("lower_ci of milex" = "lower_ci", "upper_ci of milex" = "upper_ci") |>
-  knitr::kable() |> 
-  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))
-
-null_distribution_irst <- asia_hypothesis |>
-  specify(response = count, explanatory = irst_class) |>
-  hypothesize(null = "independence") |>
-  generate(reps = 1000, type = "permute") |>
-  calculate(stat = "diff in means", order = c("high", "low"))
-
-observed_median_irst <- asia_hypothesis |>
-  specify(response = count, explanatory = irst_class) |>
-  calculate(stat = "diff in medians", order = c("high", "low")) |>
-  pull(stat)
-
-null_distribution_irst |>
-  get_p_value(obs_stat = observed_median_irst, direction = "two-sided") |>
-  rename("p-value of irst" = "p_value") |>
-  knitr::kable() |>
-  kable_styling(full_width = FALSE, position = "left", bootstrap_options = c("striped", "hover", "condensed"))
-
-
-null_distribution_irst |>
-  get_confidence_interval() |>
-  rename("lower_ci of irst" = "lower_ci", "upper_ci of irst" = "upper_ci") |>
-  knitr::kable() |> 
-  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))
-```
-
-All aspects of our analysis point to an essentially-nonexistent correlation between the number of conflicts and any of the variables in our dataset.
-When including all countries, the correlation matrix, which includes correlation coefficients such as 0.21 and 0.16 when checking for correlation with count, shows positive, linear, and very weak relationships.
-Visualizations such as @fig-military-expenditure-asia and @fig-iron-production-asia demonstrate this well; the linear regressions are positive, but they fit the data very poorly.
-When using a binary variable to differentiate between “high” and “low” military expenditure and iron production, a similar pattern of statistical insignificance emerges.
-In general, with such a skewed dataset with the median being equal to the low, models will not fit well at all.
-
-The histogram @fig-visual-milex-class comparing incident count and binary categories of `milex_class` and `irst_class` reflects this as well.
-Although the proportion of highly militarized countries in each bin increases as the number of conflicts increases, the difference is small.
-In each bin (i.e., how many conflicts entered), there are similar amounts of countries with “low” and “high” military expenditure.
-The same occurs for iron production in @fig-visual-irst-class.
-
-So far, our visualizations have given a surface-level insight regarding the influence of material capabilities and military expenditures.
-To quantify these observations, we decided to employ bootstrapping and hypothesis testing.
-Bootstrapping to find a difference in medians was not a useful exercise; the medians of both the “low” group and the “high” group for `milex_class` and `irst_class` were 1.
-This points to a further bolstering of the claim that there is no correlation between either metric and number of conflicts entered.
-Using hypothesis testing, the null hypotheses read as follows: “There is no correlation between military expenditures and number of conflicts entered” and “There is no correlation between iron production and number of conflicts entered.” For military expenditures, the confidence interval for the difference in means of number of conflicts is \[-0.70.
-0.64\] with a p-value of 0.998, and for iron production, the confidence interval for the difference in means of number of conflicts is \[-0.65, 0.68\] with a p-value of 0.998.
-These staggering p-values combined with confidence intervals centered around 0 confirm the null hypothesis, or the lack of correlation between the metrics and number of conflicts, with extreme confidence.
-As a result, we reject the alternative hypotheses that there are correlations between military expenditures, iron production, and number of conflicts.
-The p-values and confidence intervals provide a useful metric to quantify the lack of correlation, and confidently answer the research question with a resounding no – there is no relationship.
+**Bootstrap Simulation:** This conclusion is supported by our bootstrap simulation, which found that the average median number of conflicts for countries with high or low military expenditures (and for those with high or low iron and steel production) was consistently 1.
+The lack of difference between medians aligns with our confidence intervals, reinforcing the likelihood that any observed differences were due to random chance.
 
 ## Discussion
 
-In this section you’ll include a summary of what you have learned about your research question along with statistical arguments supporting your conclusions.
-In addition, discuss the limitations of your analysis and provide suggestions on ways the analysis could be improved.
-Any potential issues pertaining to the reliability and validity of your data and appropriateness of the statistical analysis should also be discussed here.
-Lastly, this section will include ideas for future work.
+All aspects of our analysis point to an essentially-nonexistent linear correlation between the number of conflicts and any of the variables in our dataset.
+When including all countries, the correlation matrix, which includes correlation coefficients such as 0.21 and 0.16 when checking for correlation with count, shows positive, linear, and very weak relationships.
+Visualizations such as \<INSERT FIGURE NAMES HERE\> demonstrate this well; the linear regressions are positive, but they fit the data very poorly.
+When using a binary variable to differentiate between “high” and “low” military expenditure and iron production, a similar pattern of statistical insignificance emerges.
+In general, with such a right skewed dataset with the median being equal to the low, models will not fit well at all.
+
+The histogram \<INSERT FIGURE NAME\> comparing incident count and binary categories of \`milex_class\` and \`irst_class\` reflects this as well.
+Although the proportion of highly militarized countries in each bin increases as the number of conflicts increases, the difference is small.
+In each bin (i.e., how many conflicts entered), there are similar amounts of countries with “low” and “high” military expenditure.
+The same occurs for iron production in \<INSERT FIGURE NAME\>. 
+
+\
