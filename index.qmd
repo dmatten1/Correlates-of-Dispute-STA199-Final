@@ -199,7 +199,7 @@ The data used in our analysis comes from the [Correlates of War (COW) project](h
 The former dataset includes annually collected data on military power indicators for each nation, such as military expenditures, military personnel, etc.
 The latter records instances where states threaten, display, or use force against one another every year from 1816 to 2016.
 
-After joining these two datasets, we mutated our dataset to include the variables: “count” (summing up the total incident count for a given country in a given year), “milex_class” (classifying the military expenditure as being either above or below the median military expenditure), and “irst_class”(classifying the iron and steel production as being either above or below the median iron and steel Production).
+After joining these two datasets, we mutated our dataset to include the variables: “count” (summing up the total incident count for a given country in a given year), “milex_class” (classifying the military expenditure as being either above or below the median military expenditure), and “irst_class”(classifying the iron and steel production as being either above or below the median iron and steel production).
 In preparing the data, we addressed several challenges.
 Variables irrelevant to our analysis were removed, and we were forced to correct the unique country codes used in the dataset as they didn’t align with standard naming conventions.
 These codes were manually mapped to their respective countries (so as to not introduce a new dataset), and we classified nations, adding new variables, country and continent, to narrow the scope of analysis.
