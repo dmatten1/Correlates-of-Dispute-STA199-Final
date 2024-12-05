@@ -417,13 +417,13 @@ A logistic regression model would not have been insightful as there were no clea
 
 #### Figures
 
-*Figure 1*: Out of all the continents, Asia has the highest number of total conflicts at around 8100 conflicts, followed by Europe and Africa at around 3500 and 3450 respectively, and finally the Americas at around 2800 and Oceania at 500.
+@fig-high-prop-conflict: Out of all the continents, Asia has the highest number of total conflicts at around 8100 conflicts, followed by Europe and Africa at around 3500 and 3450 respectively, and finally the Americas at around 2800 and Oceania at 500.
  
 
-*Figure 2/Figure 3*: Both scatter plots reveal that there is an extremely weak positive linear relationship between military expenditure (milex) or iron and steel production (irst) and total incident number.
+*Figure 2 & Figure 4*: Both scatter plots reveal that there is an extremely weak positive linear relationship between military expenditure (milex) or iron and steel production (irst) and total incident number.
 In both visualizations, most of the total incident counts remain around 0 to 10, with milex mainly clustering between 0 to 5 \* 10\^7 thousands of international currency and iron and steel production mainly between 0 to 1.25 \* 10\^5 thousands of tons.
 
-*Figure 4/Figure 5*: The visualization reveals there is a highly right-skewed unimodal relationship between both an Asian country’s military expenditure (milex) and iron and steel production (irst) with its total incident count.
+*Figure 4 & Figure 5*: The visualization reveals there is a highly right-skewed unimodal relationship between both an Asian country’s military expenditure (milex) and iron and steel production (irst) with its total incident count.
 However, it appears that countries with milex or irst above the median tend to be the outliers, as slightly more countries with higher milex or irst compared to lower milex or irst respectively have greater incident counts. 
 
 #### Hypothesis Test
