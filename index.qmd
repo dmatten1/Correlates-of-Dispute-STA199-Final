@@ -377,7 +377,7 @@ As a baseline, we found the correlation coefficients between different military 
 We generated scatterplots for said variables afterwards as we were comparing discrete numeric variables (military expenditure, iron and steel production, total incident count).
 Though there were visible outliers, we could not normalize the data as several countries had 0 total incident counts, meaning we would lose a substantial number of our observations.
 
-As a result of the extremely weak positive linear correlation we saw for all military capabilities compared to the total incident count, we decided to transform the data based off of the relatively most relevant variables (military expenditure and iron and steel production), classifying observations as either being above or below the median military expenditure as "high" and "low", respectively.
+As a result of the extremely weak positive linear correlation we saw for all military capabilities compared to the total incident count, we decided to transform the data based off of the relatively most relevant variables (military expenditure and iron & steel production), classifying observations as either being above or below the median military expenditure as "high" and "low", respectively.
 We did the same for iron and steel production.
 We then generated dodged histogram visualizations for military expenditure and iron and steel production compared with total incident counts, colored by their military expenditure and iron and steel production classifications.
 We chose to classify by medians rather than means due to the data's strong right skew.
