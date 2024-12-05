@@ -1,5 +1,5 @@
 ---
-title: Influence of National Resources on Country Conflict
+title: Armed Strength: Analyzing National Capabilities and Conflict Frequency in Asia
 subtitle: Report
 execute:
   echo: false
