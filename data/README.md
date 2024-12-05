@@ -1,3 +1,7 @@
+# final presentation
+
+link: https://www.youtube.com/watch?v=T6lBfRbZmXk&feature=youtu.be
+
 # data
 
 Place dataset(s) in this folder.
