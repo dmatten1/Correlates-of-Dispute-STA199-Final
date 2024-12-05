@@ -27,6 +27,9 @@ country_resource <- read_csv("data/NMC.csv")
 country_conflict <- read_csv("data/Conflict.csv")
 
 ```
+This study examines the relationship between a country's national material capabilities — such as military expenditures, personnel, and iron — and its frequency engaging in conflict.
+By analyzing data from the Correlates of War project, which tracks national capabilities and militarized interstate disputes, this research aims to identify whether increases in these capabilities correlate with higher frequencies of interstate conflict.
+The findings seek to enhance our understanding of how shifts in state power influence international stability and conflict dynamics.
 
 ## Introduction and Data
 
