@@ -525,6 +525,10 @@ bootstrap_medians_df1 <- tibble(
 }, simplify = FALSE) 
 
 bootstrap_medians_df1 <- bind_rows(bootstrap_medians_milex)
+
+# Source: OpenAI's ChatGPT Question: "How can we run a bootstrap on the medians of a variable grouped with another varible?" 
+
+
 ```
 
 ```{r}
@@ -570,6 +574,8 @@ bootstrap_medians_df2 <- tibble(
 }, simplify = FALSE) 
 
 bootstrap_medians_df2 <- bind_rows(bootstrap_medians_irst)
+
+# Source: OpenAI's ChatGPT Question: "How can we run a bootstrap on the medians of a variable grouped with another varible?" 
 
 ```
 
