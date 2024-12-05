@@ -489,7 +489,7 @@ null_distribution_irst |>
   kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"))
 ```
 
-#### Bootstrap Test for Military Expenditure and Conflict Frequency
+#### Bootstrap Simulation for Military Expenditure and Conflict Frequency
 
 ```{r}
 #| label: fig-explorea
