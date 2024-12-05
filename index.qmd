@@ -346,7 +346,7 @@ asia |>
   geom_histogram(alpha = 0.6, binwidth = 3, position = "dodge") +
   labs(
     title = "Distribution of Incident Counts", 
-    subtitle = "Grouped by higher than median military expenditure or lower than median military expenditure", 
+    subtitle = "Grouped by higher or lower than median military expenditure", 
     y = "Number of Observations", 
     x = "Incident Counts (thousands)",
     fill = "Military Expenditure Class (relative to median)"
