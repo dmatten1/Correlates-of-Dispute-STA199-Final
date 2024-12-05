@@ -195,10 +195,10 @@ The data used in our analysis comes from the [Correlates of War (COW) project](h
 The former dataset includes annually collected data on military power indicators for each nation, such as military expenditures, military personnel, etc.
 The latter records instances where states threaten, display, or use force against one another every year from 1816 to 2014.
 
-After joining these two datasets we mutated our dataset to include the variables: “count” (summing up the total incident count for a given country in a given year), “milex_class” (classifying the military expenditure as being either above or below the median military expenditure), and “irst_class”(classifying the iron and steel production as being either above or below the median iron and steel Production).
+After joining these two datasets, we mutated our dataset to include the variables: “count” (summing up the total incident count for a given country in a given year), “milex_class” (classifying the military expenditure as being either above or below the median military expenditure), and “irst_class”(classifying the iron and steel production as being either above or below the median iron and steel Production).
 In preparing the data, we addressed several challenges.
-Variables irrelevant to our analysis were removed, and we were forced to correct the unique country codes used in the dataser as they didn’t align with standard naming conventions.
-These codes were manually mapped to their respective countries (so as to not introduce a new dataset), and we classified nations adding new variables, country and continent, to narrow the scope of analysis.
+Variables irrelevant to our analysis were removed, and we were forced to correct the unique country codes used in the dataset as they didn’t align with standard naming conventions.
+These codes were manually mapped to their respective countries (so as to not introduce a new dataset), and we classified nations, adding new variables, country and continent, to narrow the scope of analysis.
 
 @tbl-dict provides an overview of relevant variables used in this analysis:
 
@@ -221,14 +221,14 @@ variable_info |>
 kable()
 ```
 
-Our research question is as follows: How do changes in national material capabilities influence the frequency of a country's conflicts, focusing on the continent of Asia?
+**Our research question is as follows:** How do changes in national material capabilities influence the frequency of a country's conflicts, focusing on the continent of Asia?
 
-We hypothesize that countries with higher military expenditures and iron and steel production are more likely to participate in armed conflicts.
+**We hypothesize** that countries with higher military expenditures and iron and steel production are more likely to participate in armed conflicts.
 
 This research aligns with a broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts.
 In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations.
 
-In order to narrow our search for proper analyses we decided to focus on the continent with the highest propensity for conflict.
+In order to narrow our search for proper analyses, we decided to focus on the continent with the highest propensity for conflict.
 @fig-high-prop-conflict identifies Asia as the continent with the highest propensity for conflict.
 
 ```{r}
@@ -293,7 +293,7 @@ asia |>
   theme_minimal()
 ```
 
-@tbl-cor-table demonstrates that the correlations between incident count and military expenditures, military personnel, and iron and steel production, are 0.21, 0.106, and 0.163 respectively.
+@tbl-cor-table demonstrates that the correlations between incident count and military expenditures, military personnel, and iron and steel production are 0.21, 0.106, and 0.163, respectively.
 While all relatively low, this finding caused us to narrow our focus onto military expenditures and iron and steel production, as those had the highest linear correlation with total incident count.
 
 ```{r}
@@ -330,7 +330,7 @@ asia <- asia |>
 )
 ```
 
-To identify the relationship between conflict frequency and military capabilities (focusing on iron and steel production and military expenditures) we decided to do a series of visualizations using histograms.
+To identify the relationship between conflict frequency and military capabilities (focusing on iron and steel production and military expenditures), we decided to do a series of visualizations using histograms.
 
 By grouping countries into “high” and “low” military capability classes (relative to the median), the visualization explores whether military expenditures or iron and steel production are associated with a country's total incident count.
 
@@ -373,11 +373,11 @@ asia |>
 
 ## Methodology
 
-As a baseline, we found the correlation coefficients between different military capabilities and the total incident count to focus our analysis on the most relevant variables (being military expenditure and iron and steel production).
+As a baseline, we found the correlation coefficients between different military capabilities and the total incident count to focus our analysis on the most relevant variables (military expenditure and iron and steel production).
 We generated scatterplots for said variables afterwards as we were comparing discrete numeric variables (military expenditure, iron and steel production, total incident count).
 Though there were visible outliers, we could not normalize the data as several countries had 0 total incident counts, meaning we would lose a substantial number of our observations.
 
-As a result of the extremely weak positive linear correlation we saw for all military capabilities compared to the total incident count, we decided to transform the data based off of the relatively most relevant variables (military expenditure and iron and steel production), classifying observations as either being above or below the median military expenditure as "high" and "low" respectively.
+As a result of the extremely weak positive linear correlation we saw for all military capabilities compared to the total incident count, we decided to transform the data based off of the relatively most relevant variables (military expenditure and iron and steel production), classifying observations as either being above or below the median military expenditure as "high" and "low", respectively.
 We did the same for iron and steel production.
 We then generated dodged histogram visualizations for military expenditure and iron and steel production compared with total incident counts, colored by their military expenditure and iron and steel production classifications.
 We chose to classify by medians rather than means due to the data's strong right skew.
@@ -586,7 +586,7 @@ bootstrap_medians_avg_irst |>
 ```
 
 **Hypothesis Test:** This analysis suggests that there is no statistically significant correlation between military expenditures or iron and steel production and the number of conflicts entered.
-Specifically, the p-value for our military expenditures hypothesis was 0.998 with a confidence interval for the difference in median number of conflicts being  \[-0.70.
+Specifically, the p-value for our military expenditures hypothesis was 0.998, with a confidence interval for the difference in median number of conflicts being  \[-0.70.
 0.64\].
 For our iron and steel production hypothesis, the p-value was 0.998 with a confidence interval of \[-0.65, 0.68\].
 These large p-values indicate that we fail to reject the null hypothesis.
@@ -600,7 +600,7 @@ All aspects of our analysis suggest an essentially nonexistent linear correlatio
 While the low correlation coefficients for material capabilities and total incident count suggest a very weak positive linear relationship between military expenditures, iron and steel production, and incident count, this relationship is minimal.
 Visualizations, such as Figures 2 and 3, support this, showing that most data points cluster around 0 to 10 incident counts for both variables.
 The histogram in Figure 4, which compares total incident counts with the binary categories milex_class (military expenditure classification) and irst_class (iron and steel production classification), further illustrates this pattern.
-Although the proportion of highly militarized countries slightly increases with the number of conflicts, the differences are small and these are likely outliers.
+Although the proportion of highly militarized countries slightly increases with the number of conflicts, the differences are small, and these are likely outliers.
 Within each bin (e.g., the number of conflicts entered), countries with "low" and "high" military expenditures are present in similar amounts, and the same trend is observed for iron production in Figure 5.
 These figures also highlight the heavily right-skewed nature of our data.
 
@@ -617,7 +617,7 @@ Although we wanted to employ a logistic or linear regression model, we found tha
 This was emphasized by Figure 2 and 3, as there wasn’t a linear relationship between any of the variables we were inspecting and the total incident count. 
 
 Similarly, because we only had access to the total number of incident conflicts countries participated in rather than chose to not participate in, we didn’t have a clear binary categorical variable to conduct a logistic regression either.
-We tried to the best of our ability to still use techniques from class by adding columns, classifying the military expenditure or iron and steel production as being above or below their medians respectively, but our interpretations would have been improved by just using different models or techniques that were better fit to our data set. 
+We tried to the best of our ability to still use techniques from class by adding columns, classifying the military expenditure or iron and steel production as being above or below their medians, respectively, but our interpretations would have been improved by just using different models or techniques that were better fit to our data set. 
 
 **Potential Issues**
 
