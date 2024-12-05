@@ -274,7 +274,7 @@ asia |>
   labs(
     title = "Total Incident Count vs. Military Expenditures",
     subtitle = "In Asian Countries from 1951 to 2016",
-    x = "Military Expenditures (thousands)", 
+    x = "Military Expenditures (thousands in international currency)", 
     y = "Total Incident Count"
   ) + 
   theme_minimal()
@@ -372,9 +372,16 @@ asia |>
 
 ## Methodology
 
-As a baseline, we found the correlation coefficients between different military capabilities and the total incident count to focus our analysis on the most relevant variables.
+As a baseline, we found the correlation coefficients between different military capabilities and the total incident count to focus our analysis on the most relevant variables (being military expenditure and iron and steel production).
 We generated scatterplots for said variables afterwards as we were comparing discrete numeric variables (military expenditure, iron and steel production, total incident count).
-Though there were visible outliers, we could not normalize the data as several countries had 0 total incident counts, meaning we would lose a lot of our data.
+Though there were visible outliers, we could not normalize the data as several countries had 0 total incident counts, meaning we would lose a substantial number of our observations.
+
+As a result of the extremely weak positive linear correlation we saw for all military capabilities compared to the total incident count, we decided to transform the data based off of the relatively most relevant variables (military expenditure and iron and steel production), classifying observations as either being above or below the median military expenditure as "high" and "low" respectively.
+We did the same for iron and steel production.
+We then generated dodged histogram visualizations for military expenditure and iron and steel production compared with total incident counts, colored by their military expenditure and iron and steel production classifications.
+We chose to classify by medians rather than means due to the data's strong right skew.
+Histograms fit our data as we were analyzing a discrete numerical variable, where most of the data had the same value, or around the same value.
+We visualized the difference in classifications to further explore if there was a noticeable difference in total incident counts depending on countries' military expenditure and iron and steel production classifications, even if there was not a strong linear correlation.
 
 To answer our research question, we conducted two hypothesis tests and two bootstrap simulations to determine if there was a statistically significant relationship between an Asian country's total incident number and military expenditure alongside iron and steel production respectively.
 Our hypothesis tests allowed us to assess the relationship between military expenditures, iron production, and conflict frequency.
@@ -409,7 +416,8 @@ A logistic regression model would not have been insightful as there were no clea
 
 #### Figures
 
-*Figure 1*: Reflects that out of all the continents, Asia has the highest number of total conflicts. 
+*Figure 1*: Out of all the continents, Asia has the highest number of total conflicts at around 8100 conflicts, followed by Europe and Africa at around 3500 and 3450 respectively, and finally the Americas at around 2800 and Oceania at 500.
+ 
 
 *Figure 2/Figure 3*: Both scatter plots reveal that there is an extremely weak positive linear relationship between military expenditure (milex) or iron and steel production (irst) and total incident number.
 In both visualizations, most of the total incident counts remain around 0 to 10, with milex mainly clustering between 0 to 5 \* 10\^7 thousands of international currency and iron and steel production mainly between 0 to 1.25 \* 10\^5 thousands of tons.
