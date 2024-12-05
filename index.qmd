@@ -254,7 +254,8 @@ conflict_by_continent |>
     fill = "Continent"
   ) +
   theme_minimal() +
-  scale_fill_brewer(palette = "Blues") 
+  scale_fill_brewer(palette = "Blues") +
+  theme(legend.position = "none")
 ```
 
 ```{r}
