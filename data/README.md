@@ -32,9 +32,7 @@ Data Dictionary for `NMC.csv` -> country_resource
 
 4. “irst”: Iron and steel production (thousands of tons)
 
-5. “milex”: Military Expenditures (For 1816-1913: thousands of
-current year British Pounds. For 1914+: thousands
-of current year US Dollars.)
+5. “milex”: Military Expenditures (thousands in international currency)
 
 6. “milper”: Military Personnel (thousands)
 

@@ -212,9 +212,9 @@ variable_info <- tibble::tribble(
   ~Variable,      ~Definition,                                                                 ~Type,
   "country",      "Nation of observation",                         "categorical",
   "continent",    "Geographic area of the country (e.g., Asia)",                 "categorical",
-  "count",        "Number of incidents of conflict",                    "numerical",
-  "milex",        "Military expenditures in local currency(?) (in thousands)",      "numerical",
-  "irst",         "Iron and Steel production levels in metric tons",             "numerical"
+  "count",        "Total number of incidents of conflict",                    "numerical",
+  "milex",        "Military expenditures in thousands in international currency",      "numerical",
+  "irst",         "Iron and Steel production levels in thousands of tons",             "numerical"
 )
 
 variable_info |>
@@ -223,7 +223,7 @@ kable()
 
 Our research question is as follows: How do changes in national material capabilities influence the frequency of a country's conflicts, focusing on the continent of Asia?
 
-We hypothesize that countries with higher military expenditures and personnel are more likely to participate in armed conflicts.
+We hypothesize that countries with higher military expenditures and iron and steel production are more likely to participate in armed conflicts.
 
 This research aligns with a broader theme of examining how data can explain political dynamics, provide insights into state behavior, and potentially help predict future conflicts.
 In analyzing the intersection of politics and data, this study aims to tell a story about how power, in its different forms, shapes international relations.
@@ -301,7 +301,7 @@ While all relatively low, this finding caused us to narrow our focus onto milita
 #| tbl-cap: "Demonstrating Correlation between Total Incident Counts and Material Capabilities"
 
 asia_cor_table <- tibble(
-  `Military Capability` = c("Military Expenditures (thousands)", "Military Personnel (thousands)", "Iron and Steel Production (thousands of tons)"),
+  `Military Capability` = c("Military Expenditures (thousands in international currency)", "Military Personnel (thousands)", "Iron and Steel Production (thousands of tons)"),
   `Correlation To Incident Count` = c(cor(asia$count, asia$milex), cor(asia$count, asia$milper), cor(asia$count, asia$irst))
 )
 
