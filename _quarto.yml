@@ -21,6 +21,9 @@ website:
         href: about.qmd
       - text: Contract
         href: contract.qmd
+    right:
+      - icon: github
+        href: https://github.com/sta199-f24/project-jada
 
 format:
   html:
