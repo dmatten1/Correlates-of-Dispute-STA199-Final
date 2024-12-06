@@ -1,6 +1,7 @@
 ---
 title: Armed Strength- Analyzing National Capabilities and Conflict Frequency in Asia
 subtitle: Report
+toc: true
 execute:
   echo: false
 ---
